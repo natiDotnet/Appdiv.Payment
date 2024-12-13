@@ -2,6 +2,6 @@
 
 public class PaymentQueryRequest
 {
-    public string PaymentCode { get; set; }
-    public string PaymentMethod { get; set; }
+    public string PaymentCode { get; set; } = string.Empty;
+    public string PaymentMethod { get; set; } = string.Empty;
 }

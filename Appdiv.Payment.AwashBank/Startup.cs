@@ -17,7 +17,7 @@ public static class Startup
             .AddScoped<IAwashClient, AwashClient>()
             .AddSingleton<ITokenService, TokenService>()
             .Configure<AwashConfig>(configuration.GetSection(AwashConfig.Key))
-            .AddHttpClient<AwashClient>(async (serviceProvider, client) =>
+            .AddHttpClient<AwashClient>((serviceProvider, client) =>
             {
                 var config = serviceProvider.GetRequiredService<IOptions<AwashConfig>>().Value;
                 client.BaseAddress = new Uri(config.Url);
@@ -29,9 +29,7 @@ public static class Startup
     }
     public static void UseAwashEndpoint(this IApplicationBuilder builder, string endpoint = "/Awash")
     {
-        //builder.map.MapGet("/hsll", c => c.Response.WriteAsync());
-        //builder.UseSoapEndpoint<ITelebirrService, TelebirrCustomMessage>(endpoint, new SoapEncoderOptions(), SoapSerializer.XmlSerializer);
-
+        throw new NotImplementedException();
     }
 
 

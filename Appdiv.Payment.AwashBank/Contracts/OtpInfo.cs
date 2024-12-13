@@ -2,6 +2,6 @@
 
 public class OtpInfo
 {
-    public string Phone { get; set; }
-    public string Otp { get; set; }
+    public string Phone { get; set; } = string.Empty;
+    public string Otp { get; set; } = string.Empty;
 }

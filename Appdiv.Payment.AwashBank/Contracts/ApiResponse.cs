@@ -2,12 +2,12 @@
 
 public class ApiResponse
 {
-    public string PaymentCode { get; set; }
+    public string PaymentCode { get; set; } = string.Empty;
     public decimal Amount { get; set; }
     public bool Status { get; set; }
-    public string Message { get; set; }
-    public string CustomerName { get; set; }
-    public string Reason { get; set; }
-    public string AccountNumber { get; set; }
-    public string OrderBy { get; set; }
+    public string Message { get; set; } = string.Empty;
+    public string CustomerName { get; set; } = string.Empty;
+    public string Reason { get; set; } = string.Empty;
+    public string AccountNumber { get; set; } = string.Empty;
+    public string OrderBy { get; set; } = string.Empty;
 }

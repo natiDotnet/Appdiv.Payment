@@ -1,11 +1,7 @@
-﻿using System;
-using System.Linq;
-using System.Collections.Generic;
+﻿using System.Xml;
 using SoapCore;
-using System.Xml;
-using System.ServiceModel.Channels;
 
-namespace Appdiv.C2BPayment.CBEbirr.Services;
+namespace Appdiv.Payment.CBEbirr.Services;
 
 public class CBEbirrCustomMessage : CustomMessage
 {

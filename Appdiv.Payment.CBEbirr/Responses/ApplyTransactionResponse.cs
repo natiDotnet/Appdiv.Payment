@@ -1,10 +1,7 @@
-﻿using System;
-using System.Linq;
-using System.Collections.Generic;
-using Appdiv.C2BPayment.CBEbirr.Requests;
-using System.Xml.Serialization;
+﻿using System.Xml.Serialization;
+using Appdiv.Payment.CBEbirr.Requests;
 
-namespace Appdiv.C2BPayment.CBEbirr.Responses;
+namespace Appdiv.Payment.CBEbirr.Responses;
 [XmlType(Namespace = Namespace.AT)]
 public class ApplyTransactionResponse
 {

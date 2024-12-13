@@ -1,8 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Collections.Generic;
-
-namespace Appdiv.C2BPayment.CBEbirr.Requests;
+﻿namespace Appdiv.Payment.CBEbirr.Requests;
 
 public class Namespace
 {

@@ -1,9 +1,9 @@
-using Appdiv.C2BPayment.CBEbirr.Requests;
-using Appdiv.C2BPayment.CBEbirr.Responses;
+using Appdiv.Payment.CBEbirr.Requests;
+using Appdiv.Payment.CBEbirr.Responses;
 using Appdiv.Payment.Telebirr.Requests;
 using Appdiv.Payment.Telebirr.Responses;
 
-namespace Appdiv.C2BPayment.CBEbirr;
+namespace Appdiv.Payment.CBEbirr;
 
 public class CBEbirrPayment : ICBEbirrPayment
 {

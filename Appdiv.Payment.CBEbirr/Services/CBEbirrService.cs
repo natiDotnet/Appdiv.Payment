@@ -1,13 +1,7 @@
-﻿using System;
-using System.Linq;
-using System.Collections.Generic;
-using System.ServiceModel;
-using System.Threading.Tasks;
-using Appdiv.C2BPayment.CBEbirr.Responses;
-using Appdiv.C2BPayment.CBEbirr.Requests;
-using Appdiv.Payment.Telebirr.Requests;
+﻿using Appdiv.Payment.CBEbirr.Requests;
+using Appdiv.Payment.CBEbirr.Responses;
 
-namespace Appdiv.C2BPayment.CBEbirr.Services;
+namespace Appdiv.Payment.CBEbirr.Services;
 
 public class CBEbirrService : ICBEbirrService
 {

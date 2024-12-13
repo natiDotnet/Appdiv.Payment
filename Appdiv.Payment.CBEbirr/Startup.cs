@@ -1,10 +1,10 @@
-using Microsoft.AspNetCore.Builder;
-using SoapCore;
-using Microsoft.Extensions.DependencyInjection;
-using Appdiv.C2BPayment.CBEbirr.Services;
+using Appdiv.Payment.CBEbirr.Services;
 using Appdiv.Payment.Telebirr;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
+using SoapCore;
 
-namespace Appdiv.C2BPayment.CBEbirr;
+namespace Appdiv.Payment.CBEbirr;
 
 public static class Startup
 {

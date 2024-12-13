@@ -20,9 +20,9 @@ public class ApplyTransactionResponse
 
     public int ResponseCode { get; set; }
 
-    public int ResponseDesc { get; set; }
+    public string ResponseDesc { get; set; } = string.Empty;
 
     [XmlArray(nameof(Parameters))]
     [XmlArrayItem(nameof(Parameter), Namespace = Namespace.GOA)]
-    public Parameter[] Parameters { get; set; }
+    public Parameter[] Parameters { get; set; } = Array.Empty<Parameter>();
 }

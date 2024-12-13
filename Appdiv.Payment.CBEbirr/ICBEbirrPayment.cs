@@ -1,6 +1,7 @@
 using Appdiv.C2BPayment.CBEbirr.Responses;
 using Appdiv.C2BPayment.CBEbirr.Requests;
 using Appdiv.Payment.Telebirr.Requests;
+using Appdiv.Payment.Telebirr.Responses;
 
 namespace Appdiv.C2BPayment.CBEbirr;
 public interface ICBEbirrPayment

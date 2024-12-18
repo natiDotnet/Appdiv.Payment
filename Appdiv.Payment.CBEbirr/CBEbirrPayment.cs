@@ -11,6 +11,7 @@ public class CBEbirrPayment : ICBEbirrPayment
     {
         throw new System.NotImplementedException();
     }
+    
 
     public Task<C2BPaymentValidationResult> PaymentValidation(C2BPaymentValidationRequest request)
     {

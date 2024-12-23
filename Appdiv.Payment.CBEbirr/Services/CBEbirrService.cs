@@ -1,4 +1,5 @@
-﻿using Appdiv.Payment.CBEbirr.Requests;
+﻿using Appdiv.Payment.CBEbirr.Exceptions;
+using Appdiv.Payment.CBEbirr.Requests;
 using Appdiv.Payment.CBEbirr.Responses;
 
 namespace Appdiv.Payment.CBEbirr.Services;
@@ -19,6 +20,14 @@ public class CBEbirrService : ICBEbirrService
             Header = Header,
             Body = Body
         };
-        return await _payment.PaymentQuery(request);
+        var response = await _payment.PaymentQuery(request);
+        var requiredKeys = new[] { "BillRefNumber", "Amount", "CustomerName" };
+
+        var missingKey = requiredKeys.FirstOrDefault(key => response.Parameters.All(p => p.Key != key));
+        if (missingKey != null)
+        {
+            throw new MissingParameterException(missingKey);
+        }
+        return response;
     }
 }

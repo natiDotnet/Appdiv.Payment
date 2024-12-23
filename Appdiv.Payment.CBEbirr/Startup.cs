@@ -19,13 +19,13 @@ public static class Startup
     }
     public static IApplicationBuilder UseCBEbirr(this IApplicationBuilder builder, string endpoint = "/cbebirr.asmx")
     {
-        builder.UseTelebirr<CBEbirrCustomMessage>(endpoint);
-        builder.UseSoapEndpoint<ICBEbirrService, CBEbirrCustomMessage>(endpoint,
-            new SoapEncoderOptions()
+        builder.UseSoapEndpoint<ICBEbirrService, CBETransactionCustomMessage>($"{endpoint}/transaction",
+            new SoapEncoderOptions
             {
                 MessageVersion = MessageVersion.Soap12WSAddressingAugust2004
             },
             SoapSerializer.XmlSerializer);
+        builder.UseTelebirr<CBEbirrCustomMessage>(endpoint);
         return builder;
     }
 

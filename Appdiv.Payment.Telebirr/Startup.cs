@@ -20,12 +20,12 @@ public static class Startup
             .AddSingleton<ITelebirrService, TelebirrService>();
         
     }
-    public static IApplicationBuilder UseTelebirr(this IApplicationBuilder builder, string endpoint = "/Telebirr")
+    public static IApplicationBuilder UseTelebirr(this IApplicationBuilder builder, string endpoint = "/Telebirr.asmx")
     {
         return UseTelebirr<TelebirrCustomMessage>(builder, endpoint);
     }
     
-    public static IApplicationBuilder UseTelebirr<T>(this IApplicationBuilder builder, string endpoint = "/Telebirr") where T : CustomMessage, new()
+    public static IApplicationBuilder UseTelebirr<T>(this IApplicationBuilder builder, string endpoint = "/Telebirr.asmx") where T : CustomMessage, new()
     {
         builder.UseSoapEndpoint<ITelebirrService, T>(endpoint, new SoapEncoderOptions(), SoapSerializer.XmlSerializer);
         return builder;

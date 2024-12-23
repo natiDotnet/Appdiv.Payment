@@ -3,6 +3,7 @@ using Appdiv.Payment.CBEbirr.Responses;
 
 namespace Appdiv.Payment.CBEbirr.Services;
 
+// ReSharper disable once InconsistentNaming
 public class CBEbirrService : ICBEbirrService
 {
     private readonly ICBEbirrPayment _payment;

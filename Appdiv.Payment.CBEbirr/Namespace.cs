@@ -1,4 +1,4 @@
-﻿namespace Appdiv.Payment.CBEbirr.Requests;
+﻿namespace Appdiv.Payment.CBEbirr;
 
 public class Namespace
 {

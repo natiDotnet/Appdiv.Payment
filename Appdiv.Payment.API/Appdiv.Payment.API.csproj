@@ -11,6 +11,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Appdiv.Payment.CBEbirr\Appdiv.Payment.CBEbirr.csproj" />
       <ProjectReference Include="..\Appdiv.Payment.Telebirr\Appdiv.Payment.Telebirr.csproj" />
     </ItemGroup>
 

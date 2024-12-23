@@ -7,16 +7,16 @@ public class TelebirrPayment : ITelebirrPayment
 {
     public Task<C2BPaymentQueryResult> PaymentQuery(C2BPaymentQueryRequest request)
     {
-        throw new System.NotImplementedException();
+        return Task.FromResult(new C2BPaymentQueryResult());
     }
 
     public Task<C2BPaymentValidationResult> PaymentValidation(C2BPaymentValidationRequest request)
     {
-        throw new System.NotImplementedException();
+        return Task.FromResult(new C2BPaymentValidationResult());
     }
 
     public Task<C2BPaymentConfirmationResult> PaymentConfirmation(C2BPaymentConfirmationRequest request)
     {
-        throw new System.NotImplementedException();
+        return Task.FromResult(new C2BPaymentConfirmationResult());
     }
 }

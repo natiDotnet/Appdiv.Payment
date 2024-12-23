@@ -9,7 +9,7 @@ public class CBEbirrPayment : ICBEbirrPayment
 {
     public Task<ApplyTransactionResponse> PaymentQuery(ApplyTransactionRequest request)
     {
-        throw new System.NotImplementedException();
+        return Task.FromResult(new ApplyTransactionResponse());
     }
     
 

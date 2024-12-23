@@ -1,14 +1,13 @@
-﻿using System.Xml.Serialization;
+﻿using System.ServiceModel;
+using System.Xml.Serialization;
 
 namespace Appdiv.Payment.Telebirr.Responses;
-[XmlType]
+// [XmlType]
+[MessageContract(IsWrapped = true, WrapperName = nameof(C2BPaymentValidationResult), WrapperNamespace = Namespace.C2B)]
 public class C2BPaymentValidationResult
 {
-    //[XmlElement]
     public int ResultCode { get; set; }
-    //[XmlElement]
     public string ResultDesc { get; set; } = string.Empty;
-    //[XmlElement]
     public string ThirdPartyTransID { get; set; } = string.Empty;
 
 }

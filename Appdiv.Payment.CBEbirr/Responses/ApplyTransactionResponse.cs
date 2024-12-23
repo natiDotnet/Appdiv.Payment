@@ -1,25 +1,26 @@
-﻿using System.Xml.Serialization;
+﻿using System.ServiceModel;
+using System.Xml.Serialization;
 using Appdiv.Payment.CBEbirr.Requests;
+using SoapCore;
 
 namespace Appdiv.Payment.CBEbirr.Responses;
-[XmlType(Namespace = Namespace.AT)]
+[XmlRoot(Namespace = Namespace.Tem)]
+[MessageContract(IsWrapped = true, WrapperName = nameof(ApplyTransactionResponse))]
 public class ApplyTransactionResponse
 {
-    [XmlNamespaceDeclarations] private readonly XmlSerializerNamespaces _namespaces = new();
-
-
+    [XmlNamespaceDeclarations] public XmlSerializerNamespaces Namespaces = new();
     public ApplyTransactionResponse()
     {
-        _namespaces.Add("at", Namespace.AT);
-        _namespaces.Add("goa", Namespace.GOA);
-        _namespaces.Add("tem", Namespace.Tem);
+        Namespaces.Add("at", Namespace.AT);
+        Namespaces.Add("goa", Namespace.GOA);
+        Namespaces.Add("tem", Namespace.Tem);
     }
-
+    [XmlElement(Namespace = Namespace.AT)]
     public int ResponseCode { get; set; }
-
+    [XmlElement(Namespace = Namespace.AT)]
     public string ResponseDesc { get; set; } = string.Empty;
 
-    [XmlArray(nameof(Parameters))]
+    [XmlArray(nameof(Parameters), Namespace = Namespace.AT)]
     [XmlArrayItem(nameof(Parameter), Namespace = Namespace.GOA)]
     public Parameter[] Parameters { get; set; } = Array.Empty<Parameter>();
 }

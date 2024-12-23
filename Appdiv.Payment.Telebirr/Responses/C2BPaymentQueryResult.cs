@@ -1,7 +1,9 @@
-﻿using System.Xml.Serialization;
+﻿using System.ServiceModel;
+using System.Xml.Serialization;
 
 namespace Appdiv.Payment.Telebirr.Responses;
-[XmlType]
+// [XmlType]
+[MessageContract(IsWrapped = true, WrapperName = nameof(C2BPaymentQueryResult), WrapperNamespace = Namespace.C2B)]
 public class C2BPaymentQueryResult
 {
     [XmlElement]

@@ -27,11 +27,6 @@ public class TelebirrService : ITelebirrService
         return await _payment.PaymentConfirmation(request);
     }
 
-    public Task<C2BPaymentValidationResult> C2BPaymentValidationRequest(C2BPaymentValidationRequest request)
-    {
-        throw new NotImplementedException();
-    }
-
     public async Task<C2BPaymentQueryResult> C2BPaymentQueryRequest(string TransType, string TransID, string TransTime, string BusinessShortCode, string BillRefNumber, string MSISDN)
     {
         var request = new C2BPaymentQueryRequest

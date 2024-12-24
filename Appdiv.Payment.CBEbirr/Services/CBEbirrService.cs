@@ -13,6 +13,7 @@ public class CBEbirrService : ICBEbirrService
     {
         _payment = payment;
     }
+
     public async Task<ApplyTransactionResponse> C2BPaymentQueryRequest(Header Header, Body Body)
     {
         var request = new ApplyTransactionRequest
@@ -21,13 +22,44 @@ public class CBEbirrService : ICBEbirrService
             Body = Body
         };
         var response = await _payment.PaymentQuery(request);
-        var requiredKeys = new[] { "BillRefNumber", "Amount", "CustomerName" };
-
-        var missingKey = requiredKeys.FirstOrDefault(key => response.Parameters.All(p => p.Key != key));
-        if (missingKey != null)
+        var parameters = new List<Parameter>
         {
-            throw new MissingParameterException(missingKey);
-        }
+            new()
+            {
+                Key = nameof(response.BillRefNumber),
+                Value = response.BillRefNumber ?? response.Parameters
+                        .FirstOrDefault(p => p.Key == nameof(response.BillRefNumber))?.Value
+                    ?? throw new MissingParameterException(nameof(response.BillRefNumber))
+            },
+            new()
+            {
+                Key = nameof(response.Amount),
+                Value = response.Amount?.ToString() ?? response.Parameters
+                        .FirstOrDefault(p => p.Key == nameof(response.Amount))?.Value
+                    ?? throw new MissingParameterException(nameof(response.Amount))
+            },
+            new()
+            {
+                Key = nameof(response.CustomerName),
+                Value = response.CustomerName ?? response.Parameters
+                        .FirstOrDefault(p => p.Key == nameof(response.CustomerName))?.Value
+                    ?? throw new MissingParameterException(nameof(response.CustomerName))
+            }
+        };
+        if (response.UtilityName is not null && response.Parameters.Any(p => p.Key == nameof(response.UtilityName)))
+            parameters.Add(new Parameter
+            {
+                Key = nameof(response.UtilityName),
+                Value = response.UtilityName
+            });
+
+        if (response.TransID is not null && response.Parameters.Any(p => p.Key == nameof(response.TransID)))
+            parameters.Add(new Parameter
+            {
+                Key = nameof(response.TransID),
+                Value = response.TransID
+            });
+        response.Parameters = parameters.ToArray();
         return response;
     }
 }

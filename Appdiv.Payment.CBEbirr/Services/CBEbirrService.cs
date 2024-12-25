@@ -22,44 +22,43 @@ public class CBEbirrService : ICBEbirrService
             Body = Body
         };
         var response = await _payment.PaymentQuery(request);
-        var parameters = new List<Parameter>
+        var parameters = response.Parameters;
+        parameters[0] = new()
         {
-            new()
-            {
-                Key = nameof(response.BillRefNumber),
-                Value = response.BillRefNumber ?? response.Parameters
-                        .FirstOrDefault(p => p.Key == nameof(response.BillRefNumber))?.Value
-                    ?? throw new MissingParameterException(nameof(response.BillRefNumber))
-            },
-            new()
-            {
-                Key = nameof(response.Amount),
-                Value = response.Amount?.ToString() ?? response.Parameters
-                        .FirstOrDefault(p => p.Key == nameof(response.Amount))?.Value
-                    ?? throw new MissingParameterException(nameof(response.Amount))
-            },
-            new()
-            {
-                Key = nameof(response.CustomerName),
-                Value = response.CustomerName ?? response.Parameters
+            Key = nameof(response.BillRefNumber),
+            Value = response.BillRefNumber ?? response.Parameters
+                    .FirstOrDefault(p => p.Key == nameof(response.BillRefNumber))?.Value
+                ?? throw new MissingParameterException(nameof(response.BillRefNumber))
+        };
+        parameters[1] = new()
+        {
+            Key = nameof(response.TransID),
+            Value = response.TransID ?? response.Parameters
+                    .FirstOrDefault(p => p.Key == nameof(response.TransID))?.Value
+                ?? throw new MissingParameterException(nameof(response.TransID))
+        };
+        parameters[2] = new()
+        {
+            Key = nameof(response.CustomerName),
+            Value = response.CustomerName ?? response.Parameters
                         .FirstOrDefault(p => p.Key == nameof(response.CustomerName))?.Value
                     ?? throw new MissingParameterException(nameof(response.CustomerName))
-            }
         };
-        if (response.UtilityName is not null && response.Parameters.Any(p => p.Key == nameof(response.UtilityName)))
-            parameters.Add(new Parameter
-            {
-                Key = nameof(response.UtilityName),
-                Value = response.UtilityName
-            });
-
-        if (response.TransID is not null && response.Parameters.Any(p => p.Key == nameof(response.TransID)))
-            parameters.Add(new Parameter
-            {
-                Key = nameof(response.TransID),
-                Value = response.TransID
-            });
-        response.Parameters = parameters.ToArray();
+        parameters[3] = new()
+        {
+            Key = nameof(response.Amount),
+            Value = response.Amount?.ToString() ?? response.Parameters
+                    .FirstOrDefault(p => p.Key == nameof(response.Amount))?.Value
+                ?? throw new MissingParameterException(nameof(response.Amount))
+        };
+        parameters[4] = new()
+        {
+            Key = nameof(response.ShortCode),
+            Value = response.ShortCode ?? response.Parameters
+                    .FirstOrDefault(p => p.Key == nameof(response.ShortCode))?.Value
+                ?? throw new MissingParameterException(nameof(response.ShortCode))
+        };
+        response.Parameters = parameters;
         return response;
     }
 }

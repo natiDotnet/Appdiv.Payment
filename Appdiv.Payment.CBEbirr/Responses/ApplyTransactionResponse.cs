@@ -26,13 +26,12 @@ public class ApplyTransactionResponse
     [XmlArrayItem(nameof(Parameter), Namespace = Namespace.GOA)]
     public Parameter[] Parameters { get; set; } = Array.Empty<Parameter>();
 
-    [XmlIgnore] [Required] public string? BillRefNumber { get; set; }
+    [XmlIgnore][Required] public string? BillRefNumber { get; set; }
 
-    [XmlIgnore] [Required] public string? CustomerName { get; set; }
+    [XmlIgnore][Required] public string? CustomerName { get; set; }
 
-    [XmlIgnore] [Required] public decimal? Amount { get; set; }
+    [XmlIgnore][Required] public decimal? Amount { get; set; }
 
-    [XmlIgnore] public string? UtilityName { get; set; }
-
-    [XmlIgnore] public string? TransID { get; set; }
+    [XmlIgnore][Required] public string? TransID { get; set; }
+    [XmlIgnore][Required] public string? ShortCode { get; set; }
 }

@@ -12,7 +12,6 @@ public class CBEbirrPayment : ICBEbirrPayment
             BillRefNumber = "423323",
             Amount = 10.0m,
             CustomerName = "Sample Customer Name",
-            UtilityName = "CBE Payment Utility",
         });
     }
 }

@@ -11,49 +11,21 @@ public class TelebirrService : ITelebirrService
     {
         _payment = payment;
     }
-    public async Task<C2BPaymentConfirmationResult> C2BPaymentConfirmationRequest(string BillRefNumber, string TransType, string TransID, string TransTime, decimal TransAmount, string BusinessShortCode, string MSISDN, KYCInfo[] KYCInfos)
+    public async Task<C2BPaymentConfirmationResult> C2BPaymentConfirmationRequest(string BillRefNumber, string TransType, string TransID, string TransTime, decimal TransAmount, string BusinessShortCode, string MSISDN, KYCInfo[] KYCInfo)
     {
-        var request = new C2BPaymentConfirmationRequest
-        {
-            BillRefNumber = BillRefNumber,
-            TransType = TransType,
-            TransID = TransID,
-            TransTime = TransTime,
-            TransAmount = TransAmount,
-            BusinessShortCode = BusinessShortCode,
-            MSISDN = MSISDN,
-            KYCInfos = KYCInfos
-        };
+        var request = new C2BPaymentConfirmationRequest(BillRefNumber, TransType, TransID, TransTime, TransAmount, BusinessShortCode, MSISDN, KYCInfo);
         return await _payment.PaymentConfirmation(request);
     }
 
     public async Task<C2BPaymentQueryResult> C2BPaymentQueryRequest(string TransType, string TransID, string TransTime, string BusinessShortCode, string BillRefNumber, string MSISDN)
     {
-        var request = new C2BPaymentQueryRequest
-        {
-            TransType = TransType,
-            TransID = TransID,
-            TransTime = TransTime,
-            BusinessShortCode = BusinessShortCode,
-            BillRefNumber = BillRefNumber,
-            MSISDN = MSISDN
-        };
+        var request = new C2BPaymentQueryRequest(BillRefNumber, TransType, TransID, TransTime, BusinessShortCode, MSISDN);
         return await _payment.PaymentQuery(request);
     }
 
     public async Task<C2BPaymentValidationResult> C2BPaymentValidationRequest(string BillRefNumber, string TransType, string TransID, string TransTime, decimal TransAmount, string BusinessShortCode, string MSISDN, KYCInfo[] KYCInfo)
     {
-        var request = new C2BPaymentValidationRequest
-        {
-            BillRefNumber = BillRefNumber,
-            TransType = TransType,
-            TransID = TransID,
-            TransTime = TransTime,
-            TransAmount = TransAmount,
-            BusinessShortCode = BusinessShortCode,
-            MSISDN = MSISDN,
-            KYCInfos = KYCInfo
-        };
+        var request = new C2BPaymentValidationRequest(BillRefNumber, TransType, TransID, TransTime, TransAmount, BusinessShortCode, MSISDN, KYCInfo);
         return await _payment.PaymentValidation(request);
     }
 }

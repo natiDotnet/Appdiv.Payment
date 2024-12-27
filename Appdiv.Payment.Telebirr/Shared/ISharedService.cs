@@ -1,22 +1,14 @@
-﻿using System.ServiceModel;
+using System.ServiceModel;
 using System.Xml.Serialization;
 using Appdiv.Payment.Telebirr.Requests;
 using Appdiv.Payment.Telebirr.Responses;
-using Appdiv.Payment.Telebirr.Shared;
 
 // ReSharper disable InconsistentNaming
 
-namespace Appdiv.Payment.Telebirr.Services;
-
-[ServiceContract(Namespace = Namespace.C2B)]
-public interface ITelebirrService : ISharedService
+namespace Appdiv.Payment.Telebirr.Shared;
+public interface ISharedService
 {
-    [OperationContract]
-    Task<C2BPaymentQueryResult> C2BPaymentQueryRequest(string TransType, string TransID, string TransTime,
-        string BusinessShortCode, string BillRefNumber, string MSISDN);
-
-    [OperationContract(Action = "ValidateC2BPayment")]
-    new Task<C2BPaymentValidationResult> C2BPaymentValidationRequest(
+    Task<C2BPaymentValidationResult> C2BPaymentValidationRequest(
         string BillRefNumber,
         string TransType,
         string TransID,
@@ -25,9 +17,7 @@ public interface ITelebirrService : ISharedService
         string BusinessShortCode,
         string MSISDN,
         [XmlElement(Namespace = ""), XmlArrayItem(nameof(KYCInfo), Namespace = "")] KYCInfo[] KYCInfo);
-
-    [OperationContract(Action = "ConfirmC2BPayment")]
-    new Task<C2BPaymentConfirmationResult> C2BPaymentConfirmationRequest(
+    Task<C2BPaymentConfirmationResult> C2BPaymentConfirmationRequest(
         string BillRefNumber,
         string TransType,
         string TransID,

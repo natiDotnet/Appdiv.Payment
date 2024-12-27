@@ -12,6 +12,8 @@ public class CBEbirrPayment : ICBEbirrPayment
             BillRefNumber = "423323",
             Amount = 10.0m,
             CustomerName = "Sample Customer Name",
+            TransID = "1wdcc",
+            ShortCode = "123456"
         });
     }
 }

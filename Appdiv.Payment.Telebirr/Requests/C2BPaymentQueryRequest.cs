@@ -8,4 +8,14 @@ public class C2BPaymentQueryRequest
     public string TransTime { get; set; } = string.Empty;
     public string BusinessShortCode { get; set; } = string.Empty;
     public string MSISDN { get; set; } = string.Empty;
+
+    public C2BPaymentQueryRequest(string billRefNumber, string transType, string transId, string transTime, string businessShortCode, string msisdn)
+    {
+        BillRefNumber = billRefNumber;
+        TransType = transType;
+        TransID = transId;
+        TransTime = transTime;
+        BusinessShortCode = businessShortCode;
+        MSISDN = msisdn;
+    }
 }

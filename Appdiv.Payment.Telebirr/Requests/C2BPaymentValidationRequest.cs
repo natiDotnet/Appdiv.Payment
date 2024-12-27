@@ -9,5 +9,21 @@ public class C2BPaymentValidationRequest
     public decimal TransAmount { get; set; } = decimal.Zero;
     public string BusinessShortCode { get; set; } = string.Empty;
     public string MSISDN { get; set; } = string.Empty;
-    public KYCInfo[] KYCInfos { get; set; } = Array.Empty<KYCInfo>();
+    public string FirstName { get; set; } = string.Empty;
+    public string MiddleName { get; set; } = string.Empty;
+    public string LastName { get; set; } = string.Empty;
+
+    public C2BPaymentValidationRequest(string billRefNumber, string transType, string transId, string transTime, decimal transAmount, string businessShortCode, string msisdn, KYCInfo[] kycInfos)
+    {
+        BillRefNumber = billRefNumber;
+        TransType = transType;
+        TransID = transId;
+        TransTime = transTime;
+        TransAmount = transAmount;
+        BusinessShortCode = businessShortCode;
+        MSISDN = msisdn;
+        FirstName = kycInfos[0].KYCValue;
+        MiddleName = kycInfos[1].KYCValue;
+        LastName = kycInfos[2].KYCValue;
+    }
 }

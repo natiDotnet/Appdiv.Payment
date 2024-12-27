@@ -1,17 +1,27 @@
-﻿using Appdiv.Payment.CBEbirr.Exceptions;
+﻿using System.Xml.Serialization;
+using Appdiv.Payment.CBEbirr.Exceptions;
 using Appdiv.Payment.CBEbirr.Requests;
 using Appdiv.Payment.CBEbirr.Responses;
+using Appdiv.Payment.Telebirr.Requests;
+using Appdiv.Payment.Telebirr.Responses;
+using Appdiv.Payment.Telebirr.Services;
 
 namespace Appdiv.Payment.CBEbirr.Services;
 
 // ReSharper disable once InconsistentNaming
-public class CBEbirrService : ICBEbirrService
+public class CBEbirrService : ICBESharedService, ICBEbirrService
 {
     private readonly ICBEbirrPayment _payment;
 
     public CBEbirrService(ICBEbirrPayment payment)
     {
         _payment = payment;
+    }
+
+    public Task<C2BPaymentConfirmationResult> C2BPaymentConfirmationRequest(string BillRefNumber, string TransType, string TransID, string TransTime, decimal TransAmount, string BusinessShortCode, string MSISDN, [XmlArrayItem("KYCInfo", Namespace = ""), XmlElement(Namespace = "")] KYCInfo[] KYCInfo)
+    {
+        var request = new C2BPaymentConfirmationRequest(BillRefNumber, TransType, TransID, TransTime, TransAmount, BusinessShortCode, MSISDN, KYCInfo);
+        return _payment.PaymentConfirmation(request);
     }
 
     public async Task<ApplyTransactionResponse> C2BPaymentQueryRequest(Header Header, Body Body)
@@ -60,5 +70,11 @@ public class CBEbirrService : ICBEbirrService
         };
         response.Parameters = parameters;
         return response;
+    }
+
+    public Task<C2BPaymentValidationResult> C2BPaymentValidationRequest(string BillRefNumber, string TransType, string TransID, string TransTime, decimal TransAmount, string BusinessShortCode, string MSISDN, [XmlArrayItem("KYCInfo", Namespace = ""), XmlElement(Namespace = "")] KYCInfo[] KYCInfo)
+    {
+        var request = new C2BPaymentValidationRequest(BillRefNumber, TransType, TransID, TransTime, TransAmount, BusinessShortCode, MSISDN, KYCInfo);
+        return _payment.PaymentValidation(request);
     }
 }

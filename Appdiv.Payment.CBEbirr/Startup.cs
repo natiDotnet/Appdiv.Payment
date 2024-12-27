@@ -17,15 +17,20 @@ public static class Startup
             .AddSingleton<ICBEbirrService, CBEbirrService>();
 
     }
-    public static IApplicationBuilder UseCBEbirr(this IApplicationBuilder builder, string endpoint = "/cbebirr.asmx")
+    public static IApplicationBuilder UseCBEbirr(
+        this IApplicationBuilder builder,
+        string endpoint = "/cbebirr",
+        string paymentQueryPath = "/paymentQuery",
+        string paymentValidationPath = "/paymentValidation",
+        string paymentConfirmationPath = "/paymentConfirmation")
     {
-        builder.UseSoapEndpoint<ICBEbirrService, CBETransactionCustomMessage>($"{endpoint}/transaction",
+        builder.UseSoapEndpoint<ICBEbirrService, CBETransactionCustomMessage>($"{endpoint}/{paymentQueryPath}",
             new SoapEncoderOptions
             {
                 MessageVersion = MessageVersion.Soap12WSAddressingAugust2004
             },
             SoapSerializer.XmlSerializer);
-        builder.UseTelebirr<CBEbirrCustomMessage>(endpoint);
+        builder.UseTelebirr<CBEbirrCustomMessage>(endpoint, paymentQueryPath: "/QueryPayment", paymentValidationPath, paymentConfirmationPath);
         return builder;
     }
 

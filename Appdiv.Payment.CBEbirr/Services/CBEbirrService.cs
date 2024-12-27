@@ -22,7 +22,7 @@ public class CBEbirrService : ICBEbirrService
             Body = Body
         };
         var response = await _payment.PaymentQuery(request);
-        var parameters = response.Parameters;
+        var parameters = new Parameter[5];
         parameters[0] = new()
         {
             Key = nameof(response.BillRefNumber),

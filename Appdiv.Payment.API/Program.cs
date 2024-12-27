@@ -1,3 +1,4 @@
+using Appdiv.Payment.API;
 using Appdiv.Payment.CBEbirr;
 using Appdiv.Payment.Telebirr;
 
@@ -10,7 +11,8 @@ builder.Services.AddControllers()
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddCBEbirr();
+builder.Services.AddCBEbirr<CBEbirrPayment>();
+builder.Services.AddTelebirr<TelebirrPayment>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -21,6 +23,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseCBEbirr();
+app.UseTelebirr();
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

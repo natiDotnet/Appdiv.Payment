@@ -1,14 +1,14 @@
 using System.ServiceModel;
 using System.Xml.Serialization;
-using Appdiv.Payment.CBEbirr.Requests;
-using Appdiv.Payment.CBEbirr.Responses;
+using Appdiv.Payment.CBE.Requests;
+using Appdiv.Payment.CBE.Responses;
 using Appdiv.Payment.Shared.Contracts;
 using Appdiv.Payment.Shared.Models;
 
-namespace Appdiv.Payment.CBEbirr.Services;
+namespace Appdiv.Payment.CBE.Services;
 
 [ServiceContract(Namespace = Namespace.Tem)]
-public interface ICBEbirrService
+public interface ICBEService
 {
     [OperationContract(Name = "ApplyTransactionRequest")]
     Task<ApplyTransactionResponse> C2BPaymentQueryRequest([XmlElement(Namespace = Namespace.AT)] Header Header,

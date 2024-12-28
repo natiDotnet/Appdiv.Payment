@@ -1,5 +1,5 @@
 using Appdiv.Payment.API;
-using Appdiv.Payment.CBEbirr;
+using Appdiv.Payment.CBE;
 using Appdiv.Payment.Telebirr;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,7 +11,7 @@ builder.Services.AddControllers()
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddCBEbirr<CBEbirrPayment>();
+builder.Services.AddCBEbirr<CBEPayment>();
 builder.Services.AddTelebirr<TelebirrPayment>();
 var app = builder.Build();
 

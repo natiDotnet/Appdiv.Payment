@@ -1,9 +1,9 @@
 ﻿using System.Xml;
-using Appdiv.Payment.CBEbirr.Responses;
+using Appdiv.Payment.CBE.Responses;
 using Appdiv.Payment.Shared.Helper;
 using SoapCore;
 
-namespace Appdiv.Payment.CBEbirr.Services;
+namespace Appdiv.Payment.CBE.Services;
 
 // ReSharper disable once InconsistentNaming
 public class CBETransactionMessage : CustomMessage

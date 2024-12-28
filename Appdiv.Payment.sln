@@ -4,7 +4,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Appdiv.Payment.API", "Appdi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Appdiv.Payment.Telebirr", "Appdiv.Payment.Telebirr\Appdiv.Payment.Telebirr.csproj", "{AB98F8DD-FD5E-494D-92E5-78D635E23D5A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Appdiv.Payment.CBEbirr", "Appdiv.Payment.CBEbirr\Appdiv.Payment.CBEbirr.csproj", "{9DE6C328-AF10-4708-B51E-499FE6F2E8A7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Appdiv.Payment.CBE", "Appdiv.Payment.CBE\Appdiv.Payment.CBE.csproj", "{9DE6C328-AF10-4708-B51E-499FE6F2E8A7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Appdiv.Payment.AwashBank", "Appdiv.Payment.AwashBank\Appdiv.Payment.AwashBank.csproj", "{D4768B30-2B19-4CD0-958A-9C73512D0490}"
 EndProject

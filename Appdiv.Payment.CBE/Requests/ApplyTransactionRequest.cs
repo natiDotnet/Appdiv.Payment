@@ -1,6 +1,6 @@
 ﻿using System.Xml.Serialization;
 
-namespace Appdiv.Payment.CBEbirr.Requests;
+namespace Appdiv.Payment.CBE.Requests;
 
 public class ApplyTransactionRequest
 {
@@ -32,6 +32,7 @@ public class Parameter
 {
     [XmlElement(Namespace = Namespace.GOA)]
     public string Key { get; set; } = string.Empty;
+
     [XmlElement(Namespace = Namespace.GOA)]
     public string Value { get; set; } = string.Empty;
 }

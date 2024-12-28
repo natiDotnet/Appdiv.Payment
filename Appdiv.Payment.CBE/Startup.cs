@@ -1,22 +1,22 @@
 using System.ServiceModel.Channels;
-using Appdiv.Payment.CBEbirr.Services;
+using Appdiv.Payment.CBE.Services;
 using Appdiv.Payment.Shared.Contracts;
 using Appdiv.Payment.Telebirr;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using SoapCore;
 
-namespace Appdiv.Payment.CBEbirr;
+namespace Appdiv.Payment.CBE;
 
 public static class Startup
 {
     public static IServiceCollection AddCBEbirr<TImplementation>(this IServiceCollection services)
-        where TImplementation : class, ISharedPayment, ICBEbirrPayment
+        where TImplementation : class, ISharedPayment, ICBEPayment
     {
         return services.AddSoapCore()
-            .AddSingleton<ICBEbirrPayment, TImplementation>()
-            .AddSingleton<ICBEbirrService, CBEbirrService>()
-            .AddSingleton<ICBESharedService, CBEbirrService>();
+            .AddSingleton<ICBEPayment, TImplementation>()
+            .AddSingleton<ICBEService, CBEService>()
+            .AddSingleton<ICBESharedService, CBEService>();
     }
 
     public static IApplicationBuilder UseCBEbirr(
@@ -26,13 +26,13 @@ public static class Startup
         string paymentValidationPath = "/paymentValidation",
         string paymentConfirmationPath = "/paymentConfirmation")
     {
-        builder.UseSoapEndpoint<ICBEbirrService, CBETransactionMessage>($"{endpoint}{paymentQueryPath}",
+        builder.UseSoapEndpoint<ICBEService, CBETransactionMessage>($"{endpoint}{paymentQueryPath}",
             new SoapEncoderOptions
             {
                 MessageVersion = MessageVersion.Soap12WSAddressingAugust2004
             },
             SoapSerializer.XmlSerializer);
-        builder.UseTelebirr<ICBESharedService, CBEbirrMessage>(endpoint, "/Query", paymentValidationPath,
+        builder.UseTelebirr<ICBESharedService, CBEMessage>(endpoint, "/Query", paymentValidationPath,
             paymentConfirmationPath);
         return builder;
     }

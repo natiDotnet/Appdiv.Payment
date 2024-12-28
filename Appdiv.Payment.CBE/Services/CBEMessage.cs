@@ -3,24 +3,23 @@ using Appdiv.Payment.Shared.Helper;
 using Appdiv.Payment.Shared.Models;
 using SoapCore;
 
-namespace Appdiv.Payment.CBEbirr.Services;
+namespace Appdiv.Payment.CBE.Services;
 
 // ReSharper disable once InconsistentNaming
-public class CBEbirrMessage : CustomMessage
+public class CBEMessage : CustomMessage
 {
-    private const string EnvelopeNamespace = "http://www.w3.org/2003/05/soap-envelope";
     private const string EnvelopeShortName = "SOAP-ENV";
 
     protected override void OnWriteStartEnvelope(XmlDictionaryWriter writer)
     {
-        writer.WriteStartElement(EnvelopeShortName, "Envelope", EnvelopeNamespace);
-        writer.WriteXmlnsAttribute(EnvelopeShortName, EnvelopeNamespace);
+        writer.WriteStartElement(EnvelopeShortName, "Envelope", Shared.Helper.Namespace.Soap1Envelope);
+        writer.WriteXmlnsAttribute(EnvelopeShortName, Shared.Helper.Namespace.Soap1Envelope);
         writer.WriteXmlnsAttribute("ns1", Shared.Helper.Namespace.C2B);
     }
 
     protected override void OnWriteStartBody(XmlDictionaryWriter writer)
     {
-        writer.WriteStartElement("Body", EnvelopeNamespace);
+        writer.WriteStartElement("Body", Shared.Helper.Namespace.Soap1Envelope);
     }
 
     protected override void OnWriteBodyContents(XmlDictionaryWriter writer)

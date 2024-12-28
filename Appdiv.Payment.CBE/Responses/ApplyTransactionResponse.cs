@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ServiceModel;
 using System.Xml.Serialization;
-using Appdiv.Payment.CBEbirr.Requests;
+using Appdiv.Payment.CBE.Requests;
 
-namespace Appdiv.Payment.CBEbirr.Responses;
+namespace Appdiv.Payment.CBE.Responses;
 
 [XmlRoot(Namespace = Namespace.Tem)]
 [MessageContract(IsWrapped = true, WrapperName = nameof(ApplyTransactionResponse))]
@@ -26,12 +26,12 @@ public class ApplyTransactionResponse
     [XmlArrayItem(nameof(Parameter), Namespace = Namespace.GOA)]
     public Parameter[] Parameters { get; set; } = Array.Empty<Parameter>();
 
-    [XmlIgnore][Required] public string? BillRefNumber { get; set; }
+    [XmlIgnore] [Required] public string? BillRefNumber { get; set; }
 
-    [XmlIgnore][Required] public string? CustomerName { get; set; }
+    [XmlIgnore] [Required] public string? CustomerName { get; set; }
 
-    [XmlIgnore][Required] public decimal? Amount { get; set; }
+    [XmlIgnore] [Required] public decimal? Amount { get; set; }
 
-    [XmlIgnore][Required] public string? TransID { get; set; }
-    [XmlIgnore][Required] public string? ShortCode { get; set; }
+    [XmlIgnore] [Required] public string? TransID { get; set; }
+    [XmlIgnore] [Required] public string? ShortCode { get; set; }
 }

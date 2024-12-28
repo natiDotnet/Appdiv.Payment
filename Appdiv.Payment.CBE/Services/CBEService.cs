@@ -1,17 +1,17 @@
 ﻿using System.Xml.Serialization;
-using Appdiv.Payment.CBEbirr.Exceptions;
-using Appdiv.Payment.CBEbirr.Requests;
-using Appdiv.Payment.CBEbirr.Responses;
+using Appdiv.Payment.CBE.Exceptions;
+using Appdiv.Payment.CBE.Requests;
+using Appdiv.Payment.CBE.Responses;
 using Appdiv.Payment.Shared.Models;
 
-namespace Appdiv.Payment.CBEbirr.Services;
+namespace Appdiv.Payment.CBE.Services;
 
 // ReSharper disable once InconsistentNaming
-public class CBEbirrService : ICBESharedService, ICBEbirrService
+public class CBEService : ICBESharedService, ICBEService
 {
-    private readonly ICBEbirrPayment _payment;
+    private readonly ICBEPayment _payment;
 
-    public CBEbirrService(ICBEbirrPayment payment)
+    public CBEService(ICBEPayment payment)
     {
         _payment = payment;
     }
@@ -66,7 +66,8 @@ public class CBEbirrService : ICBESharedService, ICBEbirrService
 
     public Task<C2BPaymentConfirmationResult> C2BPaymentConfirmationRequest(string BillRefNumber, string TransType,
         string TransID, string TransTime, decimal TransAmount, string BusinessShortCode, string MSISDN,
-        [XmlArrayItem("KYCInfo", Namespace = "")] [XmlElement(Namespace = "")] KYCInfo[] KYCInfo)
+        [XmlArrayItem("KYCInfo", Namespace = "")] [XmlElement(Namespace = "")]
+        KYCInfo[] KYCInfo)
     {
         var request = new C2BPaymentConfirmationRequest(BillRefNumber, TransType, TransID, TransTime, TransAmount,
             BusinessShortCode, MSISDN, KYCInfo);
@@ -75,7 +76,8 @@ public class CBEbirrService : ICBESharedService, ICBEbirrService
 
     public Task<C2BPaymentValidationResult> C2BPaymentValidationRequest(string BillRefNumber, string TransType,
         string TransID, string TransTime, decimal TransAmount, string BusinessShortCode, string MSISDN,
-        [XmlArrayItem("KYCInfo", Namespace = "")] [XmlElement(Namespace = "")] KYCInfo[] KYCInfo)
+        [XmlArrayItem("KYCInfo", Namespace = "")] [XmlElement(Namespace = "")]
+        KYCInfo[] KYCInfo)
     {
         var request = new C2BPaymentValidationRequest(BillRefNumber, TransType, TransID, TransTime, TransAmount,
             BusinessShortCode, MSISDN, KYCInfo);

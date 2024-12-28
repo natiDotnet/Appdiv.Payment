@@ -11,7 +11,7 @@ namespace Appdiv.Payment.CBE;
 public static class Startup
 {
     public static IServiceCollection AddCBEbirr<TImplementation>(this IServiceCollection services)
-        where TImplementation : class, ISharedPayment, ICBEPayment
+        where TImplementation : class, ICBEPayment
     {
         return services.AddSoapCore()
             .AddSingleton<ICBEPayment, TImplementation>()
@@ -31,8 +31,8 @@ public static class Startup
             {
                 MessageVersion = MessageVersion.Soap12WSAddressingAugust2004
             },
-            SoapSerializer.XmlSerializer);
-        builder.UseTelebirr<ICBESharedService, CBEMessage>(endpoint, "/Query", paymentValidationPath,
+            SoapSerializer.XmlSerializer, true);
+        builder.UseTelebirr<ICBESharedService, CBEMessage>(endpoint, paymentValidationPath,
             paymentConfirmationPath);
         return builder;
     }

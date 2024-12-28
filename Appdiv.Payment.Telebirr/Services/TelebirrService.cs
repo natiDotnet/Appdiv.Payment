@@ -2,7 +2,7 @@
 
 namespace Appdiv.Payment.Telebirr.Services;
 
-public class TelebirrService : ITelebirrService
+internal class TelebirrService : ITelebirrService
 {
     private readonly ITelebirrPayment _payment;
 

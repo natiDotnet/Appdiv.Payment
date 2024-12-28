@@ -7,7 +7,7 @@ using Appdiv.Payment.Shared.Models;
 namespace Appdiv.Payment.CBE.Services;
 
 // ReSharper disable once InconsistentNaming
-public class CBEService : ICBESharedService, ICBEService
+internal class CBEService : ICBESharedService, ICBEService
 {
     private readonly ICBEPayment _payment;
 

@@ -8,7 +8,7 @@ using Appdiv.Payment.Shared.Models;
 namespace Appdiv.Payment.CBE.Services;
 
 [ServiceContract(Namespace = Namespace.Tem)]
-public interface ICBEService
+internal interface ICBEService
 {
     [OperationContract(Name = "ApplyTransactionRequest")]
     Task<ApplyTransactionResponse> C2BPaymentQueryRequest([XmlElement(Namespace = Namespace.AT)] Header Header,
@@ -16,7 +16,7 @@ public interface ICBEService
 }
 
 [ServiceContract(Namespace = Shared.Helper.Namespace.C2B)]
-public interface ICBESharedService : ISharedService
+internal interface ICBESharedService : ISharedService
 {
     [OperationContract(Action = "C2BPaymentValidation")]
     new Task<C2BPaymentValidationResult> C2BPaymentValidationRequest(

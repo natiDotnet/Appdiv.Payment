@@ -9,7 +9,7 @@ using Appdiv.Payment.Shared.Models;
 namespace Appdiv.Payment.Telebirr.Services;
 
 [ServiceContract(Namespace = Namespace.C2B)]
-public interface ITelebirrService : ISharedService
+internal interface ITelebirrService : ISharedService
 {
     [OperationContract]
     Task<C2BPaymentQueryResult> C2BPaymentQueryRequest(string TransType, string TransID, string TransTime,

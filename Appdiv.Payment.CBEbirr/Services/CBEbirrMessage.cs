@@ -6,7 +6,7 @@ using SoapCore;
 namespace Appdiv.Payment.CBEbirr.Services;
 
 // ReSharper disable once InconsistentNaming
-public class CBEbirrCustomMessage : CustomMessage
+public class CBEbirrMessage : CustomMessage
 {
     private const string EnvelopeNamespace = "http://www.w3.org/2003/05/soap-envelope";
     private const string EnvelopeShortName = "SOAP-ENV";

@@ -26,13 +26,13 @@ public static class Startup
         string paymentValidationPath = "/paymentValidation",
         string paymentConfirmationPath = "/paymentConfirmation")
     {
-        builder.UseSoapEndpoint<ICBEbirrService, CBETransactionCustomMessage>($"{endpoint}{paymentQueryPath}",
+        builder.UseSoapEndpoint<ICBEbirrService, CBETransactionMessage>($"{endpoint}{paymentQueryPath}",
             new SoapEncoderOptions
             {
                 MessageVersion = MessageVersion.Soap12WSAddressingAugust2004
             },
             SoapSerializer.XmlSerializer);
-        builder.UseTelebirr<ICBESharedService, CBEbirrCustomMessage>(endpoint, "/Query", paymentValidationPath,
+        builder.UseTelebirr<ICBESharedService, CBEbirrMessage>(endpoint, "/Query", paymentValidationPath,
             paymentConfirmationPath);
         return builder;
     }

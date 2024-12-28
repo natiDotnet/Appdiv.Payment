@@ -17,7 +17,7 @@ public static class Startup
 
     public static IApplicationBuilder UseTelebirr(this IApplicationBuilder builder, string endpoint = "/Telebirr")
     {
-        return builder.UseTelebirr<ITelebirrService, TelebirrCustomMessage>(endpoint);
+        return builder.UseTelebirr<ITelebirrService, TelebirrMessage>(endpoint);
     }
 
     public static IApplicationBuilder UseTelebirr<S, T>(this IApplicationBuilder builder, string endpoint = "/Telebirr",

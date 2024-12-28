@@ -6,7 +6,7 @@ using SoapCore;
 
 namespace Appdiv.Payment.Telebirr.Services;
 
-public class TelebirrCustomMessage : CustomMessage
+public class TelebirrMessage : CustomMessage
 {
     private const string EnvelopeShortName = "soapenv";
 

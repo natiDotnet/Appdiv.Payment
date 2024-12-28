@@ -23,7 +23,7 @@ public class CBEService : ICBESharedService, ICBEService
             Header = Header,
             Body = Body
         };
-        var response = await _payment.PaymentQuery(request);
+        var response = await _payment.PaymentQueryAsync(request);
         var parameters = new Parameter[5];
         parameters[0] = new Parameter
         {
@@ -71,7 +71,7 @@ public class CBEService : ICBESharedService, ICBEService
     {
         var request = new C2BPaymentConfirmationRequest(BillRefNumber, TransType, TransID, TransTime, TransAmount,
             BusinessShortCode, MSISDN, KYCInfo);
-        return _payment.PaymentConfirmation(request);
+        return _payment.PaymentConfirmationAsync(request);
     }
 
     public Task<C2BPaymentValidationResult> C2BPaymentValidationRequest(string BillRefNumber, string TransType,
@@ -81,6 +81,6 @@ public class CBEService : ICBESharedService, ICBEService
     {
         var request = new C2BPaymentValidationRequest(BillRefNumber, TransType, TransID, TransTime, TransAmount,
             BusinessShortCode, MSISDN, KYCInfo);
-        return _payment.PaymentValidation(request);
+        return _payment.PaymentValidationAsync(request);
     }
 }

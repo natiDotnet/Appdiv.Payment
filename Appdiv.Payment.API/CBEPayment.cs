@@ -7,12 +7,12 @@ namespace Appdiv.Payment.API;
 
 public class CBEPayment : ICBEPayment
 {
-    public Task<C2BPaymentConfirmationResult> PaymentConfirmation(C2BPaymentConfirmationRequest request)
+    public Task<C2BPaymentConfirmationResult> PaymentConfirmationAsync(C2BPaymentConfirmationRequest request)
     {
         throw new NotImplementedException();
     }
 
-    public Task<ApplyTransactionResponse> PaymentQuery(ApplyTransactionRequest request)
+    public Task<ApplyTransactionResponse> PaymentQueryAsync(ApplyTransactionRequest request)
     {
         return Task.FromResult(new ApplyTransactionResponse
         {
@@ -24,7 +24,7 @@ public class CBEPayment : ICBEPayment
         });
     }
 
-    public Task<C2BPaymentValidationResult> PaymentValidation(C2BPaymentValidationRequest request)
+    public Task<C2BPaymentValidationResult> PaymentValidationAsync(C2BPaymentValidationRequest request)
     {
         return Task.FromResult(new C2BPaymentValidationResult());
     }

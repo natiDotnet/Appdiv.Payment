@@ -1,7 +1,8 @@
 ﻿using System.ServiceModel;
 using System.Xml.Serialization;
+using Appdiv.Payment.Shared.Helper;
 
-namespace Appdiv.Payment.Telebirr.Responses;
+namespace Appdiv.Payment.Shared.Models;
 
 [MessageContract(WrapperName = nameof(C2BPaymentConfirmationResult), IsWrapped = true,
     WrapperNamespace = Namespace.C2B)]

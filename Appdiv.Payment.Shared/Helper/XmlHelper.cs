@@ -1,13 +1,12 @@
 using System.Xml;
 
-namespace Appdiv.Payment.Telebirr.Helper;
+namespace Appdiv.Payment.Shared.Helper;
 
 public static class XmlHelper
 {
     public static void WriteXmlNode(XmlDictionaryReader reader, XmlWriter writer, bool inheritNamespace)
     {
         while (reader.Read())
-        {
             if (reader.NodeType == XmlNodeType.Element)
             {
                 WriteStartElement(reader, writer, inheritNamespace);
@@ -20,23 +19,18 @@ public static class XmlHelper
 
                 writer.WriteEndElement();
             }
-        }
     }
 
-    static void WriteStartElement(XmlDictionaryReader reader, XmlWriter writer, bool inheritNamespace)
+    private static void WriteStartElement(XmlDictionaryReader reader, XmlWriter writer, bool inheritNamespace)
     {
         if (inheritNamespace)
-        {
             writer.WriteStartElement(reader.Prefix, reader.LocalName, reader.NamespaceURI);
-        }
         else
-        {
             writer.WriteStartElement(reader.LocalName);
-        }
         writer.WriteAttributes(reader, false);
     }
 
-    static void WriteElementContent(XmlDictionaryReader reader, XmlWriter writer, bool inheritNamespace)
+    private static void WriteElementContent(XmlDictionaryReader reader, XmlWriter writer, bool inheritNamespace)
     {
         while (reader.NodeType != XmlNodeType.EndElement)
         {
@@ -49,6 +43,7 @@ public static class XmlHelper
                         reader.Read();
                         WriteElementContent(reader, writer, inheritNamespace);
                     }
+
                     writer.WriteEndElement();
                     break;
 

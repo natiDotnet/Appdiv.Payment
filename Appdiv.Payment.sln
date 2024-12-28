@@ -10,6 +10,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Appdiv.Payment.AwashBank", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Appdiv.Payment.Fettan", "Appdiv.Payment.Fettan\Appdiv.Payment.Fettan.csproj", "{A49A12D0-32A7-425E-8DBD-5F9EE00CF2FB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Appdiv.Payment.Shared", "Appdiv.Payment.Shared\Appdiv.Payment.Shared.csproj", "{A8EF7D6E-55DC-4A54-AB24-B1B5C6FF3667}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +38,9 @@ Global
 		{A49A12D0-32A7-425E-8DBD-5F9EE00CF2FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A49A12D0-32A7-425E-8DBD-5F9EE00CF2FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A49A12D0-32A7-425E-8DBD-5F9EE00CF2FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8EF7D6E-55DC-4A54-AB24-B1B5C6FF3667}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8EF7D6E-55DC-4A54-AB24-B1B5C6FF3667}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8EF7D6E-55DC-4A54-AB24-B1B5C6FF3667}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8EF7D6E-55DC-4A54-AB24-B1B5C6FF3667}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

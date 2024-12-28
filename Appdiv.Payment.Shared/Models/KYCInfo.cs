@@ -1,4 +1,4 @@
-﻿namespace Appdiv.Payment.Telebirr.Requests;
+﻿namespace Appdiv.Payment.Shared.Models;
 
 public class KYCInfo
 {

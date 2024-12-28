@@ -1,8 +1,7 @@
 using Appdiv.Payment.CBEbirr;
 using Appdiv.Payment.CBEbirr.Requests;
 using Appdiv.Payment.CBEbirr.Responses;
-using Appdiv.Payment.Telebirr.Requests;
-using Appdiv.Payment.Telebirr.Responses;
+using Appdiv.Payment.Shared.Models;
 
 namespace Appdiv.Payment.API;
 

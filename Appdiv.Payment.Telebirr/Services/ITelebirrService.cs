@@ -1,8 +1,8 @@
 ﻿using System.ServiceModel;
 using System.Xml.Serialization;
-using Appdiv.Payment.Telebirr.Requests;
-using Appdiv.Payment.Telebirr.Responses;
-using Appdiv.Payment.Telebirr.Shared;
+using Appdiv.Payment.Shared.Contracts;
+using Appdiv.Payment.Shared.Helper;
+using Appdiv.Payment.Shared.Models;
 
 // ReSharper disable InconsistentNaming
 
@@ -24,7 +24,8 @@ public interface ITelebirrService : ISharedService
         decimal TransAmount,
         string BusinessShortCode,
         string MSISDN,
-        [XmlElement(Namespace = ""), XmlArrayItem(nameof(KYCInfo), Namespace = "")] KYCInfo[] KYCInfo);
+        [XmlElement(Namespace = "")] [XmlArrayItem(nameof(KYCInfo), Namespace = "")]
+        KYCInfo[] KYCInfo);
 
     [OperationContract(Action = "ConfirmC2BPayment")]
     new Task<C2BPaymentConfirmationResult> C2BPaymentConfirmationRequest(
@@ -35,5 +36,6 @@ public interface ITelebirrService : ISharedService
         decimal TransAmount,
         string BusinessShortCode,
         string MSISDN,
-        [XmlElement(Namespace = ""), XmlArrayItem(nameof(KYCInfo), Namespace = "")] KYCInfo[] KYCInfo);
+        [XmlElement(Namespace = "")] [XmlArrayItem(nameof(KYCInfo), Namespace = "")]
+        KYCInfo[] KYCInfo);
 }

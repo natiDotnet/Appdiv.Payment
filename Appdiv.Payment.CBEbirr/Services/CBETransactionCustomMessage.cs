@@ -1,6 +1,6 @@
 ﻿using System.Xml;
 using Appdiv.Payment.CBEbirr.Responses;
-using Appdiv.Payment.Telebirr.Helper;
+using Appdiv.Payment.Shared.Helper;
 using SoapCore;
 
 namespace Appdiv.Payment.CBEbirr.Services;
@@ -8,19 +8,18 @@ namespace Appdiv.Payment.CBEbirr.Services;
 // ReSharper disable once InconsistentNaming
 public class CBETransactionCustomMessage : CustomMessage
 {
-    private const string EnvelopeNamespace = "http://www.w3.org/2003/05/soap-envelope";
     private const string EnvelopeShortName = "env";
 
     protected override void OnWriteStartEnvelope(XmlDictionaryWriter writer)
     {
-        writer.WriteStartElement(EnvelopeShortName, "Envelope", EnvelopeNamespace);
-        writer.WriteXmlnsAttribute(EnvelopeShortName, EnvelopeNamespace);
+        writer.WriteStartElement(EnvelopeShortName, "Envelope", Shared.Helper.Namespace.Soap12Envelope);
+        writer.WriteXmlnsAttribute(EnvelopeShortName, Shared.Helper.Namespace.Soap12Envelope);
         writer.WriteXmlnsAttribute("ns1", Namespace.AT);
     }
 
     protected override void OnWriteStartBody(XmlDictionaryWriter writer)
     {
-        writer.WriteStartElement("Body", EnvelopeNamespace);
+        writer.WriteStartElement("Body", Shared.Helper.Namespace.Soap12Envelope);
     }
 
     protected override void OnWriteBodyContents(XmlDictionaryWriter writer)
@@ -32,5 +31,4 @@ public class CBETransactionCustomMessage : CustomMessage
         using var bodyReader = Message.GetReaderAtBodyContents();
         XmlHelper.WriteXmlNode(bodyReader, writer, true);
     }
-
 }

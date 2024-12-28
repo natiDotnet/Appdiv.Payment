@@ -1,6 +1,7 @@
 ﻿using System.ServiceModel;
+using Appdiv.Payment.Shared.Helper;
 
-namespace Appdiv.Payment.Telebirr.Responses;
+namespace Appdiv.Payment.Shared.Models;
 
 [MessageContract(IsWrapped = true, WrapperName = nameof(C2BPaymentQueryResult), WrapperNamespace = Namespace.C2B)]
 public class C2BPaymentQueryResult

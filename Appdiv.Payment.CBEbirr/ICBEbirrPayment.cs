@@ -1,6 +1,6 @@
 using Appdiv.Payment.CBEbirr.Requests;
 using Appdiv.Payment.CBEbirr.Responses;
-using Appdiv.Payment.Telebirr.Shared;
+using Appdiv.Payment.Shared.Contracts;
 
 namespace Appdiv.Payment.CBEbirr;
 

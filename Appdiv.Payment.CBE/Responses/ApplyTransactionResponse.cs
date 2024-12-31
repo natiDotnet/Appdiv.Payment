@@ -18,20 +18,20 @@ public class ApplyTransactionResponse
         Namespaces.Add("tem", Namespace.Tem);
     }
 
-    [XmlElement(Namespace = Namespace.AT)] public int ResponseCode { get; set; }
+    [XmlElement(Namespace = Namespace.AT)] public int ResponseCode { get; init; }
 
     [XmlElement(Namespace = Namespace.AT)] public string ResponseDesc { get; set; } = string.Empty;
 
     [XmlArray(nameof(Parameters), Namespace = Namespace.AT)]
     [XmlArrayItem(nameof(Parameter), Namespace = Namespace.GOA)]
-    public Parameter[] Parameters { get; set; } = Array.Empty<Parameter>();
+    public Parameter[]? Parameters { get; set; } = null;
 
-    [XmlIgnore] [Required] public string? BillRefNumber { get; set; }
+    [XmlIgnore] public string? BillRefNumber { get; set; }
 
-    [XmlIgnore] [Required] public string? CustomerName { get; set; }
+    [XmlIgnore] public string? CustomerName { get; set; }
 
-    [XmlIgnore] [Required] public decimal? Amount { get; set; }
+    [XmlIgnore] public decimal? Amount { get; set; }
 
-    [XmlIgnore] [Required] public string? TransID { get; set; }
-    [XmlIgnore] [Required] public string? ShortCode { get; set; }
+    [XmlIgnore] public string? TransID { get; set; }
+    [XmlIgnore] public string? ShortCode { get; set; }
 }

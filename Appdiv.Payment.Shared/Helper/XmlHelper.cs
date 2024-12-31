@@ -24,7 +24,7 @@ public static class XmlHelper
     private static void WriteStartElement(XmlDictionaryReader reader, XmlWriter writer, bool inheritNamespace)
     {
         if (inheritNamespace)
-            writer.WriteStartElement(reader.Prefix, reader.LocalName, reader.NamespaceURI);
+            writer.WriteStartElement(reader.LocalName, reader.NamespaceURI);
         else
             writer.WriteStartElement(reader.LocalName);
         writer.WriteAttributes(reader, false);

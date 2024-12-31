@@ -24,39 +24,44 @@ internal class CBEService : ICBESharedService, ICBEService
             Body = Body
         };
         var response = await _payment.PaymentQueryAsync(request);
+        if (response.ResponseCode != 0)
+        {
+            response.Parameters = null;
+            return response;
+        }
         var parameters = new Parameter[5];
         parameters[0] = new Parameter
         {
             Key = nameof(response.BillRefNumber),
-            Value = response.BillRefNumber ?? response.Parameters
+            Value = response.BillRefNumber ?? response.Parameters?
                     .FirstOrDefault(p => p.Key == nameof(response.BillRefNumber))?.Value
                 ?? throw new MissingParameterException(nameof(response.BillRefNumber))
         };
         parameters[1] = new Parameter
         {
             Key = nameof(response.TransID),
-            Value = response.TransID ?? response.Parameters
+            Value = response.TransID ?? response.Parameters?
                     .FirstOrDefault(p => p.Key == nameof(response.TransID))?.Value
                 ?? throw new MissingParameterException(nameof(response.TransID))
         };
         parameters[2] = new Parameter
         {
             Key = nameof(response.CustomerName),
-            Value = response.CustomerName ?? response.Parameters
+            Value = response.CustomerName ?? response.Parameters?
                     .FirstOrDefault(p => p.Key == nameof(response.CustomerName))?.Value
                 ?? throw new MissingParameterException(nameof(response.CustomerName))
         };
         parameters[3] = new Parameter
         {
             Key = nameof(response.Amount),
-            Value = response.Amount?.ToString() ?? response.Parameters
+            Value = response.Amount?.ToString() ?? response.Parameters?
                     .FirstOrDefault(p => p.Key == nameof(response.Amount))?.Value
                 ?? throw new MissingParameterException(nameof(response.Amount))
         };
         parameters[4] = new Parameter
         {
             Key = nameof(response.ShortCode),
-            Value = response.ShortCode ?? response.Parameters
+            Value = response.ShortCode ?? response.Parameters?
                     .FirstOrDefault(p => p.Key == nameof(response.ShortCode))?.Value
                 ?? throw new MissingParameterException(nameof(response.ShortCode))
         };

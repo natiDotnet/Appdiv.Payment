@@ -1,11 +1,13 @@
-﻿using System.Net.Http.Headers;
-using Appdiv.Payment.AwashBank.Contracts;
+﻿using Appdiv.Payment.AwashBank.Contracts;
 using Appdiv.Payment.AwashBank.HttpDelegates;
 using Appdiv.Payment.AwashBank.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Routing;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Appdiv.Payment.AwashBank;
 
@@ -27,9 +29,23 @@ public static class Startup
         return services;
 
     }
-    public static void UseAwashEndpoint(this IApplicationBuilder builder, string endpoint = "/Awash")
+    public static void UseAwashEndpoint(this IEndpointRouteBuilder endpoints, string endpoint = "/Awash", string authPath = "/Authentication", string paymentQueryPath = "/PaymentQuery", string paymentConfirmationPath = "/PaymentConfirmation")
     {
-        throw new NotImplementedException();
+        endpoints.MapPost($"{endpoint}{authPath}", async ([FromBody] Credential request, [FromServices] IAwashReference awash) =>
+        {
+            var response = await awash.AuthenticateUserAsync(request);
+            return response.Status ? Results.Ok(response) : Results.BadRequest(response);
+        });
+        endpoints.MapPost($"{endpoint}{paymentQueryPath}", async ([FromBody] PaymentQueryRequest request, [FromServices] IAwashReference awash) =>
+        {
+            var response = await awash.PaymentQueryAsync(request);
+            return response.Status ? Results.Ok(response) : Results.BadRequest(response);
+        });
+        endpoints.MapPost($"{endpoint}{paymentConfirmationPath}", async ([FromBody] PaymentConfirmationRequest request, [FromServices] IAwashReference awash) =>
+        {
+            var response = await awash.PaymentConfirmAsync(request);
+            return response.Status ? Results.Ok(response) : Results.BadRequest(response);
+        });
     }
 
 

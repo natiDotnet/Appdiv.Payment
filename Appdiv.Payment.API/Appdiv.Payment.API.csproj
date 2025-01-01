@@ -7,12 +7,13 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0"/>
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Appdiv.Payment.CBE\Appdiv.Payment.CBE.csproj"/>
-        <ProjectReference Include="..\Appdiv.Payment.Telebirr\Appdiv.Payment.Telebirr.csproj"/>
+        <ProjectReference Include="..\Appdiv.Payment.CBE\Appdiv.Payment.CBE.csproj" />
+        <ProjectReference Include="..\Appdiv.Payment.Telebirr\Appdiv.Payment.Telebirr.csproj" />
+        <ProjectReference Include="..\Appdiv.Payment.AwashBank\Appdiv.Payment.AwashBank.csproj" />
     </ItemGroup>
 
 </Project>

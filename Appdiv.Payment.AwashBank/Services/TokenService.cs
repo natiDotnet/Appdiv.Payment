@@ -12,7 +12,7 @@ public class TokenService : ITokenService
 
     public bool IsTokenExpired()
     {
-        return DateTime.UtcNow >= _expirationDate;
+        return DateTime.UtcNow >= _expirationDate || string.IsNullOrWhiteSpace(_token);
     }
 
     public void SetToken(string token, TimeSpan expiration)

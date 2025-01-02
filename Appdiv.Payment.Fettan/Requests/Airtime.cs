@@ -12,6 +12,24 @@ public enum AirtimeVendors
     SAFARICOM
 }
 
+public enum AirtimeTransactionType
+{
+    /// <summary>
+    /// PIN-based, purchase virtual card
+    /// </summary>
+    PinBased,
+
+    /// <summary>
+    /// Bulk, purchase pinless bulk minutes to be automatically transferred to recipient mobile
+    /// </summary>
+    Bulk,
+
+    /// <summary>
+    /// Recharge/Top-up a customer’s mobile balance
+    /// </summary>
+    Recharge
+}
+
 /// <summary>
 /// Represents vendor codes for various payment services and merchants
 /// </summary>

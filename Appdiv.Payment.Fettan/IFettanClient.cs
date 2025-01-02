@@ -19,66 +19,66 @@ public interface IFettanClient
     /// Processes a sale transaction.
     /// </summary>
     /// <param name="paymentInfo">The payment information.</param>
-    /// <param name="additionalInformation">Optional additional information.</param>
+    /// <param name="additionalInfo">Optional additional information.</param>
     /// <returns>A task that represents the asynchronous operation. The task result contains the API response.</returns>
-    Task<ApiResponse> SaleAsync(PaymentInfo paymentInfo, string? additionalInformation1 = null, string? additionalInformation2 = null, string? additionalInformation3 = null, string? additionalInformation4 = null, string? additionalInformation5 = null);
+    Task<ApiResponse> SaleAsync(PaymentInfo paymentInfo, string? additionalInfo1 = null, string? additionalInfo2 = null);
 
     /// <summary>
     /// Processes a deposit transaction.
     /// </summary>
     /// <param name="paymentInfo">The payment information.</param>
-    /// <param name="additionalInformation">Optional additional information.</param>
+    /// <param name="additionalInfo">Optional additional information.</param>
     /// <returns>A task that represents the asynchronous operation. The task result contains the API response.</returns>
-    Task<ApiResponse> DepositAsync(PaymentInfo paymentInfo, string? additionalInformation1 = null, string? additionalInformation2 = null, string? additionalInformation3 = null, string? additionalInformation4 = null, string? additionalInformation5 = null);
+    Task<ApiResponse> DepositAsync(PaymentInfo paymentInfo, string? additionalInfo1 = null, string? additionalInfo5 = null);
 
     /// <summary>
     /// Processes a refund transaction.
     /// </summary>
     /// <param name="paymentInfo">The payment information.</param>
-    /// <param name="additionalInformation">Optional additional information.</param>
+    /// <param name="additionalInfo">Optional additional information.</param>
     /// <returns>A task that represents the asynchronous operation. The task result contains the API response.</returns>
-    Task<ApiResponse> RefundAsync(PaymentInfo paymentInfo, string? additionalInformation1 = null, string? additionalInformation2 = null, string? additionalInformation3 = null, string? additionalInformation4 = null, string? additionalInformation5 = null);
+    Task<ApiResponse> RefundAsync(PaymentInfo paymentInfo, string? additionalInfo1 = null);
 
     /// <summary>
     /// Processes a withdrawal transaction.
     /// </summary>
     /// <param name="paymentInfo">The payment information.</param>
-    /// <param name="additionalInformation">Optional additional information.</param>
+    /// <param name="additionalInfo">Optional additional information.</param>
     /// <returns>A task that represents the asynchronous operation. The task result contains the API response.</returns>
-    Task<ApiResponse> WithdrawalAsync(PaymentInfo paymentInfo, string? additionalInformation1 = null, string? additionalInformation2 = null, string? additionalInformation3 = null, string? additionalInformation4 = null, string? additionalInformation5 = null);
+    Task<ApiResponse> WithdrawalAsync(PaymentInfo paymentInfo, string? additionalInfo1 = null, string? additionalInfo5 = null);
 
     /// <summary>
     /// Processes an airtime top-up request.
     /// </summary>
     /// <param name="paymentInfo">The payment information.</param>
     /// <param name="vendorAccount">The airtime vendor.</param>
-    /// <param name="additionalInformation1">
+    /// <param name="additionalInfo1">
     /// Ethio Telecom = P or B (P=PIN-based, purchase virtual card or B=Bulk, purchase pinless bulk minutes to be automatically transferred to recipient mobile.
     /// Safaricom = R (R=Recharge/Top-up a customer’s mobile balance)
     /// </param>
-    /// <param name="additionalInformation2">Receiving customer mobile number if purchase is on behalf of another customer. If blank, customer making purchase will receive the airtime top-up.</param>
-    /// <param name="additionalInformation3">Reserved for future use.</param>
-    /// <param name="additionalInformation4">Reserved for future use.</param>
-    /// <param name="additionalInformation5">Merchant ID/Merchant Mobile/Cash Till/Agent Device ID for transactions taken on behalf of another merchant.</param>
+    /// <param name="additionalInfo2">Receiving customer mobile number if purchase is on behalf of another customer. If blank, customer making purchase will receive the airtime top-up.</param>
+    /// <param name="additionalInfo3">Reserved for future use.</param>
+    /// <param name="additionalInfo4">Reserved for future use.</param>
+    /// <param name="additionalInfo5">Merchant ID/Merchant Mobile/Cash Till/Agent Device ID for transactions taken on behalf of another merchant.</param>
     /// <returns>The API response.</returns>
-    /// <exception cref="ArgumentException">Thrown when additionalInformation1 is null or whitespace.</exception>
-    Task<ApiResponse> AirtimeAsync(PaymentInfo paymentInfo, AirtimeVendors vendorAccount = AirtimeVendors.ETC, string? additionalInformation1 = null, string? additionalInformation2 = null, string? additionalInformation3 = null, string? additionalInformation4 = null, string? additionalInformation5 = null);
+    /// <exception cref="ArgumentException">Thrown when additionalInfo1 is null or whitespace.</exception>
+    Task<ApiResponse> AirtimeAsync(PaymentInfo paymentInfo, AirtimeVendors vendorAccount = AirtimeVendors.ETC, AirtimeTransactionType? additionalInfo1 = null, string? additionalInfo2 = null, string? additionalInfo5 = null);
 
     /// <summary>
     /// Looks up bill information for the specified vendor account.
     /// </summary>
     /// <param name="paymentInfo">The payment information.</param>
     /// <param name="vendorAccount">The vendor account associated with the bill.</param>
-    /// <param name="additionalInformation">additional information.</param>
+    /// <param name="additionalInfo">additional information.</param>
     /// <returns>A task that represents the asynchronous operation. The task result contains the API response.</returns>
-    Task<ApiResponse> BillLookupAsync(PaymentInfo paymentInfo, VendorCode additionalInformation1, string additionalInformation2, string additionalInformation3);
+    Task<ApiResponse> BillLookupAsync(PaymentInfo paymentInfo, VendorCode additionalInfo1, string additionalInfo2, string additionalInfo3);
 
     /// <summary>
     /// Processes a bill payment for the specified vendor account.
     /// </summary>
     /// <param name="paymentInfo">The payment information.</param>
     /// <param name="vendorAccount">The vendor account to which the bill payment is made.</param>
-    /// <param name="additionalInformation">additional information.</param>
+    /// <param name="additionalInfo">additional information.</param>
     /// <returns>A task that represents the asynchronous operation. The task result contains the API response.</returns>
-    Task<ApiResponse> BillPaymentAsync(PaymentInfo paymentInfo, string vendorAccount, string additionalInformation1, string additionalInformation2, string additionalInformation3 = null, string? additionalInformation4 = null, string? additionalInformation5 = null);
+    Task<ApiResponse> BillPaymentAsync(PaymentInfo paymentInfo, string vendorAccount, string additionalInfo1, string additionalInfo2, string additionalInfo3 = null, string? additionalInfo4 = null, string? additionalInfo5 = null);
 }

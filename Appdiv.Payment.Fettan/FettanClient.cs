@@ -40,27 +40,27 @@ public class FettanClient : IFettanClient
         return HandlePaymentAsync(paymentInfo, PaymentAction.Authorization);
     }
 
-    public Task<ApiResponse> DepositAsync(PaymentInfo paymentInfo, string? additionalInformation1 = null, string? additionalInformation2 = null, string? additionalInformation3 = null, string? additionalInformation4 = null, string? additionalInformation5 = null)
+    public Task<ApiResponse> DepositAsync(PaymentInfo paymentInfo, string? additionalInfo1 = null, string? additionalInfo5 = null)
     {
-        return HandlePaymentAsync(paymentInfo, PaymentAction.Deposit, additionalInformation1, additionalInformation2, additionalInformation3, additionalInformation4, additionalInformation5);
+        return HandlePaymentAsync(paymentInfo, PaymentAction.Deposit, additionalInfo1: additionalInfo1, additionalInfo5);
     }
 
-    public Task<ApiResponse> RefundAsync(PaymentInfo paymentInfo, string? additionalInformation1 = null, string? additionalInformation2 = null, string? additionalInformation3 = null, string? additionalInformation4 = null, string? additionalInformation5 = null)
+    public Task<ApiResponse> RefundAsync(PaymentInfo paymentInfo, string? additionalInfo1 = null)
     {
-        return HandlePaymentAsync(paymentInfo, PaymentAction.Refund, additionalInformation1, additionalInformation2, additionalInformation3, additionalInformation4, additionalInformation5);
+        return HandlePaymentAsync(paymentInfo, PaymentAction.Refund, additionalInfo1: additionalInfo1);
     }
 
-    public Task<ApiResponse> SaleAsync(PaymentInfo paymentInfo, string? additionalInformation1 = null, string? additionalInformation2 = null, string? additionalInformation3 = null, string? additionalInformation4 = null, string? additionalInformation5 = null)
+    public Task<ApiResponse> SaleAsync(PaymentInfo paymentInfo, string? additionalInfo1 = null, string? additionalInfo2 = null)
     {
-        return HandlePaymentAsync(paymentInfo, PaymentAction.Sale, additionalInformation1, additionalInformation2, additionalInformation3, additionalInformation4, additionalInformation5);
+        return HandlePaymentAsync(paymentInfo, PaymentAction.Sale, additionalInfo1: additionalInfo1, additionalInfo2);
     }
 
-    public Task<ApiResponse> WithdrawalAsync(PaymentInfo paymentInfo, string? additionalInformation1 = null, string? additionalInformation2 = null, string? additionalInformation3 = null, string? additionalInformation4 = null, string? additionalInformation5 = null)
+    public Task<ApiResponse> WithdrawalAsync(PaymentInfo paymentInfo, string? additionalInfo1 = null, string? additionalInfo5 = null)
     {
-        return HandlePaymentAsync(paymentInfo, PaymentAction.Withdraw, additionalInformation1, additionalInformation2, additionalInformation3, additionalInformation4, additionalInformation5);
+        return HandlePaymentAsync(paymentInfo, PaymentAction.Withdraw, additionalInfo1: additionalInfo1, additionalInfo5);
     }
 
-    private Task<ApiResponse> HandlePaymentAsync(PaymentInfo paymentInfo, PaymentAction action, string vendorCode, string? additionalInformation1 = null, string? additionalInformation2 = null, string? additionalInformation3 = null, string? additionalInformation4 = null, string? additionalInformation5 = null)
+    private Task<ApiResponse> HandlePaymentAsync(PaymentInfo paymentInfo, PaymentAction action, string vendorCode, string? additionalInfo1 = null, string? additionalInfo2 = null, string? additionalInfo3 = null, string? additionalInfo4 = null, string? additionalInfo5 = null)
     {
         if (paymentInfo is null)
         {
@@ -69,44 +69,44 @@ public class FettanClient : IFettanClient
         var request = (RequestBody)paymentInfo; // Implicit conversion
         request.PaymentAction = action.ToString("D2");
         request.VendorAccount = vendorCode;
-        request.AdditionalInfo1 = additionalInformation1 ?? string.Empty;
-        request.AdditionalInfo2 = additionalInformation2 ?? string.Empty;
-        request.AdditionalInfo3 = additionalInformation3 ?? string.Empty;
-        request.AdditionalInfo4 = additionalInformation4 ?? string.Empty;
-        request.AdditionalInfo5 = additionalInformation5 ?? string.Empty;
+        request.AdditionalInfo1 = additionalInfo1 ?? string.Empty;
+        request.AdditionalInfo2 = additionalInfo2 ?? string.Empty;
+        request.AdditionalInfo3 = additionalInfo3 ?? string.Empty;
+        request.AdditionalInfo4 = additionalInfo4 ?? string.Empty;
+        request.AdditionalInfo5 = additionalInfo5 ?? string.Empty;
 
         return SendRequestAsync(request);
     }
 
-    private Task<ApiResponse> HandlePaymentAsync(PaymentInfo paymentInfo, PaymentAction action, string? additionalInformation1 = null, string? additionalInformation2 = null, string? additionalInformation3 = null, string? additionalInformation4 = null, string? additionalInformation5 = null)
+    private Task<ApiResponse> HandlePaymentAsync(PaymentInfo paymentInfo, PaymentAction action, string? additionalInfo1 = null, string? additionalInfo2 = null, string? additionalInfo3 = null, string? additionalInfo4 = null, string? additionalInfo5 = null)
     {
-        return HandlePaymentAsync(paymentInfo, action, string.Empty, additionalInformation1, additionalInformation2, additionalInformation3, additionalInformation4, additionalInformation5);
+        return HandlePaymentAsync(paymentInfo, action, string.Empty, additionalInfo1, additionalInfo2, additionalInfo3, additionalInfo4, additionalInfo5);
     }
 
-    public Task<ApiResponse> AirtimeAsync(PaymentInfo paymentInfo, AirtimeVendors vendorAccount = AirtimeVendors.ETC, string? additionalInformation1 = null, string? additionalInformation2 = null, string? additionalInformation3 = null, string? additionalInformation4 = null, string? additionalInformation5 = null)
+    public Task<ApiResponse> AirtimeAsync(PaymentInfo paymentInfo, AirtimeVendors vendorAccount = AirtimeVendors.ETC, AirtimeTransactionType? additionalInfo1 = null, string? additionalInfo2 = null, string? additionalInfo5 = null)
     {
-        if (string.IsNullOrWhiteSpace(additionalInformation1))
+        if (additionalInfo1 is null)
         {
-            throw new ArgumentException("additionalInformation1 is required", nameof(additionalInformation1));
+            throw new ArgumentException("additionalInfo1 is required", nameof(additionalInfo1));
         }
-        return HandlePaymentAsync(paymentInfo, PaymentAction.Airtime, vendor.ToString(), additionalInformation1, additionalInformation2, additionalInformation3, additionalInformation4, additionalInformation5);
+        return HandlePaymentAsync(paymentInfo, PaymentAction.Airtime, vendorAccount.ToString(), additionalInfo1: additionalInfo1.ToString()?[0].ToString(), additionalInfo2, additionalInfo5);
     }
 
-    public Task<ApiResponse> BillLookupAsync(PaymentInfo paymentInfo, VendorCode additionalInformation1, string additionalInformation2, string additionalInformation3)
+    public Task<ApiResponse> BillLookupAsync(PaymentInfo paymentInfo, VendorCode additionalInfo1, string additionalInfo2, string additionalInfo3)
     {
-        if (string.IsNullOrWhiteSpace(additionalInformation1) || string.IsNullOrWhiteSpace(additionalInformation2) || string.IsNullOrWhiteSpace(additionalInformation3))
+        if (string.IsNullOrWhiteSpace(additionalInfo2) || string.IsNullOrWhiteSpace(additionalInfo3))
         {
-            throw new ArgumentException("additionalInformation1, additionalInformation2, and additionalInformation3 are required", nameof(additionalInformation1));
+            throw new ArgumentException("additionalInfo1, additionalInfo2, and additionalInfo3 are required", nameof(additionalInfo1));
         }
-        return HandlePaymentAsync(paymentInfo, PaymentAction.BillLookup, vendorAccount, additionalInformation1, additionalInformation2, additionalInformation3);
+        return HandlePaymentAsync(paymentInfo, PaymentAction.BillLookup, additionalInfo1: additionalInfo1.ToString(), additionalInfo2, additionalInfo3);
     }
 
-    public Task<ApiResponse> BillPaymentAsync(PaymentInfo paymentInfo, string vendorAccount, string additionalInformation1, string additionalInformation2, string additionalInformation3 = null, string? additionalInformation4 = null, string? additionalInformation5 = null)
+    public Task<ApiResponse> BillPaymentAsync(PaymentInfo paymentInfo, string vendorAccount, string additionalInfo1, string additionalInfo2, string additionalInfo3 = null, string? additionalInfo4 = null, string? additionalInfo5 = null)
     {
-        if (string.IsNullOrWhiteSpace(additionalInformation1) || string.IsNullOrWhiteSpace(additionalInformation2) || string.IsNullOrWhiteSpace(additionalInformation3))
+        if (string.IsNullOrWhiteSpace(additionalInfo1) || string.IsNullOrWhiteSpace(additionalInfo2) || string.IsNullOrWhiteSpace(additionalInfo3))
         {
-            throw new ArgumentException("additionalInformation1, additionalInformation2, and additionalInformation3 are required", nameof(additionalInformation1));
+            throw new ArgumentException("additionalInfo1, additionalInfo2, and additionalInfo3 are required", nameof(additionalInfo1));
         }
-        return HandlePaymentAsync(paymentInfo, PaymentAction.BillPayment, vendorAccount, additionalInformation1, additionalInformation2, additionalInformation3, additionalInformation4, additionalInformation5);
+        return HandlePaymentAsync(paymentInfo, PaymentAction.BillPayment, vendorAccount, additionalInfo1, additionalInfo2, additionalInfo3, additionalInfo4, additionalInfo5);
     }
 }

@@ -1,8 +1,8 @@
-using Appdiv.Payment.CBE.Requests;
-using Appdiv.Payment.CBE.Responses;
+using Appdiv.Payment.CBEBirr.Requests;
+using Appdiv.Payment.CBEBirr.Responses;
 using Appdiv.Payment.Shared.Contracts;
 
-namespace Appdiv.Payment.CBE;
+namespace Appdiv.Payment.CBEBirr;
 
 /// <summary>
 ///     Interface for handling CBE payment operations.

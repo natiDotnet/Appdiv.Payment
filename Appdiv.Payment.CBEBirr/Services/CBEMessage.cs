@@ -3,7 +3,7 @@ using Appdiv.Payment.Shared.Helper;
 using Appdiv.Payment.Shared.Models;
 using SoapCore;
 
-namespace Appdiv.Payment.CBE.Services;
+namespace Appdiv.Payment.CBEBirr.Services;
 
 // ReSharper disable once InconsistentNaming
 public class CBEMessage : CustomMessage

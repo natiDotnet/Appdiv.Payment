@@ -1,12 +1,12 @@
 using System.ServiceModel.Channels;
-using Appdiv.Payment.CBE.Services;
+using Appdiv.Payment.CBEBirr.Services;
 using Appdiv.Payment.Shared.Contracts;
 using Appdiv.Payment.Telebirr;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using SoapCore;
 
-namespace Appdiv.Payment.CBE;
+namespace Appdiv.Payment.CBEBirr;
 
 public static class Startup
 {

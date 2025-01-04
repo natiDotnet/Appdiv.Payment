@@ -1,6 +1,6 @@
 ﻿using System.Xml.Serialization;
 
-namespace Appdiv.Payment.CBE.Requests;
+namespace Appdiv.Payment.CBEBirr.Requests;
 
 public class ApplyTransactionRequest
 {

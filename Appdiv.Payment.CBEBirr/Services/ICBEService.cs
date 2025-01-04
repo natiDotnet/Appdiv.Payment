@@ -1,11 +1,11 @@
 using System.ServiceModel;
 using System.Xml.Serialization;
-using Appdiv.Payment.CBE.Requests;
-using Appdiv.Payment.CBE.Responses;
+using Appdiv.Payment.CBEBirr.Requests;
+using Appdiv.Payment.CBEBirr.Responses;
 using Appdiv.Payment.Shared.Contracts;
 using Appdiv.Payment.Shared.Models;
 
-namespace Appdiv.Payment.CBE.Services;
+namespace Appdiv.Payment.CBEBirr.Services;
 
 [ServiceContract(Namespace = Namespace.Tem)]
 internal interface ICBEService

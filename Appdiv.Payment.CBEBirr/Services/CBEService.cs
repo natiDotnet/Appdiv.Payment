@@ -1,10 +1,10 @@
 ﻿using System.Xml.Serialization;
-using Appdiv.Payment.CBE.Exceptions;
-using Appdiv.Payment.CBE.Requests;
-using Appdiv.Payment.CBE.Responses;
+using Appdiv.Payment.CBEBirr.Exceptions;
+using Appdiv.Payment.CBEBirr.Requests;
+using Appdiv.Payment.CBEBirr.Responses;
 using Appdiv.Payment.Shared.Models;
 
-namespace Appdiv.Payment.CBE.Services;
+namespace Appdiv.Payment.CBEBirr.Services;
 
 // ReSharper disable once InconsistentNaming
 internal class CBEService : ICBESharedService, ICBEService

@@ -1,11 +1,11 @@
-using Appdiv.Payment.CBE;
-using Appdiv.Payment.CBE.Requests;
-using Appdiv.Payment.CBE.Responses;
+using Appdiv.Payment.CBEBirr;
+using Appdiv.Payment.CBEBirr.Requests;
+using Appdiv.Payment.CBEBirr.Responses;
 using Appdiv.Payment.Shared.Models;
 
 namespace Appdiv.Payment.API;
 
-public class CBEPayment : ICBEPayment
+public class CBEBirrPayment : ICBEBirrPayment
 {
     public Task<C2BPaymentConfirmationResult> PaymentConfirmationAsync(C2BPaymentConfirmationRequest request)
     {

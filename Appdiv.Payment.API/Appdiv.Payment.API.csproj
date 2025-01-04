@@ -11,7 +11,8 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Appdiv.Payment.CBE\Appdiv.Payment.CBE.csproj" />
+        <ProjectReference Include="../Appdiv.Payment.Fettan/Appdiv.Payment.Fettan.csproj" />
+        <ProjectReference Include="..\Appdiv.Payment.CBEBirr\Appdiv.Payment.CBEBirr.csproj" />
         <ProjectReference Include="..\Appdiv.Payment.Telebirr\Appdiv.Payment.Telebirr.csproj" />
         <ProjectReference Include="..\Appdiv.Payment.AwashBank\Appdiv.Payment.AwashBank.csproj" />
     </ItemGroup>

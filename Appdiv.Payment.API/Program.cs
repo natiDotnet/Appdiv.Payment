@@ -1,9 +1,11 @@
 using Appdiv.Payment.API;
-using Appdiv.Payment.CBE;
+using Appdiv.Payment.CBEBirr;
 using Appdiv.Payment.Telebirr;
 using Appdiv.Payment.AwashBank;
 using Appdiv.Payment.AwashBank.Contracts;
 using Microsoft.AspNetCore.Mvc;
+using Appdiv.Payment.Fettan;
+using Appdiv.Payment.Fettan.Requests;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,9 +16,10 @@ builder.Services.AddControllers()
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddCBEbirr<CBEPayment>();
+builder.Services.AddCBEBirr<CBEBirrPayment>();
 builder.Services.AddTelebirr<TelebirrPayment>();
 builder.Services.AddAwashClient(builder.Configuration);
+builder.Services.AddFettanClient(builder.Configuration);
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -25,8 +28,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
-app.UseCBEbirr();
+app.UseCBEBirr();
 app.UseTelebirr();
 app.UseHttpsRedirection();
 app.UseAuthorization();
@@ -35,10 +37,9 @@ app.UseAwashEndpoint();
 
 app.MapControllers();
 
-app.MapGet("/awash", async (IAwashClient client) =>
+app.MapGet("/awash", async (IFettanClient client) =>
 {
-    var response = await client.GetTokenAsync(new Credential("username", "password"));
-    return response.Token;
+
 });
 
 app.Run();

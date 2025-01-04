@@ -9,9 +9,9 @@ namespace Appdiv.Payment.CBEBirr.Services;
 // ReSharper disable once InconsistentNaming
 internal class CBEService : ICBESharedService, ICBEService
 {
-    private readonly ICBEPayment _payment;
+    private readonly ICBEBirrPayment _payment;
 
-    public CBEService(ICBEPayment payment)
+    public CBEService(ICBEBirrPayment payment)
     {
         _payment = payment;
     }

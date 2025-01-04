@@ -7,7 +7,7 @@ namespace Appdiv.Payment.CBEBirr;
 /// <summary>
 ///     Interface for handling CBE payment operations.
 /// </summary>
-public interface ICBEPayment : ISharedPayment
+public interface ICBEBirrPayment : ISharedPayment
 {
     /// <summary>
     ///     Queries the amount of a C2B payment.

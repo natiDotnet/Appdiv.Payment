@@ -8,12 +8,13 @@
         <Authors>Natnael Yirga</Authors>
         <Description>Telebirr payment integration for Ethio Telecom</Description>
         <Company>Appdiv</Company>
-        <!-- <PackageIcon>icon/telebirr.jpeg</PackageIcon> -->
+        <PackageIcon>telebirr.jpeg</PackageIcon>
         <RepositoryUrl>https://github.com/natiDotnet/Appdiv.Payment/tree/master/Appdiv.Payment.Telebirr</RepositoryUrl>
         <RepositoryType>Library</RepositoryType>
         <PackageTags>payment; telebirr; ethio telecom; telebirr super app;telebirr c2b api integration;</PackageTags>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
     </PropertyGroup>
 
     <ItemGroup>
@@ -25,10 +26,14 @@
     </ItemGroup>
 
     <ItemGroup>
-      <!-- <None Update="icon/telebirr.jpeg">
+      <None Include="README.md">
         <Pack>True</Pack>
-        <PackagePath></PackagePath>
-      </None> -->
+        <PackagePath>README.md</PackagePath>
+      </None>
+      <None Include="telebirr.jpeg">
+        <Pack>True</Pack>
+        <PackagePath>telebirr.jpeg</PackagePath>
+      </None>
     </ItemGroup>
 
 </Project>

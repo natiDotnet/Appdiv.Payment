@@ -54,8 +54,14 @@ builder.Services.AddTelebirr<TelebirrPayment>();
 var app = builder.Build();
 
 // ...existing code...
-
-app.UseTelebirr();
+// app.UseTelebirr();
+app.UseTelebirr(
+    // you can also override the request default path
+    // endpoint: "/telebirr",
+    // paymentQueryPath: "/payment",
+    // paymentValidationPath: "/validation"
+    // paymentConfirmationPath: "/confirmation",
+);
 
 app.Run();
 ```

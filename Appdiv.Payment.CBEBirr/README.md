@@ -53,7 +53,14 @@ var app = builder.Build();
 
 // ...existing code...
 
-app.UseCBEBirr();
+// app.UseCBEBirr();
+app.UseCBEBirr(
+    // you can also override the request default path
+    // endpoint: "/cbebirr",
+    // paymentQueryPath: "/payment",
+    // paymentValidationPath: "/validation"
+    // paymentConfirmationPath: "/confirmation",
+    );
 
 app.Run();
 ```

@@ -28,7 +28,12 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-app.UseCBEBirr();
+app.UseCBEBirr(
+    endpoint: "/cbebirr",
+    paymentQueryPath: "/payment",
+    paymentConfirmationPath: "/confirmation",
+    paymentValidationPath: "/validation");
+
 app.UseTelebirr();
 app.UseHttpsRedirection();
 app.UseAuthorization();

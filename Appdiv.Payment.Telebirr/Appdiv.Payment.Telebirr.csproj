@@ -1,9 +1,19 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net6.0</TargetFramework>
+        <TargetFrameworks>net6.0;net8.0;</TargetFrameworks>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <Title>Telebirr</Title>
+        <Authors>Natnael Yirga</Authors>
+        <Description>Telebirr payment integration for Ethio Telecom</Description>
+        <Company>Appdiv</Company>
+        <!-- <PackageIcon>icon/telebirr.jpeg</PackageIcon> -->
+        <RepositoryUrl>https://github.com/natiDotnet/Appdiv.Payment/tree/master/Appdiv.Payment.Telebirr</RepositoryUrl>
+        <RepositoryType>Library</RepositoryType>
+        <PackageTags>payment; telebirr; ethio telecom; telebirr super app;telebirr c2b api integration;</PackageTags>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     </PropertyGroup>
 
     <ItemGroup>
@@ -12,6 +22,13 @@
 
     <ItemGroup>
         <ProjectReference Include="..\Appdiv.Payment.Shared\Appdiv.Payment.Shared.csproj"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <!-- <None Update="icon/telebirr.jpeg">
+        <Pack>True</Pack>
+        <PackagePath></PackagePath>
+      </None> -->
     </ItemGroup>
 
 </Project>

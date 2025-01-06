@@ -1,4 +1,4 @@
-# CBEBirr Payment Service
+# CBEBirr C2B Payment Service
 
 This document provides information on how to implement the `ICBEBirrPayment` interface for handling CBEBirr payment operations.
 

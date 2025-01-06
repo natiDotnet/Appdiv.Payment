@@ -1,6 +1,6 @@
-# Telebirr Payment Service
+# Telebirr C2B Payment Service
 
-This document provides information on how to implement the `ITelebirrPayment` interface for handling Telebirr payment operations.
+This document provides information on how to implement the `ITelebirrPayment` interface for handling Telebirr C2B payment operations.
 
 ## Implementing ITelebirrPayment
 

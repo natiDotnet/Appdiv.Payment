@@ -92,21 +92,13 @@ public class FettanClient : IFettanClient
         return HandlePaymentAsync(paymentInfo, PaymentAction.Airtime, vendorAccount.ToString(), additionalInfo1: additionalInfo1.ToString()?[0].ToString(), additionalInfo2, additionalInfo5);
     }
 
-    public Task<ApiResponse> BillLookupAsync(PaymentInfo paymentInfo, VendorCode additionalInfo1, string additionalInfo2, string additionalInfo3)
+    public Task<ApiResponse> BillLookupAsync(PaymentInfo paymentInfo, string? vendorAccount = null, VendorCode? additionalInfo1 = null, string? additionalInfo2 = null, string? additionalInfo3 = null, string? additionalInfo4 = null, string? additionalInfo5 = null)
     {
-        if (string.IsNullOrWhiteSpace(additionalInfo2) || string.IsNullOrWhiteSpace(additionalInfo3))
-        {
-            throw new ArgumentException("additionalInfo1, additionalInfo2, and additionalInfo3 are required", nameof(additionalInfo1));
-        }
-        return HandlePaymentAsync(paymentInfo, PaymentAction.BillLookup, additionalInfo1: additionalInfo1.ToString(), additionalInfo2, additionalInfo3);
+        return HandlePaymentAsync(paymentInfo, PaymentAction.BillLookup, additionalInfo1: additionalInfo1?.ToString(), additionalInfo2, additionalInfo3, additionalInfo4, additionalInfo5);
     }
 
-    public Task<ApiResponse> BillPaymentAsync(PaymentInfo paymentInfo, string vendorAccount, string additionalInfo1, string additionalInfo2, string additionalInfo3 = null, string? additionalInfo4 = null, string? additionalInfo5 = null)
+    public Task<ApiResponse> BillPaymentAsync(PaymentInfo paymentInfo, string? vendorAccount = null, VendorCode? additionalInfo1 = null, string? additionalInfo2 = null, string? additionalInfo3 = null, string? additionalInfo4 = null, string? additionalInfo5 = null)
     {
-        if (string.IsNullOrWhiteSpace(additionalInfo1) || string.IsNullOrWhiteSpace(additionalInfo2) || string.IsNullOrWhiteSpace(additionalInfo3))
-        {
-            throw new ArgumentException("additionalInfo1, additionalInfo2, and additionalInfo3 are required", nameof(additionalInfo1));
-        }
-        return HandlePaymentAsync(paymentInfo, PaymentAction.BillPayment, vendorAccount, additionalInfo1, additionalInfo2, additionalInfo3, additionalInfo4, additionalInfo5);
+        return HandlePaymentAsync(paymentInfo, PaymentAction.BillPayment, vendorAccount ?? string.Empty, additionalInfo1?.ToString(), additionalInfo2, additionalInfo3, additionalInfo4, additionalInfo5);
     }
 }

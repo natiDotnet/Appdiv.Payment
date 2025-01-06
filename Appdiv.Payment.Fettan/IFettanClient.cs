@@ -71,7 +71,7 @@ public interface IFettanClient
     /// <param name="vendorAccount">The vendor account associated with the bill.</param>
     /// <param name="additionalInfo">additional information.</param>
     /// <returns>A task that represents the asynchronous operation. The task result contains the API response.</returns>
-    Task<ApiResponse> BillLookupAsync(PaymentInfo paymentInfo, VendorCode additionalInfo1, string additionalInfo2, string additionalInfo3);
+    Task<ApiResponse> BillLookupAsync(PaymentInfo paymentInfo, string? vendorAccount = null, VendorCode? additionalInfo1 = null, string? additionalInfo2 = null, string? additionalInfo3 = null, string? additionalInfo4 = null, string? additionalInfo5 = null);
 
     /// <summary>
     /// Processes a bill payment for the specified vendor account.
@@ -80,5 +80,5 @@ public interface IFettanClient
     /// <param name="vendorAccount">The vendor account to which the bill payment is made.</param>
     /// <param name="additionalInfo">additional information.</param>
     /// <returns>A task that represents the asynchronous operation. The task result contains the API response.</returns>
-    Task<ApiResponse> BillPaymentAsync(PaymentInfo paymentInfo, string vendorAccount, string additionalInfo1, string additionalInfo2, string additionalInfo3 = null, string? additionalInfo4 = null, string? additionalInfo5 = null);
+    Task<ApiResponse> BillPaymentAsync(PaymentInfo paymentInfo, string? vendorAccount = null, VendorCode? additionalInfo1 = null, string? additionalInfo2 = null, string? additionalInfo3 = null, string? additionalInfo4 = null, string? additionalInfo5 = null);
 }

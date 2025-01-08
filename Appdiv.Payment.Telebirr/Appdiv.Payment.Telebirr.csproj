@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>net6.0;net8.0;</TargetFrameworks>
+        <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <Title>Telebirr</Title>
@@ -13,8 +13,9 @@
         <RepositoryType>Library</RepositoryType>
         <PackageTags>payment; telebirr; ethio telecom; telebirr super app;telebirr c2b api integration;</PackageTags>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
-        <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+        <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
         <PackageReadmeFile>README.md</PackageReadmeFile>
+        <Version>1.0.3</Version>
     </PropertyGroup>
 
     <ItemGroup>

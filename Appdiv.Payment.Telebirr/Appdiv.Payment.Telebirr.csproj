@@ -1,7 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <Title>Telebirr</Title>
@@ -16,25 +15,40 @@
         <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <Version>1.0.3</Version>
+        <PackageOutputPath>./nupkg</PackageOutputPath>
+        <PackageReleaseNotes>Bug fix.</PackageReleaseNotes>
+        <LangVersion>latestmajor</LangVersion>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <TargetFramework>net8.0</TargetFramework>
+        <TargetsForTfmSpecificBuildOutput>$(TargetsForTfmSpecificBuildOutput);CopyProjectReferencesToPackage</TargetsForTfmSpecificBuildOutput>
     </PropertyGroup>
-
+    
     <ItemGroup>
         <PackageReference Include="SoapCore" Version="1.1.0.51"/>
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Appdiv.Payment.Shared\Appdiv.Payment.Shared.csproj"/>
+        <ProjectReference Include="..\Appdiv.Payment.Shared\Appdiv.Payment.Shared.csproj">
+            <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
+            <IncludeAssets>Appdiv.Payment.Shared.dll</IncludeAssets>
+        </ProjectReference>
     </ItemGroup>
 
+    <Target DependsOnTargets="ResolveReferences" Name="CopyProjectReferencesToPackage">
+        <ItemGroup>
+        <BuildOutputInPackage Include="@(ReferenceCopyLocalPaths->WithMetadataValue('ReferenceSourceTarget', 'ProjectReference'))"/>
+        </ItemGroup>
+    </Target>
+
     <ItemGroup>
-      <None Include="README.md">
-        <Pack>True</Pack>
-        <PackagePath>README.md</PackagePath>
-      </None>
-      <None Include="telebirr.jpeg">
-        <Pack>True</Pack>
-        <PackagePath>telebirr.jpeg</PackagePath>
-      </None>
+        <None Include="README.md">
+            <Pack>True</Pack>
+            <PackagePath>README.md</PackagePath>
+        </None>
+        <None Include="telebirr.jpeg">
+            <Pack>True</Pack>
+            <PackagePath>telebirr.jpeg</PackagePath>
+        </None>
     </ItemGroup>
 
 </Project>

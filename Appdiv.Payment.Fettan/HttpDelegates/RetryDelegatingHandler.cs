@@ -5,7 +5,7 @@ namespace Appdiv.Payment.Fettan.HttpDelegates;
 
 public class RetryDelegatingHandler : DelegatingHandler
 {
-    private readonly RetryPolicy<HttpResponseMessage> _retryPolicy = Policy<HttpResponseMessage>.Handle<HttpRequestException>().RetryAsync(3);
+    private readonly AsyncRetryPolicy<HttpResponseMessage> _retryPolicy = Policy<HttpResponseMessage>.Handle<HttpRequestException>().RetryAsync(3);
     protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
     {
         var policyResult = await _retryPolicy.ExecuteAndCaptureAsync(() => base.SendAsync(request, cancellationToken));

@@ -4,8 +4,8 @@ namespace Appdiv.Payment.CBEBirr.Requests;
 
 public class ApplyTransactionRequest
 {
-    public Header Header { get; set; }
-    public Body Body { get; set; }
+    public Header Header { get; set; } = null!;
+    public Body Body { get; set; } = null!;
 }
 
 [XmlType(Namespace = Namespace.GOA)]

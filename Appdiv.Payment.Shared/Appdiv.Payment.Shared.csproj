@@ -5,6 +5,16 @@
         <Nullable>enable</Nullable>
         <LangVersion>latestmajor</LangVersion>
         <TargetFramework>net8.0</TargetFramework>
+        <PackageOutputPath>./nupkg</PackageOutputPath>
+        <Title>Shared Library for telebirr</Title>
+        <Authors>Natnael Yirga</Authors>
+        <Description></Description>
+        <Company>Appdiv</Company>
+        <RepositoryUrl>https://github.com/natiDotnet/Appdiv.Payment/tree/master/Appdiv.Payment.Shared</RepositoryUrl>
+        <RepositoryType>Library</RepositoryType>
+        <PackageTags></PackageTags>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     </PropertyGroup>
     <ItemGroup>
         <PackageReference Include="System.ServiceModel.Primitives" Version="8.1.1"/>

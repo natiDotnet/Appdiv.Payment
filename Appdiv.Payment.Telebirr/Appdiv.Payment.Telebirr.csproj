@@ -20,25 +20,16 @@
         <LangVersion>latestmajor</LangVersion>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <TargetFramework>net8.0</TargetFramework>
-        <TargetsForTfmSpecificBuildOutput>$(TargetsForTfmSpecificBuildOutput);CopyProjectReferencesToPackage</TargetsForTfmSpecificBuildOutput>
     </PropertyGroup>
     
     <ItemGroup>
         <PackageReference Include="SoapCore" Version="1.1.0.51"/>
+        <PackageReference Include="Appdiv.Payment.Shared" Version="1.0.0" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Appdiv.Payment.Shared\Appdiv.Payment.Shared.csproj">
-            <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
-            <IncludeAssets>Appdiv.Payment.Shared.dll</IncludeAssets>
-        </ProjectReference>
+        
     </ItemGroup>
-
-    <Target DependsOnTargets="ResolveReferences" Name="CopyProjectReferencesToPackage">
-        <ItemGroup>
-        <BuildOutputInPackage Include="@(ReferenceCopyLocalPaths->WithMetadataValue('ReferenceSourceTarget', 'ProjectReference'))"/>
-        </ItemGroup>
-    </Target>
 
     <ItemGroup>
         <None Include="README.md">

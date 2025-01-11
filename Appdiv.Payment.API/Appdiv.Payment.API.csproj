@@ -1,19 +1,19 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
     <PropertyGroup>
-        <TargetFrameworks>net6.0;net8.0;</TargetFrameworks>
+        <TargetFramework>net8.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="7.2.0" />
+        <PackageReference Include="Appdiv.Payment.Telebirr" Version="1.0.3" />
+        <PackageReference Include="Appdiv.Payment.CBEBirr" Version="1.0.1" />
     </ItemGroup>
 
     <ItemGroup>
         <ProjectReference Include="../Appdiv.Payment.Fettan/Appdiv.Payment.Fettan.csproj" />
-        <ProjectReference Include="..\Appdiv.Payment.CBEBirr\Appdiv.Payment.CBEBirr.csproj" />
-        <ProjectReference Include="..\Appdiv.Payment.Telebirr\Appdiv.Payment.Telebirr.csproj" />
         <ProjectReference Include="..\Appdiv.Payment.AwashBank\Appdiv.Payment.AwashBank.csproj" />
     </ItemGroup>
 

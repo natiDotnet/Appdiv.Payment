@@ -42,7 +42,7 @@ internal class CBEService : ICBESharedService, ICBEService
             Key = nameof(response.BillRefNumber),
             Value = response.BillRefNumber ?? response.Parameters?
                     .FirstOrDefault(p => p.Key == nameof(response.BillRefNumber))?.Value
-                ?? throw new MissingParameterException(nameof(response.BillRefNumber))
+                ?? Body.BillReferenceNumber ?? throw new MissingParameterException(nameof(response.BillRefNumber))
         };
         parameters[1] = new Parameter
         {
@@ -70,7 +70,7 @@ internal class CBEService : ICBESharedService, ICBEService
             Key = nameof(response.ShortCode),
             Value = response.ShortCode ?? response.Parameters?
                     .FirstOrDefault(p => p.Key == nameof(response.ShortCode))?.Value
-                ?? throw new MissingParameterException(nameof(response.ShortCode))
+                ?? Body.ShortCode ?? throw new MissingParameterException(nameof(response.ShortCode))
         };
         response.Parameters = parameters;
         return response;

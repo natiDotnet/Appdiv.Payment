@@ -1,4 +1,4 @@
-namespace Appdiv.Payment.CBEBirr.Exceptions;
+namespace Appdiv.Payment.Shared.Exceptions;
 
 public class MissingParameterException : Exception
 {

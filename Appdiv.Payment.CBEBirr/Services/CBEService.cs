@@ -1,5 +1,5 @@
 ﻿using System.Xml.Serialization;
-using Appdiv.Payment.CBEBirr.Exceptions;
+using Appdiv.Payment.Shared.Exceptions;
 using Appdiv.Payment.Shared.Models;
 
 namespace Appdiv.Payment.CBEBirr.Services;

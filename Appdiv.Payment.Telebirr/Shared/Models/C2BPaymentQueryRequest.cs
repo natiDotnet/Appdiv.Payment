@@ -2,6 +2,7 @@
 
 public class C2BPaymentQueryRequest
 {
+    public C2BPaymentQueryRequest() { }
     public C2BPaymentQueryRequest(string billRefNumber, string transType, string transId, string transTime,
         string businessShortCode, string msisdn)
     {

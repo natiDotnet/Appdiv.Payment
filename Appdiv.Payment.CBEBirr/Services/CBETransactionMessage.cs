@@ -1,7 +1,7 @@
 ﻿using System.ServiceModel.Channels;
 using System.Xml;
-using Appdiv.Payment.CBEBirr.Responses;
 using Appdiv.Payment.Shared.Helper;
+using Appdiv.Payment.Shared.Models;
 using SoapCore;
 
 namespace Appdiv.Payment.CBEBirr.Services;

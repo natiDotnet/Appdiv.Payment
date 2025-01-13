@@ -1,6 +1,5 @@
-using Appdiv.Payment.CBEBirr.Requests;
-using Appdiv.Payment.CBEBirr.Responses;
 using Appdiv.Payment.Shared.Contracts;
+using Appdiv.Payment.Shared.Models;
 
 namespace Appdiv.Payment.CBEBirr;
 

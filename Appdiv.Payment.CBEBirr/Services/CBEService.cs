@@ -1,7 +1,5 @@
 ﻿using System.Xml.Serialization;
 using Appdiv.Payment.CBEBirr.Exceptions;
-using Appdiv.Payment.CBEBirr.Requests;
-using Appdiv.Payment.CBEBirr.Responses;
 using Appdiv.Payment.Shared.Models;
 
 namespace Appdiv.Payment.CBEBirr.Services;
@@ -18,6 +16,15 @@ internal class CBEService : ICBESharedService, ICBEService
 
     public async Task<ApplyTransactionResponse> C2BPaymentQueryRequest(Header Header, Body Body)
     {
+        Body.BillReferenceNumber = Body.Parameters.Where(p => p.Key == nameof(Body.BillReferenceNumber))
+                                            .Select(p => p.Value)
+                                            .FirstOrDefault();
+        Body.MSISDN = Body.Parameters.Where(p => p.Key == nameof(Body.MSISDN))
+                                      .Select(p => p.Value)
+                                      .FirstOrDefault();
+        Body.ShortCode = Body.Parameters.Where(p => p.Key == nameof(Body.ShortCode))
+                                         .Select(p => p.Value)
+                                         .FirstOrDefault();
         var request = new ApplyTransactionRequest
         {
             Header = Header,

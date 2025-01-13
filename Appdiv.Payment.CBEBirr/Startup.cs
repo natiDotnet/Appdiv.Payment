@@ -14,9 +14,9 @@ public static class Startup
         where TImplementation : class, ICBEBirrPayment
     {
         return services.AddSoapCore()
-            .AddSingleton<ICBEBirrPayment, TImplementation>()
-            .AddSingleton<ICBEService, CBEService>()
-            .AddSingleton<ICBESharedService, CBEService>();
+            .AddTransient<ICBEService, CBEService>()
+            .AddTransient<ICBESharedService, CBEService>()
+            .AddTransient<ICBEBirrPayment, TImplementation>();
     }
 
     public static IApplicationBuilder UseCBEBirr(

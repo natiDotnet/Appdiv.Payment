@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ServiceModel;
 using System.Xml.Serialization;
-using Appdiv.Payment.CBEBirr.Requests;
+using Appdiv.Payment.Shared.Helper;
 
-namespace Appdiv.Payment.CBEBirr.Responses;
+namespace Appdiv.Payment.Shared.Models;
 
 [XmlRoot(Namespace = Namespace.Tem)]
 [MessageContract(IsWrapped = true, WrapperName = nameof(ApplyTransactionResponse))]

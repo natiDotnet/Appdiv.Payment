@@ -1,6 +1,7 @@
 ﻿using System.Xml.Serialization;
+using Appdiv.Payment.Shared.Helper;
 
-namespace Appdiv.Payment.CBEBirr.Requests;
+namespace Appdiv.Payment.Shared.Models;
 
 public class ApplyTransactionRequest
 {
@@ -25,6 +26,11 @@ public class Body
     [XmlArray(nameof(Parameters), Namespace = Namespace.AT)]
     [XmlArrayItem(nameof(Parameter), Namespace = Namespace.GOA)]
     public Parameter[] Parameters { get; set; } = Array.Empty<Parameter>();
+
+    [XmlIgnore] public string? BillReferenceNumber { get; set; }
+
+    [XmlIgnore] public string? MSISDN { get; set; }
+    [XmlIgnore] public string? ShortCode { get; set; }
 }
 
 [XmlType(Namespace = Namespace.GOA)]

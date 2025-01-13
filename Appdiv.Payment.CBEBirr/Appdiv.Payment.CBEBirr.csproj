@@ -23,7 +23,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Appdiv.Payment.Telebirr" Version="1.0.3" />
+        <!-- <PackageReference Include="Appdiv.Payment.Telebirr" Version="1.0.3" /> -->
     </ItemGroup>
 
     <ItemGroup>
@@ -35,6 +35,10 @@
             <Pack>True</Pack>
             <PackagePath>cbebirr.jpeg</PackagePath>
         </None>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="../Appdiv.Payment.Telebirr/Appdiv.Payment.Telebirr.csproj" />
     </ItemGroup>
 
 </Project>

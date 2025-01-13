@@ -11,17 +11,25 @@ public static class Startup
         where TImplementation : class, ITelebirrPayment
     {
         return services.AddSoapCore()
-            .AddSingleton<ITelebirrService, TelebirrService>()
-            .AddSingleton<ITelebirrPayment, TImplementation>();
+            .AddTransient<ITelebirrService, TelebirrService>()
+            .AddTransient<ITelebirrPayment, TImplementation>();
     }
 
-    public static IApplicationBuilder UseTelebirr(this IApplicationBuilder builder, string endpoint = "/Telebirr")
+    public static IApplicationBuilder UseTelebirr(
+        this IApplicationBuilder builder,
+        string endpoint = "/Telebirr",
+        string paymentQueryPath = "/paymentQuery",
+        string paymentValidationPath = "/paymentValidation",
+        string paymentConfirmationPath = "/paymentConfirmation")
     {
-        return builder.UseTelebirr<ITelebirrService, TelebirrMessage>(endpoint);
+        return builder.UseTelebirr<ITelebirrService, TelebirrMessage>(endpoint, paymentQueryPath, paymentValidationPath, paymentConfirmationPath);
     }
 
-    public static IApplicationBuilder UseTelebirr<S, T>(this IApplicationBuilder builder, string endpoint = "/Telebirr",
-        string paymentQueryPath = "/paymentQuery", string paymentValidationPath = "/paymentValidation",
+    public static IApplicationBuilder UseTelebirr<S, T>(
+        this IApplicationBuilder builder,
+        string endpoint = "/Telebirr",
+        string paymentQueryPath = "/paymentQuery",
+        string paymentValidationPath = "/paymentValidation",
         string paymentConfirmationPath = "/paymentConfirmation") where T : CustomMessage, new()
     {
         builder.UseSoapEndpoint<S, T>($"{endpoint}{paymentQueryPath}", new SoapEncoderOptions(),

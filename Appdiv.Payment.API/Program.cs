@@ -28,13 +28,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-app.UseCBEBirr(
-    endpoint: "/cbebirr",
-    paymentQueryPath: "/payment",
-    paymentConfirmationPath: "/confirmation",
-    paymentValidationPath: "/validation");
 
-app.UseTelebirr();
+app.UseTelebirr("/TelebirrApi"
+// , "/paymentQueryRequest", "/paymentValidationRequest", "/paymentConfirmationRequest"
+);
+app.UseCBEBirr("/CbeBirr", "/ApplyTransactionRequest", "/paymentValidationRequest", "/paymentConfirmationRequest");
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.UseAwashEndpoint();

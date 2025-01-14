@@ -1,12 +1,16 @@
 using Appdiv.Payment.CBEBirr;
-using Appdiv.Payment.CBEBirr.Requests;
-using Appdiv.Payment.CBEBirr.Responses;
 using Appdiv.Payment.Shared.Models;
 
 namespace Appdiv.Payment.API;
 
 public class CBEBirrPayment : ICBEBirrPayment
 {
+    private readonly HttpClient _httpClient;
+
+    public CBEBirrPayment(HttpClient httpClient)
+    {
+        _httpClient = httpClient;
+    }
     public Task<C2BPaymentConfirmationResult> PaymentConfirmationAsync(C2BPaymentConfirmationRequest request)
     {
         throw new NotImplementedException();
@@ -14,6 +18,7 @@ public class CBEBirrPayment : ICBEBirrPayment
 
     public Task<ApplyTransactionResponse> PaymentQueryAsync(ApplyTransactionRequest request)
     {
+        _httpClient.GetAsync("");
         return Task.FromResult(new ApplyTransactionResponse
         {
             BillRefNumber = "423323",

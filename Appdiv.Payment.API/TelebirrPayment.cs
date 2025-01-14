@@ -5,8 +5,16 @@ namespace Appdiv.Payment.API;
 
 public class TelebirrPayment : ITelebirrPayment
 {
+    private readonly HttpClient _httpClient;
+    public TelebirrPayment(HttpClient httpClient)
+    {
+        _httpClient = httpClient;
+
+    }
     public Task<C2BPaymentQueryResult> PaymentQueryAsync(C2BPaymentQueryRequest request)
     {
+        Console.WriteLine(_httpClient.BaseAddress?.ToString());
+        _httpClient.GetAsync("");
         return Task.FromResult(new C2BPaymentQueryResult());
     }
 

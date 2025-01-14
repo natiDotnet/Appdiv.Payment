@@ -13,10 +13,14 @@ public static class Startup
     public static IServiceCollection AddCBEBirr<TImplementation>(this IServiceCollection services)
         where TImplementation : class, ICBEBirrPayment
     {
+        return AddCBEBirr(services)
+            .AddScoped<ICBEBirrPayment, TImplementation>();
+    }
+    public static IServiceCollection AddCBEBirr(this IServiceCollection services)
+    {
         return services.AddSoapCore()
-            .AddTransient<ICBEService, CBEService>()
-            .AddTransient<ICBESharedService, CBEService>()
-            .AddTransient<ICBEBirrPayment, TImplementation>();
+            .AddScoped<ICBEService, CBEService>()
+            .AddScoped<ICBESharedService, CBEService>();
     }
 
     public static IApplicationBuilder UseCBEBirr(
@@ -32,7 +36,7 @@ public static class Startup
                 MessageVersion = MessageVersion.Soap12WSAddressingAugust2004
             },
             SoapSerializer.XmlSerializer, true);
-        builder.UseTelebirr<ICBESharedService, CBEMessage>(endpoint, paymentValidationPath,
+        builder.UseTelebirr<ICBESharedService, CBEMessage>(endpoint, paymentQueryPath: "private", paymentValidationPath,
             paymentConfirmationPath);
         return builder;
     }

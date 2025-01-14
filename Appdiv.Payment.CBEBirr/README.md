@@ -49,6 +49,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddCBEBirr<CBEBirrPayment>();
 
+// or for more flexibility on dependency use
+builder.Services.AddCBEBirr();
+builder.Services.AddScoped<ICBEBirrPayment, CBEBirrPayment>();
+
 var app = builder.Build();
 
 // ...existing code...

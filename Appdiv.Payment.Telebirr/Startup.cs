@@ -10,9 +10,13 @@ public static class Startup
     public static IServiceCollection AddTelebirr<TImplementation>(this IServiceCollection services)
         where TImplementation : class, ITelebirrPayment
     {
+        return AddTelebirr(services)
+            .AddScoped<ITelebirrPayment, TImplementation>();
+    }
+    public static IServiceCollection AddTelebirr(this IServiceCollection services)
+    {
         return services.AddSoapCore()
-            .AddTransient<ITelebirrService, TelebirrService>()
-            .AddTransient<ITelebirrPayment, TImplementation>();
+            .AddScoped<ITelebirrService, TelebirrService>();
     }
 
     public static IApplicationBuilder UseTelebirr(

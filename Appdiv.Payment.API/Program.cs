@@ -1,11 +1,8 @@
 using Appdiv.Payment.API;
-using Appdiv.Payment.CBEBirr;
-using Appdiv.Payment.Telebirr;
 using Appdiv.Payment.AwashBank;
-using Appdiv.Payment.AwashBank.Contracts;
-using Microsoft.AspNetCore.Mvc;
+using Appdiv.Payment.CBEBirr;
 using Appdiv.Payment.Fettan;
-using Appdiv.Payment.Fettan.Requests;
+using Appdiv.Payment.Telebirr;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,8 +13,12 @@ builder.Services.AddControllers()
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddHttpClient<ITelebirrPayment, TelebirrPayment>((serviceProvidor, client) =>
+{
+    client.BaseAddress = new Uri("https://www.google.com/");
+});
 builder.Services.AddCBEBirr<CBEBirrPayment>();
-builder.Services.AddTelebirr<TelebirrPayment>();
+builder.Services.AddTelebirr();
 builder.Services.AddAwashClient(builder.Configuration);
 builder.Services.AddFettanClient(builder.Configuration);
 var app = builder.Build();
@@ -40,9 +41,6 @@ app.UseAwashEndpoint();
 
 app.MapControllers();
 
-app.MapGet("/awash", async (IFettanClient client) =>
-{
-
-});
+app.MapGet("/awash", async (IFettanClient client) => { });
 
 app.Run();

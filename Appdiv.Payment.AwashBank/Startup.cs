@@ -16,13 +16,14 @@ public static class Startup
     public static IServiceCollection AddAwashClient(this IServiceCollection services, IConfiguration configuration)
     {
         services
-            .AddScoped<IAwashClient, AwashClient>()
             .AddSingleton<ITokenService, TokenService>()
+            .AddScoped<RetryDelegatingHandler>()
+            .AddScoped<AuthenticationDelegatingHandler>()
             .Configure<AwashConfig>(configuration.GetSection(AwashConfig.Key))
-            .AddHttpClient<AwashClient>((serviceProvider, client) =>
+            .AddHttpClient<IAwashClient, AwashClient>((serviceProvider, client) =>
             {
                 var config = serviceProvider.GetRequiredService<IOptions<AwashConfig>>().Value;
-                client.BaseAddress = new Uri(config.Url);
+                client.BaseAddress = new Uri(config.Url.TrimEnd('/'));
             })
             .AddHttpMessageHandler<RetryDelegatingHandler>()
             .AddHttpMessageHandler<AuthenticationDelegatingHandler>();

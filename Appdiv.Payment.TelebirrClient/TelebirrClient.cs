@@ -57,7 +57,7 @@ public class TelebirrClient : ITelebirrClient
         return await response.Content.ReadAsStringAsync();
     }
 
-    public async Task<string> CreateOrder(string title, decimal amount)
+    public async Task<OrderResponse> CreateOrder(string title, decimal amount)
     {
         var request = new Order();
         request.BizContent = new OrderBiz
@@ -77,11 +77,18 @@ public class TelebirrClient : ITelebirrClient
         request.Sign = Helper.Sign(request, config.PrivateKey);
         var body = JsonSerializer.Serialize(request, Helper.SerializeOptions);
         var response = await client.PostAsJsonAsync(PreOrderPath, body);
-        var responseBody = await response.Content.ReadFromJsonAsync<dynamic>();
-        var prepayId = responseBody.BizContent.PrepayId;
-        var orderResponse = new OrderResponse
+        if (!response.IsSuccessStatusCode)
         {
-
+            var res = await response.Content.ReadFromJsonAsync<ErrorResponse>();
+            throw new Exception(res.ErrorMessage);
+        }
+        var responseBody = await response.Content.ReadFromJsonAsync<OrderResponse>();
+        var prepayId = responseBody?.BizContent.PrepayId;
+        var orderResponse = new RawRequest
+        {
+            MerchCode = config.ShortCode,
+            AppId = config.MerchantAppId,
+            PrepayId = prepayId           
         };
         orderResponse.Sign = Helper.Sign(orderResponse, config.PrivateKey);
         return Helper.Sign(orderResponse);

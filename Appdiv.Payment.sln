@@ -1,5 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
+# 
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Appdiv.Payment.API", "Appdiv.Payment.API\Appdiv.Payment.API.csproj", "{374ECD26-A83E-4ECD-9D61-2F503CF717B0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Appdiv.Payment.Telebirr", "Appdiv.Payment.Telebirr\Appdiv.Payment.Telebirr.csproj", "{AB98F8DD-FD5E-494D-92E5-78D635E23D5A}"
@@ -13,6 +14,14 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Appdiv.Payment.Shared", "Appdiv.Payment.Shared\Appdiv.Payment.Shared.csproj", "{A8EF7D6E-55DC-4A54-AB24-B1B5C6FF3667}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Appdiv.Payment.TelebirrClient", "Appdiv.Payment.TelebirrClient\Appdiv.Payment.TelebirrClient.csproj", "{C6839247-C2B4-454C-931A-7F7D506463FE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DirectPay", "DirectPay", "{922D980B-5A27-40EF-953A-52AA90E668C9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DirectPay.Telebirr", "DirectPay\DirectPay.Telebirr\DirectPay.Telebirr.csproj", "{67CF0BCC-3B64-4EE5-B6BD-2F0AB30DDBD7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DirectPay.Domain", "DirectPay\DirectPay.Domain\DirectPay.Domain.csproj", "{9ECF2315-36A1-4666-AC18-93C91A16B7EE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DirectPay.Application", "DirectPay\DirectPay.Application\DirectPay.Application.csproj", "{AF83A197-8A51-461D-BE4E-A0C5AA0A23F6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -48,8 +57,25 @@ Global
 		{C6839247-C2B4-454C-931A-7F7D506463FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C6839247-C2B4-454C-931A-7F7D506463FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C6839247-C2B4-454C-931A-7F7D506463FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67CF0BCC-3B64-4EE5-B6BD-2F0AB30DDBD7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67CF0BCC-3B64-4EE5-B6BD-2F0AB30DDBD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67CF0BCC-3B64-4EE5-B6BD-2F0AB30DDBD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67CF0BCC-3B64-4EE5-B6BD-2F0AB30DDBD7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9ECF2315-36A1-4666-AC18-93C91A16B7EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9ECF2315-36A1-4666-AC18-93C91A16B7EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9ECF2315-36A1-4666-AC18-93C91A16B7EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9ECF2315-36A1-4666-AC18-93C91A16B7EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF83A197-8A51-461D-BE4E-A0C5AA0A23F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF83A197-8A51-461D-BE4E-A0C5AA0A23F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF83A197-8A51-461D-BE4E-A0C5AA0A23F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF83A197-8A51-461D-BE4E-A0C5AA0A23F6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{67CF0BCC-3B64-4EE5-B6BD-2F0AB30DDBD7} = {922D980B-5A27-40EF-953A-52AA90E668C9}
+		{9ECF2315-36A1-4666-AC18-93C91A16B7EE} = {922D980B-5A27-40EF-953A-52AA90E668C9}
+		{AF83A197-8A51-461D-BE4E-A0C5AA0A23F6} = {922D980B-5A27-40EF-953A-52AA90E668C9}
 	EndGlobalSection
 EndGlobal

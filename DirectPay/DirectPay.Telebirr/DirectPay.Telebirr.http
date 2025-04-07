@@ -1,0 +1,6 @@
+@DirectPay.Telebirr_HostAddress = http://localhost:5115
+
+GET {{DirectPay.Telebirr_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

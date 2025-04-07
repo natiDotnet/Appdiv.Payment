@@ -1,5 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
+# 
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Appdiv.Payment.API", "Appdiv.Payment.API\Appdiv.Payment.API.csproj", "{374ECD26-A83E-4ECD-9D61-2F503CF717B0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Appdiv.Payment.Telebirr", "Appdiv.Payment.Telebirr\Appdiv.Payment.Telebirr.csproj", "{AB98F8DD-FD5E-494D-92E5-78D635E23D5A}"
@@ -13,6 +14,12 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Appdiv.Payment.Shared", "Appdiv.Payment.Shared\Appdiv.Payment.Shared.csproj", "{A8EF7D6E-55DC-4A54-AB24-B1B5C6FF3667}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Appdiv.Payment.TelebirrClient", "Appdiv.Payment.TelebirrClient\Appdiv.Payment.TelebirrClient.csproj", "{C6839247-C2B4-454C-931A-7F7D506463FE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Appdiv.Payment.UI", "Appdiv.Payment.UI", "{8086698A-6D31-4B7E-BFDF-1A5336C8372F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Appdiv.Payment.UI", "Appdiv.Payment.UI\Appdiv.Payment.UI\Appdiv.Payment.UI.csproj", "{D25AF91A-318B-4252-BA3C-699237E1499C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Appdiv.Payment.UI.Client", "Appdiv.Payment.UI\Appdiv.Payment.UI.Client\Appdiv.Payment.UI.Client.csproj", "{DAF27DAE-70AD-47ED-8DE5-5820AAA0FAAC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -48,5 +55,17 @@ Global
 		{C6839247-C2B4-454C-931A-7F7D506463FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C6839247-C2B4-454C-931A-7F7D506463FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C6839247-C2B4-454C-931A-7F7D506463FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D25AF91A-318B-4252-BA3C-699237E1499C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D25AF91A-318B-4252-BA3C-699237E1499C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D25AF91A-318B-4252-BA3C-699237E1499C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D25AF91A-318B-4252-BA3C-699237E1499C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DAF27DAE-70AD-47ED-8DE5-5820AAA0FAAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DAF27DAE-70AD-47ED-8DE5-5820AAA0FAAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DAF27DAE-70AD-47ED-8DE5-5820AAA0FAAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DAF27DAE-70AD-47ED-8DE5-5820AAA0FAAC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D25AF91A-318B-4252-BA3C-699237E1499C} = {8086698A-6D31-4B7E-BFDF-1A5336C8372F}
+		{DAF27DAE-70AD-47ED-8DE5-5820AAA0FAAC} = {8086698A-6D31-4B7E-BFDF-1A5336C8372F}
 	EndGlobalSection
 EndGlobal

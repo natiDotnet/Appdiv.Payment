@@ -14,7 +14,7 @@ public class TelebirrPayment : ITelebirrPayment
     }
     public async Task<C2BPaymentConfirmationResult> PaymentConfirmationAsync(C2BPaymentConfirmationRequest request)
     {
-        var transation = await transationRepository.GetByReferenceAsync(request.BillRefNumber);
+        var transation = await transationRepository.ReadByReferenceAsync(request.BillRefNumber);
         if (transation is null || transation.Amount != request.TransAmount)
             return new C2BPaymentConfirmationResult
             {
@@ -29,7 +29,7 @@ public class TelebirrPayment : ITelebirrPayment
 
     public async Task<C2BPaymentQueryResult> PaymentQueryAsync(C2BPaymentQueryRequest request)
     {
-        var transation = await transationRepository.GetByReferenceAsync(request.BillRefNumber);
+        var transation = await transationRepository.ReadByReferenceAsync(request.BillRefNumber);
         if (transation is null)
             return new C2BPaymentQueryResult
             {
@@ -61,7 +61,6 @@ public class TelebirrPayment : ITelebirrPayment
                 ResultDesc = "No Payment Found",
             };
 
-        await transationRepository.SaveChangesAsync();
 
         if (transation.Amount != request.TransAmount)
             return new C2BPaymentValidationResult
@@ -74,6 +73,8 @@ public class TelebirrPayment : ITelebirrPayment
         transation.PaymentStatus = true;
         transation.PaymentDate = DateTime.Now;
         transation.PaymentMethod = nameof(Telebirr);
+
+        await transationRepository.SaveChangesAsync();
 
         return new C2BPaymentValidationResult
         {

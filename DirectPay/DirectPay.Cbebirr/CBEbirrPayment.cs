@@ -14,7 +14,7 @@ public class CBEbirrPayment : ICBEBirrPayment
     }
     public async Task<C2BPaymentConfirmationResult> PaymentConfirmationAsync(C2BPaymentConfirmationRequest request)
     {
-        var transation = await transationRepository.ReadByReferenceAsync(request.BillRefNumber);
+        var transation = await transationRepository.GetByReferenceAsync(request.BillRefNumber);
         if (transation is null || transation.Amount != request.TransAmount)
             return new C2BPaymentConfirmationResult
             {
@@ -54,7 +54,7 @@ public class CBEbirrPayment : ICBEBirrPayment
 
     public async Task<C2BPaymentValidationResult> PaymentValidationAsync(C2BPaymentValidationRequest request)
     {
-        var transation = await transationRepository.GetByReferenceAsync(request.BillRefNumber);
+        var transation = await transationRepository.ReadByReferenceAsync(request.BillRefNumber);
         if (transation is null)
             return new C2BPaymentValidationResult
             {

@@ -18,12 +18,19 @@ public class CBEbirrPayment : ICBEBirrPayment
         if (transation is null || transation.Amount != request.TransAmount)
             return new C2BPaymentConfirmationResult
             {
-                ResultCode = 0,
+                ResultCode = 1,
             };
+
+        transation.TransactionId = request.TransID;
+        transation.PaymentStatus = true;
+        transation.PaymentDate = DateTime.Now;
+        transation.PaymentMethod = nameof(Cbebirr);
+
+        await transationRepository.SaveChangesAsync();
 
         return new C2BPaymentConfirmationResult
         {
-            ResultCode = 1,
+            ResultCode = 0,
         };
     }
 
@@ -62,11 +69,6 @@ public class CBEbirrPayment : ICBEBirrPayment
                 ResultCode = 1,
                 ResultDesc = "Amount Mismatch",
             };
-
-        transation.TransactionId = request.TransID;
-        transation.PaymentStatus = true;
-        transation.PaymentDate = DateTime.Now;
-        transation.PaymentMethod = nameof(Cbebirr);
 
         await transationRepository.SaveChangesAsync();
 

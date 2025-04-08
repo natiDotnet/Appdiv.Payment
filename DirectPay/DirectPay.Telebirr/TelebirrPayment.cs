@@ -14,12 +14,19 @@ public class TelebirrPayment : ITelebirrPayment
     }
     public async Task<C2BPaymentConfirmationResult> PaymentConfirmationAsync(C2BPaymentConfirmationRequest request)
     {
-        var transation = await transationRepository.ReadByReferenceAsync(request.BillRefNumber);
+        var transation = await transationRepository.GetByReferenceAsync(request.BillRefNumber);
         if (transation is null || transation.Amount != request.TransAmount)
             return new C2BPaymentConfirmationResult
             {
                 ResultCode = 1,
             };
+
+        transation.TransactionId = request.TransID;
+        transation.PaymentStatus = true;
+        transation.PaymentDate = DateTime.Now;
+        transation.PaymentMethod = nameof(Telebirr);
+
+        await transationRepository.SaveChangesAsync();
 
         return new C2BPaymentConfirmationResult
         {
@@ -53,7 +60,7 @@ public class TelebirrPayment : ITelebirrPayment
 
     public async Task<C2BPaymentValidationResult> PaymentValidationAsync(C2BPaymentValidationRequest request)
     {
-        var transation = await transationRepository.GetByReferenceAsync(request.BillRefNumber);
+        var transation = await transationRepository.ReadByReferenceAsync(request.BillRefNumber);
         if (transation is null)
             return new C2BPaymentValidationResult
             {
@@ -68,13 +75,6 @@ public class TelebirrPayment : ITelebirrPayment
                 ResultCode = 1,
                 ResultDesc = "Amount Mismatch",
             };
-
-        transation.TransactionId = request.TransID;
-        transation.PaymentStatus = true;
-        transation.PaymentDate = DateTime.Now;
-        transation.PaymentMethod = nameof(Telebirr);
-
-        await transationRepository.SaveChangesAsync();
 
         return new C2BPaymentValidationResult
         {

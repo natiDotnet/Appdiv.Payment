@@ -1,14 +1,14 @@
 using System;
+using Appdiv.Payment.CBEBirr;
 using Appdiv.Payment.Shared.Models;
-using Appdiv.Payment.Telebirr;
 using DirectPay.Application.Transations;
 
-namespace DirectPay.Telebirr;
+namespace DirectPay.Cbebirr;
 
-public class TelebirrPayment : ITelebirrPayment
+public class CBEbirrPayment : ICBEBirrPayment
 {
     private readonly ITransationRepository transationRepository;
-    public TelebirrPayment(ITransationRepository transationRepository)
+    public CBEbirrPayment(ITransationRepository transationRepository)
     {
         this.transationRepository = transationRepository;
     }
@@ -18,37 +18,31 @@ public class TelebirrPayment : ITelebirrPayment
         if (transation is null || transation.Amount != request.TransAmount)
             return new C2BPaymentConfirmationResult
             {
-                ResultCode = 1,
+                ResultCode = 0,
             };
 
         return new C2BPaymentConfirmationResult
         {
-            ResultCode = 0,
+            ResultCode = 1,
         };
     }
 
-    public async Task<C2BPaymentQueryResult> PaymentQueryAsync(C2BPaymentQueryRequest request)
+    public async Task<ApplyTransactionResponse> PaymentQueryAsync(ApplyTransactionRequest request)
     {
-        var transation = await transationRepository.ReadByReferenceAsync(request.BillRefNumber);
+        var transation = await transationRepository.ReadByReferenceAsync(request.Body.BillReferenceNumber);
         if (transation is null)
-            return new C2BPaymentQueryResult
+            return new ApplyTransactionResponse
             {
                 Amount = 0m,
-                ResultCode = 1,
-                BillRefNumber = request.BillRefNumber,
-                ResultDesc = "No Payment Found",
-                TransID = request.TransID,
+                ResponseCode = 1,
+                ResponseDesc = "No Payment Found",
             };
 
-        return new C2BPaymentQueryResult
+        return new ApplyTransactionResponse
         {
             Amount = transation.Amount,
-            ResultCode = 1,
-            BillRefNumber = request.BillRefNumber,
-            ResultDesc = "Success",
-            TransID = request.TransID,
+            ResponseCode = 0,
         };
-
     }
 
     public async Task<C2BPaymentValidationResult> PaymentValidationAsync(C2BPaymentValidationRequest request)
@@ -72,7 +66,7 @@ public class TelebirrPayment : ITelebirrPayment
         transation.TransactionId = request.TransID;
         transation.PaymentStatus = true;
         transation.PaymentDate = DateTime.Now;
-        transation.PaymentMethod = nameof(Telebirr);
+        transation.PaymentMethod = nameof(Cbebirr);
 
         await transationRepository.SaveChangesAsync();
 

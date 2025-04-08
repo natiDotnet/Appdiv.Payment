@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DirectPay.Domain", "DirectP
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DirectPay.Application", "DirectPay\DirectPay.Application\DirectPay.Application.csproj", "{AF83A197-8A51-461D-BE4E-A0C5AA0A23F6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DirectPay.Cbebirr", "DirectPay\DirectPay.Cbebirr\DirectPay.Cbebirr.csproj", "{84DB9B65-BA83-4EB2-95E7-837DBF09FBD0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +71,10 @@ Global
 		{AF83A197-8A51-461D-BE4E-A0C5AA0A23F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AF83A197-8A51-461D-BE4E-A0C5AA0A23F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AF83A197-8A51-461D-BE4E-A0C5AA0A23F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84DB9B65-BA83-4EB2-95E7-837DBF09FBD0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84DB9B65-BA83-4EB2-95E7-837DBF09FBD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84DB9B65-BA83-4EB2-95E7-837DBF09FBD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84DB9B65-BA83-4EB2-95E7-837DBF09FBD0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -77,5 +83,6 @@ Global
 		{67CF0BCC-3B64-4EE5-B6BD-2F0AB30DDBD7} = {922D980B-5A27-40EF-953A-52AA90E668C9}
 		{9ECF2315-36A1-4666-AC18-93C91A16B7EE} = {922D980B-5A27-40EF-953A-52AA90E668C9}
 		{AF83A197-8A51-461D-BE4E-A0C5AA0A23F6} = {922D980B-5A27-40EF-953A-52AA90E668C9}
+		{84DB9B65-BA83-4EB2-95E7-837DBF09FBD0} = {922D980B-5A27-40EF-953A-52AA90E668C9}
 	EndGlobalSection
 EndGlobal

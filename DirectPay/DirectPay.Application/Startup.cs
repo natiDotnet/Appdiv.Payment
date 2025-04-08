@@ -1,4 +1,5 @@
 using System;
+using DirectPay.Application.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,7 +16,9 @@ public static class Startup
             options => options
                 .UseNpgsql(connectionString, npgsqlOptions =>
                     npgsqlOptions.MigrationsHistoryTable("__EFMigrationsHistory", nameof(DirectPay)))
-                .UseSnakeCaseNamingConvention(), ServiceLifetime.Scoped);
+                .UseSnakeCaseNamingConvention());
+
+        services.AddScoped<IApplicationDbContext>(sp => sp.GetRequiredService<ApplicationDbContext>());
 
         return services;
     }

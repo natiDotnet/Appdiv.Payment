@@ -1,7 +1,8 @@
-namespace DirectPay.Domain;
+namespace DirectPay.Domain.Transactions;
 
-public class Transation
+public class Transaction
 {
+    public Guid Id { get; set; }
     public decimal Amount { get; set; }
     public string? Currency { get; set; } = "ETB";
     public string? Email { get; set; }

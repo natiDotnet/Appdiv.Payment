@@ -1,14 +1,15 @@
 using System;
-using DirectPay.Domain;
+using DirectPay.Application.Database;
+using DirectPay.Domain.Transactions;
 using Microsoft.EntityFrameworkCore;
 
 namespace DirectPay.Application.Transations;
 
 public interface ITransationRepository
 {
-    Task<Transation> AddAsync(Transation transation);
-    Task<Transation?> GetByReferenceAsync(string reference);
-    Task<Transation?> ReadByReferenceAsync(string reference);
+    Task<Transaction> AddAsync(Transaction transation);
+    Task<Transaction?> GetByReferenceAsync(string reference);
+    Task<Transaction?> ReadByReferenceAsync(string reference);
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 }
 
@@ -21,7 +22,7 @@ public class TransationRepository : ITransationRepository
         _context = context ?? throw new ArgumentNullException(nameof(context));
     }
 
-    public async Task<Transation> AddAsync(Transation transation)
+    public async Task<Transaction> AddAsync(Transaction transation)
     {
         await _context.Transations.AddAsync(transation);
         await _context.SaveChangesAsync();
@@ -29,14 +30,14 @@ public class TransationRepository : ITransationRepository
         return transation;
     }
 
-    public async Task<Transation?> ReadByReferenceAsync(string reference)
+    public async Task<Transaction?> ReadByReferenceAsync(string reference)
     {
         return await _context.Transations
                             .AsNoTracking()
                             .FirstOrDefaultAsync(t => t.TxRef == reference);
     }
 
-    public async Task<Transation?> GetByReferenceAsync(string reference)
+    public async Task<Transaction?> GetByReferenceAsync(string reference)
     {
         return await _context.Transations.FirstOrDefaultAsync(t => t.TxRef == reference);
     }

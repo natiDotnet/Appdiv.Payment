@@ -11,8 +11,8 @@ public class Transaction
     public string? LastName { get; set; }
     public string? PhoneNumber { get; set; }
     public string? TxRef { get; set; }
-    public Uri? CallbackUrl { get; set; }
-    public Uri? ReturnUrl { get; set; }
+    public string? CallbackUrl { get; set; }
+    public string? ReturnUrl { get; set; }
     public Customization? Customization { get; set; }
     public bool PaymentStatus { get; set; }
     public string? TransactionId { get; set; }

@@ -1,5 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
+# 
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Appdiv.Payment.API", "Appdiv.Payment.API\Appdiv.Payment.API.csproj", "{374ECD26-A83E-4ECD-9D61-2F503CF717B0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Appdiv.Payment.Telebirr", "Appdiv.Payment.Telebirr\Appdiv.Payment.Telebirr.csproj", "{AB98F8DD-FD5E-494D-92E5-78D635E23D5A}"
@@ -25,6 +26,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DirectPay.Cbebirr", "DirectPay\Plugins\DirectPay.Cbebirr\DirectPay.Cbebirr.csproj", "{BEF3B429-EC47-4CBF-A035-09F3649E50F8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DirectPay.Telebirr", "DirectPay\Plugins\DirectPay.Telebirr\DirectPay.Telebirr.csproj", "{35CBE8D6-4243-4606-9F10-C5FC1623FC25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API", "DirectPay\API\API.csproj", "{A2CA877A-FE04-4645-97DB-ED0234028B6C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -76,6 +79,10 @@ Global
 		{35CBE8D6-4243-4606-9F10-C5FC1623FC25}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{35CBE8D6-4243-4606-9F10-C5FC1623FC25}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{35CBE8D6-4243-4606-9F10-C5FC1623FC25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2CA877A-FE04-4645-97DB-ED0234028B6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2CA877A-FE04-4645-97DB-ED0234028B6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2CA877A-FE04-4645-97DB-ED0234028B6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2CA877A-FE04-4645-97DB-ED0234028B6C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -86,5 +93,6 @@ Global
 		{19A729D5-E4B0-4D92-B0D4-BCB70140C7F8} = {922D980B-5A27-40EF-953A-52AA90E668C9}
 		{BEF3B429-EC47-4CBF-A035-09F3649E50F8} = {19A729D5-E4B0-4D92-B0D4-BCB70140C7F8}
 		{35CBE8D6-4243-4606-9F10-C5FC1623FC25} = {19A729D5-E4B0-4D92-B0D4-BCB70140C7F8}
+		{A2CA877A-FE04-4645-97DB-ED0234028B6C} = {922D980B-5A27-40EF-953A-52AA90E668C9}
 	EndGlobalSection
 EndGlobal

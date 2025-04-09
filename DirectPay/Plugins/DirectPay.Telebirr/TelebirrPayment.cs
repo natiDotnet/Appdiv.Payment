@@ -7,8 +7,8 @@ namespace DirectPay.Telebirr;
 
 public class TelebirrPayment : ITelebirrPayment
 {
-    private readonly ITransationRepository transationRepository;
-    public TelebirrPayment(ITransationRepository transationRepository)
+    private readonly ITransactionRepository transationRepository;
+    public TelebirrPayment(ITransactionRepository transationRepository)
     {
         this.transationRepository = transationRepository;
     }

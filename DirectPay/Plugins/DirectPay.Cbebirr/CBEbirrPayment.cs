@@ -7,8 +7,8 @@ namespace DirectPay.Cbebirr;
 
 public class CBEbirrPayment : ICBEBirrPayment
 {
-    private readonly ITransationRepository transationRepository;
-    public CBEbirrPayment(ITransationRepository transationRepository)
+    private readonly ITransactionRepository transationRepository;
+    public CBEbirrPayment(ITransactionRepository transationRepository)
     {
         this.transationRepository = transationRepository;
     }

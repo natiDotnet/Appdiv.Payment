@@ -5,29 +5,27 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DirectPay.Application.Transations;
 
-public interface ITransationRepository
+public interface ITransactionRepository
 {
-    Task<Transaction> AddAsync(Transaction transation);
+    Task<int> AddAsync(Transaction transation);
     Task<Transaction?> GetByReferenceAsync(string reference);
     Task<Transaction?> ReadByReferenceAsync(string reference);
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 }
 
-public class TransationRepository : ITransationRepository
+public class TransactionRepository : ITransactionRepository
 {
     private readonly IApplicationDbContext _context;
 
-    public TransationRepository(IApplicationDbContext context)
+    public TransactionRepository(IApplicationDbContext context)
     {
         _context = context ?? throw new ArgumentNullException(nameof(context));
     }
 
-    public async Task<Transaction> AddAsync(Transaction transation)
+    public async Task<int> AddAsync(Transaction transation)
     {
         await _context.Transations.AddAsync(transation);
-        await _context.SaveChangesAsync();
-
-        return transation;
+        return await _context.SaveChangesAsync();
     }
 
     public async Task<Transaction?> ReadByReferenceAsync(string reference)

@@ -7,14 +7,14 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Swashbuckle.AspNetCore" Version="7.2.0"/>
-        <PackageReference Include="Appdiv.Payment.Telebirr" Version="1.0.5"/>
-        <PackageReference Include="Appdiv.Payment.CBEBirr" Version="1.0.3"/>
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="7.2.0" />
+        <PackageReference Include="Appdiv.Payment.Telebirr" Version="1.0.5" />
+        <PackageReference Include="Appdiv.Payment.CBEBirr" Version="1.0.3" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="../Appdiv.Payment.Fettan/Appdiv.Payment.Fettan.csproj"/>
-        <ProjectReference Include="..\Appdiv.Payment.AwashBank\Appdiv.Payment.AwashBank.csproj"/>
+        <ProjectReference Include="../Appdiv.Payment.Fettan/Appdiv.Payment.Fettan.csproj" />
+        <ProjectReference Include="..\Appdiv.Payment.AwashBank\Appdiv.Payment.AwashBank.csproj" />
     </ItemGroup>
 
 </Project>

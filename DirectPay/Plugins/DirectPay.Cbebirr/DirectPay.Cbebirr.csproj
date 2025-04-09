@@ -1,14 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Appdiv.Payment.CBEBirr\Appdiv.Payment.CBEBirr.csproj" />
+    <ProjectReference Include="..\..\DirectPay.Application\DirectPay.Application.csproj" />
+  </ItemGroup>
+
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="../../Appdiv.Payment.CBEBirr/Appdiv.Payment.CBEBirr.csproj" />
-    <ProjectReference Include="../DirectPay.Application/DirectPay.Application.csproj" />
-  </ItemGroup>
 
 </Project>

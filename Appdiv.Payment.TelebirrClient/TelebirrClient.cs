@@ -57,7 +57,7 @@ public class TelebirrClient : ITelebirrClient
         return await response.Content.ReadAsStringAsync();
     }
 
-    public async Task<OrderResponse> CreateOrder(string title, decimal amount)
+    public async Task<string> CreateOrder(string title, decimal amount)
     {
         var request = new Order();
         request.BizContent = new OrderBiz

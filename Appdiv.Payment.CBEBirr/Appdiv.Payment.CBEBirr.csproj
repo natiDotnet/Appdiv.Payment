@@ -1,8 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>net8.0;</TargetFrameworks>
+        <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
+        <OutputType>Library</OutputType>
         <Nullable>enable</Nullable>
         <Title>CBE Birr</Title>
         <Authors>Natnael Yirga</Authors>

@@ -6,5 +6,8 @@
         "ICBE",
         "MSISDN",
         "Telebirr"
+    ],
+    "dotrush.roslyn.projectOrSolutionFiles": [
+        "c:\\Users\\dev\\Projects\\Appdiv.Payment\\Appdiv.Payment\\Appdiv.Payment.sln"
     ]
 }

@@ -1,0 +1,19 @@
+using DirectPay.Domain.Transactions;
+
+namespace DirectPay.Application.Transations;
+
+public class TransactionResponse
+{
+    public decimal Amount { get; set; }
+    public string? Currency { get; set; } = "ETB";
+    public string? Email { get; set; }
+    public string? FirstName { get; set; }
+    public string? MiddleName { get; set; }
+    public string? LastName { get; set; }
+    public string? PhoneNumber { get; set; }
+    public string? Reference { get; set; }
+    public string? TxRef { get; set; }
+    public Uri? CallbackUrl { get; set; }
+    public Uri? ReturnUrl { get; set; }
+    public Customization? Customization { get; set; }
+}

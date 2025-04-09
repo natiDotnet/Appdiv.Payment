@@ -15,10 +15,12 @@ public class Transaction
     public string? ReturnUrl { get; set; }
     public Customization? Customization { get; set; }
     public bool PaymentStatus { get; set; }
-    public string? TransId { get; set; }
+    public string? Reference { get; set; }
     public string? PaymentType { get; set; }
     public string? PaymentMethod { get; set; }
     public DateTime? PaymentDate { get; set; }
+    public DateTime CreatedAt { get; set; }
+    public DateTime UpdatedAt { get; set; }
 
 }
 

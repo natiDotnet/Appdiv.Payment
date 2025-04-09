@@ -24,4 +24,23 @@ public static class TransactionExtensions
         };
     }
 
+    public static TransactionResponse ToResponse(this Transaction transaction)
+    {
+        return new TransactionResponse
+        {
+            Amount = transaction.Amount,
+            Currency = transaction.Currency,
+            Email = transaction.Email,
+            FirstName = transaction.FirstName,
+            MiddleName = transaction.MiddleName,
+            LastName = transaction.LastName,
+            PhoneNumber = transaction.PhoneNumber,
+            Reference = transaction.Reference,
+            TxRef = transaction.TxRef,
+            CallbackUrl = transaction.CallbackUrl != null ? new Uri(transaction.CallbackUrl) : null,
+            ReturnUrl = transaction.ReturnUrl != null ? new Uri(transaction.ReturnUrl) : null,
+            Customization = transaction.Customization,
+        };  
+    }
+
 }

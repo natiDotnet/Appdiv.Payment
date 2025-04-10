@@ -2,6 +2,7 @@ using System;
 using DirectPay.Application.Settings;
 using DirectPay.Application.Shared;
 using DirectPay.Application.Transations;
+using DirectPay.Domain.Transactions;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 

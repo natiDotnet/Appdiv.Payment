@@ -2,26 +2,38 @@ namespace DirectPay.Application.Shared;
 
 public class ApiResponse
 {
-    public required string Message { get; set; }
-    public required string Status { get; set; }
-    public object? Data { get; set; } 
-
-    public static ApiResponse Success(string message, object? data = null)
+    public string Message { get; set; }
+    public string Status { get; set; }
+    public ApiResponse(string message, string status)
     {
-        return new ApiResponse
-        {
-            Message = message,
-            Status = "success",
-            Data = data
-        };
+        Message = message;
+        Status = status;
     }
-    public static ApiResponse Error(string message, object? data = null)
+    public static ApiResponse Success(string message)
     {
-        return new ApiResponse
-        {
-            Message = message,
-            Status = "failed",
-            Data = data
-        };
+        return new ApiResponse(message, "success");
+    }
+    public static ApiResponse Error(string message)
+    {
+        return new ApiResponse(message, "failed");
+    }
+
+    public static ApiResponse<TData> Success<TData>(string message, TData? data = default)
+    {
+        return new ApiResponse<TData>(message, "success", data);
+    }
+
+    public static ApiResponse<TData> Error<TData>(string message, TData? data = default)
+    {
+        return new ApiResponse<TData>(message, "failed", data);
+    }
+}
+
+public class ApiResponse<TData> : ApiResponse
+{
+    public TData? Data { get; set; }
+    public ApiResponse(string message, string status, TData? data) : base(message, status)
+    {
+        Data = data;
     }
 }

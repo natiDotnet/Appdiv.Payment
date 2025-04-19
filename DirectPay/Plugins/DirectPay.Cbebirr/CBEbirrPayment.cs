@@ -21,7 +21,7 @@ public class CBEbirrPayment : ICBEBirrPayment
                 ResultCode = 1,
             };
 
-        transation.TransactionId = request.TransID;
+        transation.Reference = request.TransID;
         transation.PaymentStatus = true;
         transation.PaymentDate = DateTime.Now;
         transation.PaymentMethod = nameof(Cbebirr);

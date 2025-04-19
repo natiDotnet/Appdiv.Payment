@@ -21,7 +21,7 @@ public class TelebirrPayment : ITelebirrPayment
                 ResultCode = 1,
             };
 
-        transation.TransactionId = request.TransID;
+        transation.Reference = request.TransID;
         transation.PaymentStatus = true;
         transation.PaymentDate = DateTime.Now;
         transation.PaymentMethod = nameof(Telebirr);

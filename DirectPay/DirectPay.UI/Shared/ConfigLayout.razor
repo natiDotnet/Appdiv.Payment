@@ -1,0 +1,21 @@
+@inherits LayoutComponentBase
+<MudThemeProvider />
+<MudPopoverProvider />
+<MudLayout>
+    <MudAppBar Elevation="1" Color="Color.Primary">
+        <MudStack Row="true" AlignItems="AlignItems.Center">
+            <MudImage Src="/images/logo.svg" Alt="DirectPay Logo" Height="40" Class="mr-4" />
+            <MudStack Spacing="0">
+                <MudText Typo="Typo.h6">DirectPay</MudText>
+                <MudText Typo="Typo.caption">Configuration Wizard</MudText>
+            </MudStack>
+        </MudStack>
+        <MudSpacer />
+        <MudText Typo="Typo.body2">Version 1.0</MudText>
+    </MudAppBar>
+    <MudMainContent>
+        <MudContainer MaxWidth="MaxWidth.Large" Class="pa-6">
+            @Body
+        </MudContainer>
+    </MudMainContent>
+</MudLayout>

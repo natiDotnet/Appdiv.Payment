@@ -1,0 +1,67 @@
+@page "/api-key-config"
+@using System.ComponentModel.DataAnnotations
+@using System.Text.Json
+@layout ConfigLayout
+@using Microsoft.AspNetCore.Components
+@inject NavigationManager NavigationManager
+@inject IConfiguration Configuration
+@inject IWebHostEnvironment Environment
+
+<MudGrid Justify="Justify.Center" Class="d-flex align-center" Style="min-height: 100vh;">
+    <MudItem xs="12" sm="8" md="6" lg="4">
+        <MudCard Elevation="4" Class="pa-4">
+            <MudForm @ref="_form" Model="@apiKeyConfig" Class="d-flex flex-column gap-4">
+                <MudText Typo="Typo.h5" Class="mb-4 text-center">API Key Configuration</MudText>
+
+                <MudTextField @bind-Value="apiKeyConfig.PublicKey" Label="Public Key" Required="true"
+                    For="@(() => apiKeyConfig.PublicKey)" Variant="Variant.Outlined" />
+
+                <MudTextField @bind-Value="apiKeyConfig.SecretKey" Label="Secret Key" Required="true"
+                    InputType="@(_secretKeyVisible ? InputType.Text : InputType.Password)"
+                    For="@(() => apiKeyConfig.SecretKey)" Variant="Variant.Outlined" Adornment="Adornment.End"
+                    AdornmentIcon="@(_secretKeyVisible ? Icons.Material.Filled.VisibilityOff : Icons.Material.Filled.Visibility)"
+                    OnAdornmentClick="() => _secretKeyVisible = !_secretKeyVisible" />
+
+                <MudButton Color="Color.Primary" Variant="Variant.Filled" Size="Size.Large" OnClick="@(async () => await
+                    HandleValidSubmit())">
+                    Save Configuration
+                </MudButton>
+            </MudForm>
+        </MudCard>
+    </MudItem>
+</MudGrid>
+
+@code {
+    private MudForm _form;
+    private ApiKeyConfigModel apiKeyConfig = new();
+    private bool _secretKeyVisible;
+
+    private async Task HandleValidSubmit()
+    {
+        await _form.Validate();
+        if (_form.IsValid)
+        {
+            var configPath = Path.Combine(Environment.ContentRootPath, "appsettings.json");
+            var jsonString = await File.ReadAllTextAsync(configPath);
+            var jsonDoc = JsonDocument.Parse(jsonString);
+            var root = jsonDoc.RootElement;
+
+            var existingConfig = JsonSerializer.Deserialize<Dictionary<string, JsonElement>>(jsonString);
+            existingConfig[nameof(ApiKeySettings)] = JsonSerializer.SerializeToElement(apiKeyConfig);
+
+            var options = new JsonSerializerOptions { WriteIndented = true };
+            await File.WriteAllTextAsync(configPath, JsonSerializer.Serialize(existingConfig, options));
+
+            NavigationManager.NavigateTo("/database-config");
+        }
+    }
+
+    public class ApiKeyConfigModel
+    {
+        [Required(ErrorMessage = "Public key is required")]
+        public string PublicKey { get; set; }
+
+        [Required(ErrorMessage = "Secret key is required")]
+        public string SecretKey { get; set; }
+    }
+}

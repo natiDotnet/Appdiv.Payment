@@ -1,5 +1,7 @@
 using System;
 using DirectPay.Application.Database;
+using DirectPay.Application.Settings;
+using DirectPay.Application.Transations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -8,9 +10,17 @@ namespace DirectPay.Application;
 
 public static class Startup
 {
-    private static IServiceCollection AddDatabase(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddApplication(this IServiceCollection services, IConfiguration configuration)
     {
-        string? connectionString = configuration.GetConnectionString("Database");
+        services.AddScoped<ISettingRepository, SettingRepository>();
+        services.AddScoped<ITransactionRepository, TransactionRepository>();
+        services.AddDatabase(configuration);
+
+        return services;
+    }
+    public static IServiceCollection AddDatabase(this IServiceCollection services, IConfiguration configuration)
+    {
+        string? connectionString = configuration.GetConnectionString("DirectPay");
 
         services.AddDbContext<ApplicationDbContext>(
             options => options

@@ -1,6 +1,11 @@
 @page "/database-config"
 @using System.ComponentModel.DataAnnotations
+@using System.Text.Json
+@using MudBlazor
 @layout ConfigLayout
+@inject NavigationManager NavigationManager
+@inject IConfiguration Configuration
+@inject IWebHostEnvironment Environment
 
 <MudGrid Justify="Justify.Center" Class="d-flex align-center" Style="min-height: 100vh;">
     <MudItem xs="12" sm="8" md="6" lg="4">
@@ -22,8 +27,8 @@
                     For="@(() => dbConfig.Username)" Variant="Variant.Outlined" />
 
                 <MudTextField @bind-Value="dbConfig.Password" Label="Password" Required="true"
-                    InputType="@(_passwordVisible? InputType.Text: InputType.Password)"
-                    For="@(() => dbConfig.Password)" Variant="Variant.Outlined" Adornment="Adornment.End"
+                    InputType="@(_passwordVisible? InputType.Text: InputType.Password)" For="@(() => dbConfig.Password)"
+                    Variant="Variant.Outlined" Adornment="Adornment.End"
                     AdornmentIcon="@(_passwordVisible? Icons.Material.Filled.VisibilityOff : Icons.Material.Filled.Visibility)"
                     OnAdornmentClick="() => _passwordVisible = !_passwordVisible" />
 
@@ -38,7 +43,8 @@
                     Test Connection
                 </MudButton>
 
-                <MudButton Color="Color.Primary" Variant="Variant.Filled" Size="Size.Large" OnClick="HandleValidSubmit">
+                <MudButton Color="Color.Primary" Variant="Variant.Filled" Size="Size.Large" OnClick=@(async () => await
+                    HandleValidSubmit())>
                     Save Configuration
                 </MudButton>
             </MudForm>
@@ -56,8 +62,18 @@
         await _form.Validate();
         if (_form.IsValid)
         {
-            // TODO: Implement save configuration logic
-            Console.WriteLine($"Database: {dbConfig.DatabaseType}, Host: {dbConfig.Host}");
+            var configPath = Path.Combine(Environment.ContentRootPath, "appsettings.json");
+            var jsonString = await File.ReadAllTextAsync(configPath);
+            var jsonDoc = JsonDocument.Parse(jsonString);
+            var root = jsonDoc.RootElement;
+
+            var existingConfig = JsonSerializer.Deserialize<Dictionary<string, JsonElement>>(jsonString);
+            existingConfig[nameof(DatabaseSettings)] = JsonSerializer.SerializeToElement(dbConfig);
+
+            var options = new JsonSerializerOptions { WriteIndented = true };
+            await File.WriteAllTextAsync(configPath, JsonSerializer.Serialize(existingConfig, options));
+
+            NavigationManager.NavigateTo("/api-key-config");
         }
     }
 

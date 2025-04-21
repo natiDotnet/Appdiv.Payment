@@ -5,7 +5,7 @@
 <MudGrid Justify="Justify.Center" Class="d-flex align-center" Style="min-height: 100vh;">
     <MudItem xs="12" sm="8" md="6" lg="4">
         <MudCard Elevation="4" Class="pa-4">
-            <MudForm @ref="_form" Model="@superUser" @ OnValidSubmit="HandleValidSubmit" Class="d-flex flex-column gap-4">
+            <MudForm @ref="_form" Model="@superUser" Class="d-flex flex-column gap-4">
                 <MudText Typo="Typo.h5" Class="mb-4 text-center">Super User Registration</MudText>
                 <MudTextField @bind-Value="superUser.BusinessName" Label="Business Name" Required="true"
                     For="@(() => superUser.BusinessName)" Variant="Variant.Outlined" />

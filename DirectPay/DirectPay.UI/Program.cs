@@ -4,6 +4,7 @@ using DirectPay.UI.Data;
 using MudBlazor.Services;
 using DirectPay.Application;
 using DirectPay.UI.Configuration;
+using DirectPay.UI.Configuration.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +14,7 @@ builder.Services.AddServerSideBlazor();
 builder.Services.AddMudServices();
 builder.Services.AddSingleton<WeatherForecastService>();
 builder.Services.AddApplication(builder.Configuration);
+builder.Services.AddScoped<IConfigurationService, ConfigurationService>();
 
 // Configure API Key Settings
 // Add configuration bindings

@@ -21,7 +21,7 @@ public static class Handler
             return Results.Ok(ApiResponse.Success("Hosted Link"));
         });
 
-        users.MapGet("/verify/{txRef:string}", async ([FromRoute] string txRef, ITransactionRepository transactionRepository) =>
+        users.MapGet("/verify/{txRef}", async ([FromRoute] string txRef, ITransactionRepository transactionRepository) =>
         {
             var transaction = await transactionRepository.GetByReferenceAsync(txRef);
             if (transaction == null)

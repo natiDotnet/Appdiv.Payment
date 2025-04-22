@@ -1,11 +1,12 @@
+using DirectPay.API.Transactions;
 using DirectPay.Application;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
 builder.Services.AddApplication(builder.Configuration);
+builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
@@ -15,7 +16,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+// app.Endpoint();
+Handler.Endpoint(app);
 app.UseHttpsRedirection();
 
 var summaries = new[]

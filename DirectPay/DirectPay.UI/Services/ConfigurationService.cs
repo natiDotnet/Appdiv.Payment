@@ -1,6 +1,6 @@
 using System.Text.Json;
 
-namespace DirectPay.UI.Configuration.Services;
+namespace DirectPay.UI.Services;
 
 public interface IConfigurationService
 {

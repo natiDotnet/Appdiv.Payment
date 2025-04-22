@@ -1,11 +1,14 @@
 @page "/api-key-config"
 @using System.ComponentModel.DataAnnotations
 @using System.Text.Json
+@using DirectPay.API.Services
+@using DirectPay.Application.Settings
 @layout ConfigLayout
 @using Microsoft.AspNetCore.Components
 @inject NavigationManager NavigationManager
 @inject IConfiguration Configuration
 @inject IWebHostEnvironment Environment
+@inject IConfigurationService ConfigurationService
 
 <MudGrid Justify="Justify.Center" Class="d-flex align-center" Style="min-height: 100vh;">
     <MudItem xs="12" sm="8" md="6" lg="4">
@@ -41,17 +44,7 @@
         await _form.Validate();
         if (_form.IsValid)
         {
-            var configPath = Path.Combine(Environment.ContentRootPath, "appsettings.json");
-            var jsonString = await File.ReadAllTextAsync(configPath);
-            var jsonDoc = JsonDocument.Parse(jsonString);
-            var root = jsonDoc.RootElement;
-
-            var existingConfig = JsonSerializer.Deserialize<Dictionary<string, JsonElement>>(jsonString);
-            existingConfig[nameof(ApiKeySettings)] = JsonSerializer.SerializeToElement(apiKeyConfig);
-
-            var options = new JsonSerializerOptions { WriteIndented = true };
-            await File.WriteAllTextAsync(configPath, JsonSerializer.Serialize(existingConfig, options));
-
+            ConfigurationService.UpdateSection(nameof(ApiKeySettings), apiKeyConfig);
             NavigationManager.NavigateTo("/database-config");
         }
     }

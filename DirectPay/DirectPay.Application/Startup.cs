@@ -12,6 +12,9 @@ public static class Startup
 {
     public static IServiceCollection AddApplication(this IServiceCollection services, IConfiguration configuration)
     {
+        services.AddOptions<ApiKeySettings>(nameof(ApiKeySettings)).BindConfiguration(nameof(ApiKeySettings));
+        services.AddOptions<DatabaseSettings>(nameof(DatabaseSettings)).BindConfiguration(nameof(DatabaseSettings));
+
         services.AddScoped<ISettingRepository, SettingRepository>();
         services.AddScoped<ITransactionRepository, TransactionRepository>();
         services.AddDatabase(configuration);

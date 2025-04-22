@@ -1,6 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
   <ItemGroup>
-    <ProjectReference Include="..\DirectPay.Application\DirectPay.Application.csproj" />
+    <!-- <ProjectReference Include="..\DirectPay.Application\DirectPay.Application.csproj" /> -->
+    <ProjectReference Include="..\DirectPay.API\DirectPay.API.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="MudBlazor" Version="8.5.1" />

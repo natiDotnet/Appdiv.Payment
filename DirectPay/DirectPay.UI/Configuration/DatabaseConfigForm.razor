@@ -26,6 +26,9 @@
                 <MudTextField @bind-Value="dbConfig.Host" Label="Host" Required="true" For="@(() => dbConfig.Host)"
                     Variant="Variant.Outlined" />
 
+                <MudTextField @bind-Value="dbConfig.Port" Label="Port" Required="true" For="@(() => dbConfig.Port)"
+                    Variant="Variant.Outlined" Type="InputType.Number" />
+
                 <MudTextField @bind-Value="dbConfig.Username" Label="Username" Required="true"
                     For="@(() => dbConfig.Username)" Variant="Variant.Outlined" />
 
@@ -66,7 +69,7 @@
         if (_form.IsValid)
         {
             await ConfigurationService.UpdateSection(nameof(DatabaseSettings), dbConfig);
-            NavigationManager.NavigateTo("/api-key-config");
+            NavigationManager.NavigateTo("/");
         }
     }
 
@@ -76,13 +79,36 @@
         await Task.Delay(1000); // Simulated delay
     }
 
+    private static string GetPort(string value)
+    {
+        return value switch
+        {
+            "PostgreSQL" => "5432",
+            "MySQL" => "3306",
+            "SQLServer" => "1433",
+            _ => string.Empty
+        };
+    }
+
     public class DatabaseConfigModel
     {
+        private string dbType = string.Empty;
         [Required(ErrorMessage = "Database type is required")]
-        public string DatabaseType { get; set; } = string.Empty;
+        public string DatabaseType
+        {
+            get => dbType;
+            set
+            {
+                dbType = value;
+                Port = GetPort(value);
+            }
+        }
 
         [Required(ErrorMessage = "Host is required")]
         public string Host { get; set; } = string.Empty;
+
+        [Required(ErrorMessage = "Port is required")]
+        public string Port { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "Username is required")]
         public string Username { get; set; } = string.Empty;
@@ -93,6 +119,6 @@
         [Required(ErrorMessage = "Database name is required")]
         public string DatabaseName { get; set; } = string.Empty;
 
-        public string TablePrefix { get; set; } = string.Empty; // Optional: Add a prefix to all database tables
+        public string TablePrefix { get; set; } = string.Empty;
     }
 }

@@ -44,7 +44,7 @@
         await _form.Validate();
         if (_form.IsValid)
         {
-            ConfigurationService.UpdateSection(nameof(ApiKeySettings), apiKeyConfig);
+            await ConfigurationService.UpdateSection(nameof(ApiKeySettings), apiKeyConfig);
             NavigationManager.NavigateTo("/database-config");
         }
     }

@@ -22,12 +22,6 @@ builder.Services.AddScoped<IConfigurationService, ConfigurationService>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// Add route configuration
-// builder.Services.Configure<RouteOptions>(options =>
-// {
-//     options.ConstraintMap["string"] = typeof(string);
-// });
-
 // Configure API Key Settings
 // Add configuration bindings
 builder.Services.Configure<ApiKeySettings>(
@@ -35,7 +29,11 @@ builder.Services.Configure<ApiKeySettings>(
 
 builder.Services.Configure<DatabaseSettings>(
     builder.Configuration.GetSection(nameof(DatabaseSettings)));
-builder.Services.AddControllers().PartManager.ApplicationParts.Add(new AssemblyPart(typeof(Handler).Assembly));
+builder.Services
+    .AddControllers()
+    .PartManager
+    .ApplicationParts
+    .Add(new AssemblyPart(typeof(Handler).Assembly));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -65,7 +63,7 @@ app.MapBlazorHub();
 app.MapControllers();
 
 // Register DirectPay API endpoints
-Handler.Endpoint(app);
+// Handler.Endpoint(app);
 
 app.MapFallbackToPage("/_Host");
 

@@ -10,14 +10,12 @@ public interface IConfigurationService
 
 public class ConfigurationService : IConfigurationService
 {
-    private readonly IWebHostEnvironment _environment;
     private readonly string _configPath;
     private static readonly JsonSerializerOptions _jsonOptions = new() { WriteIndented = true };
 
-    public ConfigurationService(IWebHostEnvironment environment)
+    public ConfigurationService()
     {
-        _environment = environment;
-        _configPath = Path.Combine(_environment.ContentRootPath, "appsettings.json");
+        _configPath = Path.Combine(Path.GetDirectoryName(typeof(ConfigurationService).Assembly.Location)!, "appsettings.json");
     }
 
     public async Task UpdateSection<T>(string sectionName, T sectionData) where T : class

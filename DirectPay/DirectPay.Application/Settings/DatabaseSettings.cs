@@ -14,7 +14,7 @@ public class DatabaseSettings
 public enum DatabaseType
 {
     None,
-    Postgres,
+    PostgreSQL,
     SqlServer,
     MySql
 }

@@ -1,6 +1,7 @@
 @page "/database-config"
 @using System.ComponentModel.DataAnnotations
 @using System.Text.Json
+@using DirectPay.Application
 @using DirectPay.API.Services
 @using DirectPay.Application.Settings
 @using MudBlazor
@@ -64,66 +65,55 @@
     private DatabaseConfigModel dbConfig = new();
     private bool _passwordVisible;
 
+    protected override void OnInitialized()
+    {
+        Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomLeft;
+        base.OnInitialized();
+    }
+
     private async Task HandleValidSubmit()
     {
         await _form.Validate();
         if (_form.IsValid)
         {
+            var testResult = await TestConnection();
+            if (!testResult)
+            {
+                return;
+            }
             await ConfigurationService.UpdateSection(nameof(DatabaseSettings), dbConfig);
             NavigationManager.NavigateTo("/");
         }
     }
 
-    private async Task TestConnection()
+    private async Task<bool> TestConnection()
     {
         try
         {
-            var connectionString = dbConfig.DatabaseType switch
+            await _form.Validate();
+            if (!_form.IsValid)
             {
-                "PostgreSQL" => $"Host={dbConfig.Host};Port={dbConfig.Port};Database={dbConfig.DatabaseName};Username={dbConfig.Username};Password={dbConfig.Password}",
-                "SQLServer" => $"Server={dbConfig.Host},{dbConfig.Port};Database={dbConfig.DatabaseName};User Id={dbConfig.Username};Password={dbConfig.Password};TrustServerCertificate=True",
-                "MySQL" => $"Server={dbConfig.Host};Port={dbConfig.Port};Database={dbConfig.DatabaseName};Uid={dbConfig.Username};Pwd={dbConfig.Password}",
-                _ => throw new ArgumentException("Invalid database type")
-            };
-
-            bool isConnected = false;
-            string errorMessage = string.Empty;
-
-            switch (dbConfig.DatabaseType)
-            {
-                case "PostgreSQL":
-                    using (var conn = new Npgsql.NpgsqlConnection(connectionString))
-                    {
-                        await conn.OpenAsync();
-                        isConnected = true;
-                    }
-                    break;
-
-                case "SQLServer":
-                    using (var conn = new Microsoft.Data.SqlClient.SqlConnection(connectionString))
-                    {
-                        await conn.OpenAsync();
-                        isConnected = true;
-                    }
-                    break;
-
-                case "MySQL":
-                    using (var conn = new MySql.Data.MySqlClient.MySqlConnection(connectionString))
-                    {
-                        await conn.OpenAsync();
-                        isConnected = true;
-                    }
-                    break;
+                throw new ArgumentException("Form is not valid");
             }
+            var setting = new DatabaseSettings
+                {
+                    DatabaseType = (DatabaseType)Enum.Parse(typeof(DatabaseType), dbConfig.DatabaseType),
+                    Database = dbConfig.DatabaseName,
+                    Username = dbConfig.Username,
+                    Port = int.Parse(dbConfig.Port),
+                    Host = dbConfig.Host,
+                    Password = dbConfig.Password,
+                    TablePrefix = dbConfig.TablePrefix
+                };
+            await setting.TestConnection();
 
-            if (isConnected)
-            {
-                Snackbar.Add("Connection successful!", Severity.Success);
-            }
+            Snackbar.Add("Connection successful!", Severity.Success);
+            return true;
         }
         catch (Exception ex)
         {
-            Snackbar.Add($"Connection failed: {ex.Message}", Severity.Error);
+            Snackbar.Add($"Error: {ex.Message}", Severity.Error);
+            return false;
         }
     }
 

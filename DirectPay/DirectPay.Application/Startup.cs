@@ -45,16 +45,45 @@ public static class Startup
     private static string ConnectionString(this DatabaseSettings dbSettings)
     => dbSettings.DatabaseType switch
     {
-        DatabaseType.Postgres => $"Host={dbSettings.Host};Port={dbSettings.Port};Database={dbSettings.Database};Username={dbSettings.Username};Password={dbSettings.Password}",
+        DatabaseType.PostgreSQL => $"Host={dbSettings.Host};Port={dbSettings.Port};Database={dbSettings.Database};Username={dbSettings.Username};Password={dbSettings.Password}",
         DatabaseType.SqlServer => $"Server={dbSettings.Host},{dbSettings.Port};Database={dbSettings.Database};User Id={dbSettings.Username};Password={dbSettings.Password};",
         DatabaseType.MySql => $"Server={dbSettings.Host};Database={dbSettings.Database};Uid={dbSettings.Username};Pwd={dbSettings.Password};Port={dbSettings.Port};",
         _ => throw new ArgumentOutOfRangeException(nameof(dbSettings), dbSettings, null)
     };
 
+    public static async Task TestConnection(this DatabaseSettings databaseType)
+    {
+        var connectionString = databaseType.ConnectionString();
+        switch (databaseType.DatabaseType)
+        {
+            case DatabaseType.PostgreSQL:
+                using (var conn = new Npgsql.NpgsqlConnection(connectionString))
+                {
+                    await conn.OpenAsync();
+                }
+                break;
+
+            case DatabaseType.SqlServer:
+                using (var conn = new Microsoft.Data.SqlClient.SqlConnection(connectionString))
+                {
+                    await conn.OpenAsync();
+                }
+                break;
+
+            case DatabaseType.MySql:
+                using (var conn = new MySql.Data.MySqlClient.MySqlConnection(connectionString))
+                {
+                    await conn.OpenAsync();
+                }
+                break;
+        }
+
+    }
+
     private static DbContextOptionsBuilder UseDatabase(this DbContextOptionsBuilder options, DatabaseType databaseType, string connectionString)
         => databaseType switch
         {
-            DatabaseType.Postgres => options.UsePostgres(connectionString),
+            DatabaseType.PostgreSQL => options.UsePostgres(connectionString),
             DatabaseType.SqlServer => options.UseSqlServer(connectionString),
             DatabaseType.MySql => options.UseMySql(connectionString),
             _ => throw new ArgumentOutOfRangeException(nameof(databaseType), databaseType, null)

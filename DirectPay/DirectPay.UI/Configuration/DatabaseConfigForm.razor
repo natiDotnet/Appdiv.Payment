@@ -9,6 +9,7 @@
 @inject IConfiguration Configuration
 @inject IWebHostEnvironment Environment
 @inject IConfigurationService ConfigurationService
+@inject ISnackbar Snackbar
 
 <MudGrid Justify="Justify.Center" Class="d-flex align-center" Style="min-height: 100vh;">
     <MudItem xs="12" sm="8" md="6" lg="4">
@@ -75,8 +76,55 @@
 
     private async Task TestConnection()
     {
-        // TODO: Implement connection test logic
-        await Task.Delay(1000); // Simulated delay
+        try
+        {
+            var connectionString = dbConfig.DatabaseType switch
+            {
+                "PostgreSQL" => $"Host={dbConfig.Host};Port={dbConfig.Port};Database={dbConfig.DatabaseName};Username={dbConfig.Username};Password={dbConfig.Password}",
+                "SQLServer" => $"Server={dbConfig.Host},{dbConfig.Port};Database={dbConfig.DatabaseName};User Id={dbConfig.Username};Password={dbConfig.Password};TrustServerCertificate=True",
+                "MySQL" => $"Server={dbConfig.Host};Port={dbConfig.Port};Database={dbConfig.DatabaseName};Uid={dbConfig.Username};Pwd={dbConfig.Password}",
+                _ => throw new ArgumentException("Invalid database type")
+            };
+
+            bool isConnected = false;
+            string errorMessage = string.Empty;
+
+            switch (dbConfig.DatabaseType)
+            {
+                case "PostgreSQL":
+                    using (var conn = new Npgsql.NpgsqlConnection(connectionString))
+                    {
+                        await conn.OpenAsync();
+                        isConnected = true;
+                    }
+                    break;
+
+                case "SQLServer":
+                    using (var conn = new Microsoft.Data.SqlClient.SqlConnection(connectionString))
+                    {
+                        await conn.OpenAsync();
+                        isConnected = true;
+                    }
+                    break;
+
+                case "MySQL":
+                    using (var conn = new MySql.Data.MySqlClient.MySqlConnection(connectionString))
+                    {
+                        await conn.OpenAsync();
+                        isConnected = true;
+                    }
+                    break;
+            }
+
+            if (isConnected)
+            {
+                Snackbar.Add("Connection successful!", Severity.Success);
+            }
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add($"Connection failed: {ex.Message}", Severity.Error);
+        }
     }
 
     private static string GetPort(string value)

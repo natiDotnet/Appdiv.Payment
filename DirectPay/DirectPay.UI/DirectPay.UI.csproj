@@ -1,6 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
   <ItemGroup>
-    <!-- <ProjectReference Include="..\DirectPay.Application\DirectPay.Application.csproj" /> -->
     <ProjectReference Include="..\DirectPay.API\DirectPay.API.csproj" />
   </ItemGroup>
   <ItemGroup>
@@ -11,4 +10,16 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
+  
+  <!-- Add this section to handle configuration files -->
+  <ItemGroup>
+    <Content Update="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>UI\%(Filename)%(Extension)</Link>
+    </Content>
+    <Content Update="appsettings.Development.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>UI\%(Filename)%(Extension)</Link>
+    </Content>
+  </ItemGroup>
 </Project>

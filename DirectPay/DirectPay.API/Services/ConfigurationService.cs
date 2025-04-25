@@ -15,7 +15,8 @@ public class ConfigurationService : IConfigurationService
 
     public ConfigurationService()
     {
-        _configPath = Path.Combine(Path.GetDirectoryName(typeof(ConfigurationService).Assembly.Location)!, "appsettings.json");
+        var baseDirectory = AppContext.BaseDirectory;
+        _configPath = Path.Combine(baseDirectory, "appsettings.json");
     }
 
     public async Task UpdateSection<T>(string sectionName, T sectionData) where T : class

@@ -40,8 +40,8 @@
                     AdornmentIcon="@(_passwordVisible? Icons.Material.Filled.VisibilityOff : Icons.Material.Filled.Visibility)"
                     OnAdornmentClick="() => _passwordVisible = !_passwordVisible" />
 
-                <MudTextField @bind-Value="dbConfig.DatabaseName" Label="Database Name" Required="true"
-                    For="@(() => dbConfig.DatabaseName)" Variant="Variant.Outlined" />
+                <MudTextField @bind-Value="dbConfig.Database" Label="Database Name" Required="true"
+                    For="@(() => dbConfig.Database)" Variant="Variant.Outlined" />
 
                 <MudTextField @bind-Value="dbConfig.TablePrefix" Label="Table Prefix"
                     For="@(() => dbConfig.TablePrefix)" Variant="Variant.Outlined"
@@ -98,7 +98,7 @@
             var setting = new DatabaseSettings
                 {
                     DatabaseType = (DatabaseType)Enum.Parse(typeof(DatabaseType), dbConfig.DatabaseType),
-                    Database = dbConfig.DatabaseName,
+                    Database = dbConfig.Database,
                     Username = dbConfig.Username,
                     Port = int.Parse(dbConfig.Port),
                     Host = dbConfig.Host,
@@ -155,7 +155,7 @@
         public string Password { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "Database name is required")]
-        public string DatabaseName { get; set; } = string.Empty;
+        public string Database { get; set; } = string.Empty;
 
         public string TablePrefix { get; set; } = string.Empty;
     }

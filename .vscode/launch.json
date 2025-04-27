@@ -1,7 +1,6 @@
 {
     "version": "0.2.0",
     "configurations": [
-    
         {
             // Use IntelliSense to find out which attributes exist for C# debugging
             // Use hover for the description of the existing attributes
@@ -33,16 +32,28 @@
             "request": "attach"
         },
         {
-            "name": ".NET Core Launch (CBEBirr Plugin)",
+            // Use IntelliSense to find out which attributes exist for C# debugging
+            // Use hover for the description of the existing attributes
+            // For further information visit https://github.com/dotnet/vscode-csharp/blob/main/debugger-launchjson.md.
+            "name": ".NET Core Launch (web Telebirr)",
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceFolder}/DirectPay/DirectPay.UI/bin/Debug/net8.0/DirectPay.UI.dll",
+            // If you have changed target frameworks, make sure to update the program path.
+            "program": "${workspaceFolder}/DirectPay/DirectPay.Telebirr/bin/Debug/net8.0/DirectPay.Telebirr.dll",
             "args": [],
-            "cwd": "${workspaceFolder}/DirectPay/Plugins/DirectPay.Cbebirr",
+            "cwd": "${workspaceFolder}/DirectPay/DirectPay.Telebirr",
             "stopAtEntry": false,
+            // Enable launching a web browser when ASP.NET Core starts. For more information: https://aka.ms/VSCode-CS-LaunchJson-WebBrowser
+            "serverReadyAction": {
+                "action": "openExternally",
+                "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+            },
             "env": {
                 "ASPNETCORE_ENVIRONMENT": "Development"
+            },
+            "sourceFileMap": {
+                "/Views": "${workspaceFolder}/Views"
             }
         },
         {

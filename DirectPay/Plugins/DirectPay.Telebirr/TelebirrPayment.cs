@@ -1,7 +1,7 @@
 using System;
 using Appdiv.Payment.Shared.Models;
 using Appdiv.Payment.Telebirr;
-using DirectPay.Application.Transations;
+using DirectPay.Application.Abstration;
 
 namespace DirectPay.Telebirr;
 

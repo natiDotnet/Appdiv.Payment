@@ -2,7 +2,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Appdiv.Payment.CBEBirr\Appdiv.Payment.CBEBirr.csproj" />
-    <ProjectReference Include="..\..\DirectPay.Application\DirectPay.Application.csproj" />
+    <ProjectReference Include="..\..\DirectPay.Application.Abstration\DirectPay.Application.Abstration.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

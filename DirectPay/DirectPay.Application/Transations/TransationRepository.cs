@@ -1,17 +1,11 @@
 using System;
+using DirectPay.Application.Abstration;
 using DirectPay.Application.Database;
 using DirectPay.Domain.Transactions;
 using Microsoft.EntityFrameworkCore;
 
 namespace DirectPay.Application.Transations;
 
-public interface ITransactionRepository
-{
-    Task<int> AddAsync(Transaction transation);
-    Task<Transaction?> GetByReferenceAsync(string reference);
-    Task<Transaction?> ReadByReferenceAsync(string reference);
-    Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
-}
 
 public class TransactionRepository : ITransactionRepository
 {

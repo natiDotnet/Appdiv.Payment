@@ -1,23 +1,14 @@
 using System;
+using DirectPay.Application.Abstration;
 using DirectPay.Application.Database;
 using DirectPay.Domain.Settings;
 using Microsoft.EntityFrameworkCore;
 
 namespace DirectPay.Application.Settings;
 
-public interface ISettingRepository
+public class SettingRepository(IApplicationDbContext context) : ISettingRepository
 {
-    Task<Setting> AddAsync(Setting setting);
-    Task<Setting> GetByKey(string key);
-    Task<Setting> ReadByKey(string key);
-}
-public class SettingRepository : ISettingRepository
-{
-    private readonly IApplicationDbContext _context;
-    public SettingRepository(IApplicationDbContext context)
-    {
-        _context = context;
-    }
+    private readonly IApplicationDbContext _context = context;
 
     public async Task<Setting> AddAsync(Setting setting)
     {

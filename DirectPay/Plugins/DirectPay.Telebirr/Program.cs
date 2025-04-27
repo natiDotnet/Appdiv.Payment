@@ -1,4 +1,5 @@
 using Appdiv.Payment.Telebirr;
+using DirectPay.Telebirr;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -6,7 +7,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddTelebirr();
+builder.Services.AddTelebirr<TelebirrPayment>();
+// builder.Services.AddApplication(builder.Configuration);
 
 var app = builder.Build();
 
@@ -16,6 +18,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.UseTelebirr();
 
 app.UseHttpsRedirection();
 

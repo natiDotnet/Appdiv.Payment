@@ -1,7 +1,7 @@
 using System;
 using Appdiv.Payment.CBEBirr;
 using Appdiv.Payment.Shared.Models;
-using DirectPay.Application.Transations;
+using DirectPay.Application.Abstration;
 
 namespace DirectPay.Cbebirr;
 

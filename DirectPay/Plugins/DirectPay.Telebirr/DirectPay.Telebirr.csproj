@@ -17,7 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="../../../Appdiv.Payment.Telebirr/Appdiv.Payment.Telebirr.csproj" />
-    <ProjectReference Include="../../DirectPay.Application/DirectPay.Application.csproj" />
+    <ProjectReference Include="../../DirectPay.Application.Abstration/DirectPay.Application.Abstration.csproj" />
   </ItemGroup>
 
 </Project>

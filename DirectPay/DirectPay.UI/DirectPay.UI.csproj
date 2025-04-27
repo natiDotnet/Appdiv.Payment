@@ -10,7 +10,6 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
-  
   <!-- Add this section to handle configuration files -->
   <ItemGroup>
     <Content Update="appsettings.json">

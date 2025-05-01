@@ -1,7 +1,7 @@
 using System.Reflection;
 using System.Runtime.Loader;
 
-namespace DirectPay.UI;
+namespace DirectPay.API;
 
 public interface IApiPlugin
 {

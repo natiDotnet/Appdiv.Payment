@@ -14,16 +14,21 @@ public static class PluginBootstrapper
         foreach (var pluginDir in pluginDirs)
         {
             // Search for DLLs recursively in each plugin directory
-            var dlls = Directory.GetFiles(pluginDir, "*.dll", SearchOption.AllDirectories);
-
-            foreach (var dll in dlls)
+            return Directory.GetFiles(pluginDir, "*.dll", SearchOption.AllDirectories)
+            .Where(dllPath =>
             {
-                var alc = new AssemblyLoadContext(Path.GetFileNameWithoutExtension(dll), true);
-                using var stream = File.OpenRead(dll);
-                yield return alc.LoadFromStream(stream);
-                Log.Information("Loaded plugin: {PluginPath}", dll);
-            }
+                string directoryName = Path.GetFileName(Path.GetDirectoryName(dllPath));
+                string fileNameWithoutExtension = Path.GetFileNameWithoutExtension(dllPath);
+                return string.Equals(directoryName, fileNameWithoutExtension, StringComparison.OrdinalIgnoreCase);
+            }).Select(Assembly.LoadFrom);
+
+            // foreach (var dll in dlls)
+            // {
+            //     Log.Information("Loaded plugin: {PluginPath}", dll);
+            //     yield return Assembly.LoadFrom(dll);
+            // }
         }
+        return [];
     }
 
     public static void ApplyConfigureServices(IServiceCollection services, IConfiguration config, IEnumerable<Assembly> assemblies)

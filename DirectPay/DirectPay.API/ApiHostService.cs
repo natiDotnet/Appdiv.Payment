@@ -24,7 +24,7 @@ public class ApiHostService : BackgroundService
     {
         StartApp();
 
-        using var watcher = new FileSystemWatcher(_pluginPath, "*.dll")
+        using var watcher = new FileSystemWatcher(_pluginPath)
         {
             EnableRaisingEvents = true,
             IncludeSubdirectories = true,
@@ -32,9 +32,11 @@ public class ApiHostService : BackgroundService
                         | NotifyFilters.LastWrite 
                         | NotifyFilters.CreationTime
                         | NotifyFilters.DirectoryName
+                        | NotifyFilters.Size
+                        | NotifyFilters.Attributes
         };
 
-        // Watch for all relevant file changes
+        // Watch for all relevant directory and file changes
         watcher.Created += async (s, e) => await HandlePluginChange(e, "created");
         watcher.Changed += async (s, e) => await HandlePluginChange(e, "modified");
         watcher.Deleted += async (s, e) => await HandlePluginChange(e, "deleted");
@@ -45,8 +47,12 @@ public class ApiHostService : BackgroundService
 
     private async Task HandlePluginChange(FileSystemEventArgs e, string changeType)
     {
-        _logger.LogInformation("Plugin {ChangeType}: {Plugin}", changeType, e.Name);
-        await RestartApp();
+        // Only restart if a .dll file was changed
+        if (Path.GetExtension(e.FullPath).Equals(".dll", StringComparison.OrdinalIgnoreCase))
+        {
+            _logger.LogInformation("Plugin {ChangeType}: {Plugin}", changeType, e.Name);
+            await RestartApp();
+        }
     }
 
     private void StartApp()

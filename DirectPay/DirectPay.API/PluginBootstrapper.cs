@@ -1,6 +1,7 @@
 using System.Reflection;
 using System.Runtime.Loader;
 using DirectPay.Application.Abstaction;
+using DirectPay.Application.Abstration;
 using Serilog;
 
 namespace DirectPay.API;
@@ -35,16 +36,16 @@ public static class PluginBootstrapper
     {
         foreach (var assembly in assemblies)
         {
-            foreach (var method in GetMethodsWithAttribute<PluginConfigureServicesAttribute>(assembly))
+            foreach (PluginStartup startup in GetPluginStartup(assembly))
             {
                 try
                 {
-                    method.Invoke(null, [services, config]);
-                    Log.Information("Configured services from {@Method}", method.DeclaringType?.FullName);
+                    startup.AddPlugin(services, config);
+                    Log.Information("Configured services from {@Method}", startup.Name);
                 }
                 catch (Exception ex)
                 {
-                    Log.Error(ex, "Failed to invoke ConfigureServices in {@Method}", method.DeclaringType?.FullName);
+                    Log.Error(ex, "Failed to invoke ConfigureServices in {@Method}", startup.Name);
                 }
             }
         }
@@ -54,16 +55,16 @@ public static class PluginBootstrapper
     {
         foreach (var assembly in assemblies)
         {
-            foreach (var method in GetMethodsWithAttribute<PluginConfigureMiddlewareAttribute>(assembly))
+            foreach (PluginStartup startup in GetPluginStartup(assembly))
             {
                 try
                 {
-                    method.Invoke(null, [app]);
-                    Log.Information("Configured middleware from {@Method}", method.DeclaringType?.FullName);
+                    startup.UsePlugin(app);
+                    Log.Information("Configured middleware from {@Method}", startup.Name);
                 }
                 catch (Exception ex)
                 {
-                    Log.Error(ex, "Failed to invoke ConfigureMiddleware in {@Method}", method.DeclaringType?.FullName);
+                    Log.Error(ex, "Failed to invoke ConfigureMiddleware in {@Method}", startup.Name);
                 }
             }
         }
@@ -75,4 +76,12 @@ public static class PluginBootstrapper
                 .Where(t => t.IsClass && t.IsAbstract && t.IsSealed) // static class
                 .SelectMany(t => t.GetMethods(BindingFlags.Public | BindingFlags.Static))
                 .Where(m => m.GetCustomAttribute<T>() != null);
+
+    private static IEnumerable<PluginStartup> GetPluginStartup(Assembly assembly)
+    {
+        return assembly.GetTypes()
+            .Where(t => typeof(PluginStartup).IsAssignableFrom(t) && !t.IsAbstract)
+            .Select(t => Activator.CreateInstance(t) as PluginStartup)
+            .Where(p => p is not null)!;
+    }
 }

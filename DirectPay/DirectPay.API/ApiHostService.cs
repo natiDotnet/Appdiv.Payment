@@ -1,3 +1,4 @@
+using DirectPay.API.Plugins;
 using DirectPay.API.Services;
 using DirectPay.API.Transactions;
 using DirectPay.Application;
@@ -28,8 +29,10 @@ public class ApiHostService : BackgroundService
         {
             EnableRaisingEvents = true,
             IncludeSubdirectories = true,
-            NotifyFilter = NotifyFilters.FileName 
-                        | NotifyFilters.LastWrite 
+            NotifyFilter = NotifyFilters.FileName
+
+                        | NotifyFilters.LastWrite
+
                         | NotifyFilters.CreationTime
                         | NotifyFilters.DirectoryName
                         | NotifyFilters.Size
@@ -85,21 +88,18 @@ public class ApiHostService : BackgroundService
 
         var pluginAssemblies = PluginBootstrapper.LoadAssemblies(_pluginPath)
                                                  .ToList();
-
-        // Create a logger factory for plugin startup
-        // var loggerFactory = LoggerFactory.Create(builder =>
-        // {
-        //     builder.AddSerilog(Log.Logger);
-        // });
-        // var pluginLogger = loggerFactory.CreateLogger("PluginStartup");
+        PluginBootstrapper.PluginStartups = pluginAssemblies.SelectMany(PluginBootstrapper.GetPluginStartup);
 
         // Hook services with the correct logger
+
         PluginBootstrapper.ApplyConfigureServices(
             builder.Services,
             builder.Configuration,
             pluginAssemblies);
 
         var app = builder.Build();
+        // Configure the HTTP request pipeline.
+        app.UseHttpsRedirection();
 
         // Hook middleware with the app's logger factory
         PluginBootstrapper.ApplyConfigureMiddleware(

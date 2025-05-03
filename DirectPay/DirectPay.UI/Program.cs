@@ -17,21 +17,6 @@ builder.Services.AddSingleton<WeatherForecastService>();
 builder.Services.AddApplication(builder.Configuration);
 builder.Services.AddScoped<IConfigurationService, ConfigurationService>();
 
-// builder.Services.AddEndpointsApiExplorer();
-// builder.Services.AddSwaggerGen();
-
-// Configure API Key Settings
-// Add configuration bindings
-// builder.Services.Configure<ApiKeySettings>(
-//     builder.Configuration.GetSection(nameof(ApiKeySettings)));
-
-// builder.Services.Configure<DatabaseSettings>(
-//     builder.Configuration.GetSection(nameof(DatabaseSettings)));
-// builder.Services
-//     .AddControllers()
-//     .PartManager
-//     .ApplicationParts
-//     .Add(new AssemblyPart(typeof(Handler).Assembly));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

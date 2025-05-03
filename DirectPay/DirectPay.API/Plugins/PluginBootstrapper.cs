@@ -1,12 +1,11 @@
 using System.Reflection;
-using System.Runtime.Loader;
-using DirectPay.Application.Abstaction;
 using DirectPay.Application.Abstration;
 using Serilog;
 
-namespace DirectPay.API;
+namespace DirectPay.API.Plugins;
 public static class PluginBootstrapper
 {
+    public static IEnumerable<PluginStartup> PluginStartups = [];
     public static IEnumerable<Assembly> LoadAssemblies(string basePath)
     {
         // Get all plugin directories
@@ -77,7 +76,7 @@ public static class PluginBootstrapper
                 .SelectMany(t => t.GetMethods(BindingFlags.Public | BindingFlags.Static))
                 .Where(m => m.GetCustomAttribute<T>() != null);
 
-    private static IEnumerable<PluginStartup> GetPluginStartup(Assembly assembly)
+    public static IEnumerable<PluginStartup> GetPluginStartup(Assembly assembly)
     {
         return assembly.GetTypes()
             .Where(t => typeof(PluginStartup).IsAssignableFrom(t) && !t.IsAbstract)

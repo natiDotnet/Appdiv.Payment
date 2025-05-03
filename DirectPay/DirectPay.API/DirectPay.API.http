@@ -1,6 +1,7 @@
-@DirectPay.API_HostAddress = http://localhost:5207
+@DirectPay.API_HostAddress = http://localhost:2122
 
 GET {{DirectPay.API_HostAddress}}/weatherforecast/
 Accept: application/json
+
 
 ###

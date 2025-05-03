@@ -4,19 +4,25 @@ using System.Linq;
 using System.Threading.Tasks;
 using Appdiv.Payment.Telebirr;
 using DirectPay.Application.Abstaction;
+using DirectPay.Application.Abstration;
 
 namespace DirectPay.Telebirr;
-[PluginMetadata("Telebirr", "1.0.0")]
-public static class Startup
+public class Startup : PluginStartup
 {
-    [PluginConfigureServices]
-    public static IServiceCollection AddPlugin(this IServiceCollection services, IConfiguration configuration)
+
+    public override string Name => "Telebirr";
+
+    public override string Description => "Telebirr Payment";
+
+    public override string Version => "1.0.0";
+
+    public override IServiceCollection AddPlugin(IServiceCollection services, IConfiguration configuration)
     {
         services.AddTelebirr<TelebirrPayment>();
         return services;
     }
-    [PluginConfigureMiddleware]
-    public static IApplicationBuilder UsePlugin(this IApplicationBuilder app)
+
+    public override IApplicationBuilder UsePlugin(IApplicationBuilder app)
     {
         app.UseTelebirr();
         return app;

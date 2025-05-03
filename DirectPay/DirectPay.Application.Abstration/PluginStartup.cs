@@ -10,7 +10,7 @@ public abstract class PluginStartup
     public abstract string Description { get; }
     public abstract string Version { get; }
 
-    public abstract void AddPlugin(IServiceCollection services, IConfiguration configuration);
-    public abstract void UsePlugin(IApplicationBuilder app);
+    public abstract IServiceCollection AddPlugin(IServiceCollection services, IConfiguration configuration);
+    public abstract IApplicationBuilder UsePlugin(IApplicationBuilder app);
 }
 

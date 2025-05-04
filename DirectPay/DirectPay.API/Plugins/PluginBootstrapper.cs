@@ -50,7 +50,7 @@ public static class PluginBootstrapper
         }
     }
 
-    public static void ApplyConfigureMiddleware(IApplicationBuilder app, IEnumerable<Assembly> assemblies)
+    public static void ApplyConfigureMiddleware(IApplicationBuilder app, IConfiguration configuration, IEnumerable<Assembly> assemblies)
     {
         foreach (var assembly in assemblies)
         {
@@ -58,7 +58,7 @@ public static class PluginBootstrapper
             {
                 try
                 {
-                    startup.UsePlugin(app);
+                    startup.UsePlugin(app, configuration);
                     Log.Information("Configured middleware from {@Method}", startup.Name);
                 }
                 catch (Exception ex)

@@ -12,5 +12,8 @@ public abstract class PluginStartup
 
     public virtual IServiceCollection AddPlugin(IServiceCollection services, IConfiguration configuration) => services;
     public virtual IApplicationBuilder UsePlugin(IApplicationBuilder app) => app;
+    public virtual IApplicationBuilder UsePlugin(IApplicationBuilder app, IConfiguration configuration) => app;
+
+
 }
 

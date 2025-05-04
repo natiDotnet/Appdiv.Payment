@@ -101,9 +101,12 @@ public class ApiHostService : BackgroundService
         // Configure the HTTP request pipeline.
         app.UseHttpsRedirection();
 
+
         // Hook middleware with the app's logger factory
+        app.UseRouting();
         PluginBootstrapper.ApplyConfigureMiddleware(
             app,
+            builder.Configuration,
             pluginAssemblies);
 
         // Configure the HTTP request pipeline.
@@ -120,7 +123,7 @@ public class ApiHostService : BackgroundService
         // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
         app.UseHsts();
         app.UseHttpsRedirection();
-        app.MapControllers();
+        // app.MapControllers();
 
         _ = Task.Run(() => app.RunAsync());
         _app = app;

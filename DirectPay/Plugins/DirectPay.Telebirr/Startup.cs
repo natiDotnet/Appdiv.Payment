@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Appdiv.Payment.Telebirr;
 using DirectPay.Application.Abstaction;
 using DirectPay.Application.Abstration;
+using DirectPay.Domain.Settings;
 using DirectPay.Telebirr.Payment;
 using Microsoft.AspNetCore.Mvc.ApplicationParts;
 
@@ -34,7 +35,17 @@ public class Startup : PluginStartup
     {
         using var scope = app.ApplicationServices.CreateScope();
         var settings = scope.ServiceProvider.GetRequiredService<ISettingRepository>();
-        var setting = await settings.GetByKey("Telebirr");
+        var setting = await settings.ReadByKey("TelebirrCallback");
+        if (setting == null)
+        {
+            setting = new Setting
+            {
+                Key = "TelebirrCallback",
+                Configuration = JsonSerializer.Serialize(new TelebirrOptions())
+            };
+            await settings.AddAsync(setting);
+        }
+
         TelebirrOptions telebirr = JsonSerializer.Deserialize<TelebirrOptions>(setting.Configuration)!;
         // TelebirrOptions telebirr = configuration.GetSection("Telebirr").Get<TelebirrOptions>()!;
         app.UseEndpoints(endpoints =>
@@ -44,10 +55,11 @@ public class Startup : PluginStartup
         });
 
         app.UseTelebirr(
-            endpoint: telebirr.BasePath,
-            paymentConfirmationPath: telebirr.PaymentConfirmationPath,
-            paymentQueryPath: telebirr.PaymentQueryPath,
-            paymentValidationPath: telebirr.PaymentValidationPath);
+            endpoint: $"/{telebirr.BasePath}",
+            paymentConfirmationPath: $"/{telebirr.PaymentConfirmationPath}",
+            paymentQueryPath: $"/{telebirr.PaymentQueryPath}",
+            paymentValidationPath: $"/{telebirr.PaymentValidationPath}"
+        );
         return app;
     }
 }

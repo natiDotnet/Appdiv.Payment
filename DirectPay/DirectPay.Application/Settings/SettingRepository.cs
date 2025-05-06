@@ -18,18 +18,16 @@ public class SettingRepository(IApplicationDbContext context) : ISettingReposito
         return setting;
     }
 
-    public async Task<Setting> GetByKey(string key)
+    public Task<Setting?> GetByKey(string key)
     {
-        return await _context.Settings.FirstOrDefaultAsync(x => x.Key == key)
-            ?? throw new KeyNotFoundException(nameof(key));
+        return _context.Settings.FirstOrDefaultAsync(x => x.Key == key);
     }
 
-    public async Task<Setting> ReadByKey(string key)
+    public async Task<Setting?> ReadByKey(string key)
     {
         return await _context.Settings
                             .AsNoTracking()
-                            .FirstOrDefaultAsync(x => x.Key == key)
-            ?? throw new KeyNotFoundException(nameof(key));
+                            .FirstOrDefaultAsync(x => x.Key == key);
     }
 
 

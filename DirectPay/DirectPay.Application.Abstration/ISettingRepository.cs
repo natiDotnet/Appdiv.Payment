@@ -5,6 +5,6 @@ namespace DirectPay.Application.Abstration;
 public interface ISettingRepository
 {
     Task<Setting> AddAsync(Setting setting);
-    Task<Setting> GetByKey(string key);
-    Task<Setting> ReadByKey(string key);
+    Task<Setting?> GetByKey(string key);
+    Task<Setting?> ReadByKey(string key);
 }

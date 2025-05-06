@@ -6,6 +6,7 @@
     <OutputPath>..\..\DirectPay.UI\bin\$(Configuration)\$(TargetFramework)\Plugins\DirectPay.Telebirr</OutputPath>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    <EnableDynamicLoading>true</EnableDynamicLoading>
   </PropertyGroup>
   <ItemGroup>
     <Content Include=".config/dotnet-tools.json" />
@@ -16,6 +17,9 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="../../../Appdiv.Payment.Telebirr/Appdiv.Payment.Telebirr.csproj" />
-    <ProjectReference Include="../../DirectPay.Application.Abstration/DirectPay.Application.Abstration.csproj" />
+    <ProjectReference Include="../../DirectPay.Application.Abstration/DirectPay.Application.Abstration.csproj" >
+      <Private>false</Private>
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </ProjectReference>
   </ItemGroup>
 </Project>

@@ -2,6 +2,7 @@ using DirectPay.API.Plugins;
 using DirectPay.API.Services;
 using DirectPay.API.Transactions;
 using DirectPay.Application;
+using DirectPay.Application.Abstration;
 using Microsoft.AspNetCore.Mvc.ApplicationParts;
 using Microsoft.Extensions.Hosting;
 using Serilog;
@@ -23,7 +24,7 @@ public class ApiHostService : BackgroundService
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        StartApp();
+        await StartAppAsync();
 
         using var watcher = new FileSystemWatcher(_pluginPath)
         {
@@ -54,11 +55,11 @@ public class ApiHostService : BackgroundService
         if (Path.GetExtension(e.FullPath).Equals(".dll", StringComparison.OrdinalIgnoreCase))
         {
             _logger.LogInformation("Plugin {ChangeType}: {Plugin}", changeType, e.Name);
-            await RestartApp();
+            await RestartAppAsync();
         }
     }
 
-    private void StartApp()
+    private async Task StartAppAsync()
     {
         var builder = WebApplication.CreateBuilder();
 
@@ -92,7 +93,7 @@ public class ApiHostService : BackgroundService
 
         // Hook services with the correct logger
 
-        PluginBootstrapper.ApplyConfigureServices(
+        await PluginBootstrapper.ApplyConfigureServices(
             builder.Services,
             builder.Configuration,
             pluginAssemblies);
@@ -101,10 +102,9 @@ public class ApiHostService : BackgroundService
         // Configure the HTTP request pipeline.
         app.UseHttpsRedirection();
 
-
         // Hook middleware with the app's logger factory
         app.UseRouting();
-        PluginBootstrapper.ApplyConfigureMiddleware(
+        await PluginBootstrapper.ApplyConfigureMiddleware(
             app,
             builder.Configuration,
             pluginAssemblies);
@@ -129,11 +129,13 @@ public class ApiHostService : BackgroundService
         _app = app;
     }
 
-    private async Task RestartApp()
+    private async Task RestartAppAsync()
     {
         await _app?.StopAsync()!;
+        Log.CloseAndFlush();
         // await _app.StartAsync();
-        StartApp();
+
+        await StartAppAsync();
     }
 
     public override async Task StopAsync(CancellationToken cancellationToken)

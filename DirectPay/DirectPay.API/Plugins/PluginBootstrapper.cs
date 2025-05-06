@@ -31,7 +31,7 @@ public static class PluginBootstrapper
         return [];
     }
 
-    public static void ApplyConfigureServices(IServiceCollection services, IConfiguration config, IEnumerable<Assembly> assemblies)
+    public static async Task ApplyConfigureServices(IServiceCollection services, IConfiguration config, IEnumerable<Assembly> assemblies)
     {
         foreach (var assembly in assemblies)
         {
@@ -40,6 +40,7 @@ public static class PluginBootstrapper
                 try
                 {
                     startup.AddPlugin(services, config);
+                    await startup.AddPluginAsync(services, config);
                     Log.Information("Configured services from {@Method}", startup.Name);
                 }
                 catch (Exception ex)
@@ -50,7 +51,7 @@ public static class PluginBootstrapper
         }
     }
 
-    public static void ApplyConfigureMiddleware(IApplicationBuilder app, IConfiguration configuration, IEnumerable<Assembly> assemblies)
+    public static async Task ApplyConfigureMiddleware(IApplicationBuilder app, IConfiguration configuration, IEnumerable<Assembly> assemblies)
     {
         foreach (var assembly in assemblies)
         {
@@ -58,7 +59,11 @@ public static class PluginBootstrapper
             {
                 try
                 {
+                    // var setting = app.ApplicationServices.GetRequiredService<ISettingRepository>();
+                    // Console.WriteLine(setting == null);
+                    startup.UsePlugin(app);
                     startup.UsePlugin(app, configuration);
+                    await startup.UsePluginAsync(app, configuration);
                     Log.Information("Configured middleware from {@Method}", startup.Name);
                 }
                 catch (Exception ex)

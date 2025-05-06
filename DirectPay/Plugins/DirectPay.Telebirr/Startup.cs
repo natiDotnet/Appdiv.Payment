@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Appdiv.Payment.Telebirr;
 using DirectPay.Application.Abstaction;
@@ -29,10 +30,13 @@ public class Startup : PluginStartup
         return services;
     }
 
-    public override IApplicationBuilder UsePlugin(IApplicationBuilder app, IConfiguration configuration)
+    public override async Task<IApplicationBuilder> UsePluginAsync(IApplicationBuilder app, IConfiguration configuration)
     {
-        var test = configuration["Telebirr"];
-        TelebirrOptions telebirr = configuration.GetSection("Telebirr").Get<TelebirrOptions>()!;
+        using var scope = app.ApplicationServices.CreateScope();
+        var settings = scope.ServiceProvider.GetRequiredService<ISettingRepository>();
+        var setting = await settings.GetByKey("Telebirr");
+        TelebirrOptions telebirr = JsonSerializer.Deserialize<TelebirrOptions>(setting.Configuration)!;
+        // TelebirrOptions telebirr = configuration.GetSection("Telebirr").Get<TelebirrOptions>()!;
         app.UseEndpoints(endpoints =>
         {
             endpoints.MapControllers();

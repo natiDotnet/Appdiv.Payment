@@ -11,8 +11,11 @@ public abstract class PluginStartup
     public abstract string Version { get; }
 
     public virtual IServiceCollection AddPlugin(IServiceCollection services, IConfiguration configuration) => services;
+    public virtual Task<IServiceCollection> AddPluginAsync(IServiceCollection services, IConfiguration configuration) => Task.FromResult(services);
     public virtual IApplicationBuilder UsePlugin(IApplicationBuilder app) => app;
+    public virtual Task<IApplicationBuilder> UsePluginAsync(IApplicationBuilder app) => Task.FromResult(app);
     public virtual IApplicationBuilder UsePlugin(IApplicationBuilder app, IConfiguration configuration) => app;
+    public virtual Task<IApplicationBuilder> UsePluginAsync(IApplicationBuilder app, IConfiguration configuration) => Task.FromResult(app);
 
 
 }

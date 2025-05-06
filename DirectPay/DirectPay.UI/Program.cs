@@ -14,8 +14,8 @@ builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddMudServices();
 builder.Services.AddSingleton<WeatherForecastService>();
-builder.Services.AddApplication(builder.Configuration);
-builder.Services.AddScoped<IConfigurationService, ConfigurationService>();
+// builder.Services.AddApplication(builder.Configuration);
+// builder.Services.AddScoped<IConfigurationService, ConfigurationService>();
 
 var app = builder.Build();
 

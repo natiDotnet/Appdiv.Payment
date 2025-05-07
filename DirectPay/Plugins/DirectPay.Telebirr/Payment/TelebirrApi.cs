@@ -24,6 +24,7 @@ public static class TelebirrApi
 
             // Restart the API host service to apply the new settings
             await File.WriteAllTextAsync("Plugins/restart.dll", "restart");
+            Results.Ok("Path updated successfully");
         });
 
         string paymentQuery = CombinePath(options.BasePath, options.PaymentQueryPath);

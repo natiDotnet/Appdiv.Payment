@@ -27,7 +27,7 @@ public static class CbeApi
 
             // Restart the API host service to apply the new settings
             await File.WriteAllTextAsync("Plugins/restart.dll", "restart");
-            return Results.Ok("Settings updated successfully");
+            return Results.Ok("Path updated successfully");
         });
 
         string paymentQuery = CombinePath(options.BasePath, options.PaymentQueryPath);

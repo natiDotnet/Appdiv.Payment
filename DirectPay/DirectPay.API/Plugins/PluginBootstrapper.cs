@@ -11,23 +11,26 @@ public static class PluginBootstrapper
         // Get all plugin directories
         var pluginDirs = Directory.GetDirectories(basePath);
 
-        foreach (var pluginDir in pluginDirs)
+        // foreach (var pluginDir in pluginDirs)
+        // {
+        // Search for DLLs recursively in each plugin directory
+        return pluginDirs.SelectMany(pluginDir =>
+        Directory.GetFiles(pluginDir, "*.dll", SearchOption.AllDirectories)
+        .Where(dllPath =>
         {
-            // Search for DLLs recursively in each plugin directory
-            return Directory.GetFiles(pluginDir, "*.dll", SearchOption.AllDirectories)
-            .Where(dllPath =>
-            {
-                string directoryName = Path.GetFileName(Path.GetDirectoryName(dllPath));
-                string fileNameWithoutExtension = Path.GetFileNameWithoutExtension(dllPath);
-                return string.Equals(directoryName, fileNameWithoutExtension, StringComparison.OrdinalIgnoreCase);
-            }).Select(Assembly.LoadFrom);
+            Console.WriteLine(dllPath);
+            string directoryName = Path.GetFileName(Path.GetDirectoryName(dllPath));
+            string fileNameWithoutExtension = Path.GetFileNameWithoutExtension(dllPath);
+            return string.Equals(directoryName, fileNameWithoutExtension, StringComparison.OrdinalIgnoreCase);
+        }).Select(Assembly.LoadFrom)
+        .Where(s => s != null));
 
-            // foreach (var dll in dlls)
-            // {
-            //     Log.Information("Loaded plugin: {PluginPath}", dll);
-            //     yield return Assembly.LoadFrom(dll);
-            // }
-        }
+        // foreach (var dll in dlls)
+        // {
+        //     Log.Information("Loaded plugin: {PluginPath}", dll);
+        //     yield return Assembly.LoadFrom(dll);
+        // }
+        // }
         return [];
     }
 
@@ -63,6 +66,7 @@ public static class PluginBootstrapper
                     // Console.WriteLine(setting == null);
                     startup.UsePlugin(app);
                     startup.UsePlugin(app, configuration);
+                    await startup.UsePluginAsync(app);
                     await startup.UsePluginAsync(app, configuration);
                     Log.Information("Configured middleware from {@Method}", startup.Name);
                 }

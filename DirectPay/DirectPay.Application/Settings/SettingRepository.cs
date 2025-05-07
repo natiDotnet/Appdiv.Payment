@@ -12,7 +12,16 @@ public class SettingRepository(IApplicationDbContext context) : ISettingReposito
 
     public async Task<Setting> AddAsync(Setting setting)
     {
-        await _context.Settings.AddAsync(setting);
+        var old = await _context.Settings.Where(s => s.Key == setting.Key)
+                                         .FirstOrDefaultAsync();
+        if (old is not null)
+        {
+            old.Configuration = setting.Configuration;
+        }
+        else
+        {
+            await _context.Settings.AddAsync(setting);
+        }
         await _context.SaveChangesAsync();
 
         return setting;

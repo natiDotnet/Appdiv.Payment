@@ -12,7 +12,7 @@ public static class TelebirrApi
     public static void Endpoints(this IEndpointRouteBuilder routes, TelebirrOptions options)
     {
         var group = routes.MapGroup("/api")
-            .WithTags("Telebirr Payments"); // Added group name for OpenAPI docs
+            .WithTags("Telebirr Payments");
         group.MapPost("/Telebirr/CallbackPath", async ([FromBody] TelebirrOptions telebirr, ISettingRepository settingRepository) =>
         {
             var setting = new Setting
@@ -21,6 +21,9 @@ public static class TelebirrApi
                 Configuration = JsonSerializer.Serialize(telebirr)
             };
             await settingRepository.AddAsync(setting);
+
+            // Restart the API host service to apply the new settings
+            await File.WriteAllTextAsync("Plugins/restart.dll", "restart");
         });
 
         string paymentQuery = CombinePath(options.BasePath, options.PaymentQueryPath);

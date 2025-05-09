@@ -1,0 +1,29 @@
+@using DirectPay.API.Plugins
+@page "/plugin"
+
+<div class="plugin-container mt-2">
+    @if (_componentType == null)
+    {
+        <p>Plugin UI not found.</p>
+    }
+    else
+    {
+        <DynamicComponent Type="_componentType" />
+    }
+</div>
+
+@code {
+    [Parameter]
+    [SupplyParameterFromQuery(Name = "type")]
+    public string Type { get; set; }
+
+    private Type _componentType;
+
+    protected override void OnInitialized()
+    {
+        if (!string.IsNullOrEmpty(Type))
+        {
+            _componentType = System.Type.GetType(Uri.UnescapeDataString(Type));
+        }
+    }
+}

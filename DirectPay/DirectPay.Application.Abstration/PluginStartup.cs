@@ -10,6 +10,8 @@ public abstract class PluginStartup
     public abstract string Description { get; }
     public abstract string Version { get; }
 
+    public virtual IEnumerable<PluginView> GetRazorComponents() => [];
+
     public virtual IServiceCollection AddPlugin(IServiceCollection services, IConfiguration configuration) => services;
     public virtual Task<IServiceCollection> AddPluginAsync(IServiceCollection services, IConfiguration configuration) => Task.FromResult(services);
     public virtual IApplicationBuilder UsePlugin(IApplicationBuilder app) => app;

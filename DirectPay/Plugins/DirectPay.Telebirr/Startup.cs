@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Appdiv.Payment.Telebirr;
-using DirectPay.Application.Abstaction;
+using DirectPay.Application.Abstration;
 using DirectPay.Application.Abstration;
 using DirectPay.Domain.Settings;
 using DirectPay.Telebirr.Payment;

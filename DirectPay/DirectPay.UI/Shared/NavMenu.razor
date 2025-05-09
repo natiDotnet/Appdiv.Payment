@@ -1,4 +1,6 @@
-﻿<MudNavMenu class="mt-1">
+﻿@using DirectPay.API.Plugins
+
+<MudNavMenu class="mt-1">
     <MudText Typo="Typo.h6" Class="px-4">Material</MudText>
     <MudText Typo="Typo.body2" Class="px-4 mud-text-secondary">Icons</MudText>
     <MudDivider Class="my-2" />
@@ -7,8 +9,19 @@
     <MudNavLink Href="/fetchdata" Icon="@Icons.Material.Filled.List">Fetch Data</MudNavLink>
     <MudNavLink Href="https://localhost:7172/docs/index.html" Icon="@Icons.Material.Filled.List" Target="_blank">Docs
     </MudNavLink>
+    @foreach (var plugin in PluginBootstrapper.PluginStartups)
+    {
+        @if (!plugin.GetRazorComponents().Any())
+        {
+            continue;
+        }
+        <MudNavGroup Icon="@Icons.Material.Filled.Extension" Title="@plugin.Name" Expanded=@true>
+            @foreach (var component in plugin.GetRazorComponents())
+            {
+                <MudNavLink Href="@($"/plugin?type={Uri.EscapeDataString(component.Component.AssemblyQualifiedName)}")"
+                    Icon="@Icons.Material.Filled.LibraryAdd">@component.Title
+                </MudNavLink>
+            }
+        </MudNavGroup>
+    }
 </MudNavMenu>
-
-@code {
-
-}

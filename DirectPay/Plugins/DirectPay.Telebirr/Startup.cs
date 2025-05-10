@@ -8,7 +8,13 @@ using DirectPay.Application.Abstration;
 using DirectPay.Application.Abstration;
 using DirectPay.Domain.Settings;
 using DirectPay.Telebirr.Payment;
+using DirectPay.Telebirr.UI;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc.ApplicationParts;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using MudBlazor;
+using MudBlazor.Services;
 
 namespace DirectPay.Telebirr;
 public class Startup : PluginStartup
@@ -19,11 +25,23 @@ public class Startup : PluginStartup
     public override string Description => "Telebirr Payment";
 
     public override string Version => "1.0.0";
+    public override IEnumerable<PluginView> GetRazorComponents()
+    {
+        return
+        [
+            new PluginView
+            {
+                Title = "Settings",
+                Component = typeof(Settings)
+            }
+        ];
+    }
 
     public override IServiceCollection AddPlugin(IServiceCollection services, IConfiguration configuration)
     {
         services.AddTelebirr<TelebirrPayment>();
         services.Configure<TelebirrOptions>(configuration.GetSection("Telebirr"));
+        // services.AddMudServices();
         // services.AddControllers()
         //     .PartManager
         //     .ApplicationParts

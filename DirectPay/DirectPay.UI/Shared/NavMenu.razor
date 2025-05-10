@@ -16,11 +16,11 @@
         {
             continue;
         }
-        <MudNavGroup Icon="@Icons.Material.Filled.Extension" Title="@plugin.Name" Expanded=@true>
+        <MudNavGroup Icon="@plugin.Icon" Title="@plugin.Name" Expanded=@true>
             @foreach (var component in plugin.GetRazorComponents())
             {
                 <MudNavLink Href="@($"/plugin?type={Uri.EscapeDataString(component.Component.AssemblyQualifiedName)}")"
-                    Icon="@Icons.Material.Filled.LibraryAdd">@component.Title
+                    Icon="@component.Icon">@component.Title
                 </MudNavLink>
             }
         </MudNavGroup>

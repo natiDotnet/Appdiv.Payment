@@ -9,6 +9,7 @@ public abstract class PluginStartup
     public abstract string Name { get; }
     public abstract string Description { get; }
     public abstract string Version { get; }
+    public abstract string Icon { get; }
 
     public virtual IEnumerable<PluginView> GetRazorComponents() => [];
 

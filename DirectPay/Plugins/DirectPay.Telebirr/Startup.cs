@@ -25,6 +25,9 @@ public class Startup : PluginStartup
     public override string Description => "Telebirr Payment";
 
     public override string Version => "1.0.0";
+
+    public override string Icon => "fas fa-home";
+
     public override IEnumerable<PluginView> GetRazorComponents()
     {
         return
@@ -32,7 +35,8 @@ public class Startup : PluginStartup
             new PluginView
             {
                 Title = "Settings",
-                Component = typeof(Settings)
+                Component = typeof(Settings),
+                Icon = Icons.Material.Filled.Settings,
             }
         ];
     }

@@ -14,24 +14,17 @@ public static class PluginBootstrapper
         // Get all plugin directories
         var pluginDirs = Directory.GetDirectories(basePath);
 
-        // foreach (var pluginDir in pluginDirs)
-        // {
         // Search for DLLs recursively in each plugin directory
-        return pluginDirs.SelectMany(pluginDir => Directory.GetFiles(pluginDir, "*.dll", SearchOption.AllDirectories)
+        return pluginDirs.SelectMany(pluginDir =>
+        Directory.GetFiles(pluginDir, "*.dll", SearchOption.AllDirectories)
         .Where(dllPath =>
         {
+            Console.WriteLine(dllPath);
             string directoryName = Path.GetFileName(Path.GetDirectoryName(dllPath));
             string fileNameWithoutExtension = Path.GetFileNameWithoutExtension(dllPath);
             return string.Equals(directoryName, fileNameWithoutExtension, StringComparison.OrdinalIgnoreCase);
-        }).Select(Assembly.LoadFrom));
-
-        // foreach (var dll in dlls)
-        // {
-        //     Log.Information("Loaded plugin: {PluginPath}", dll);
-        //     yield return Assembly.LoadFrom(dll);
-        // }
-        // }
-        // return [];
+        }).Select(Assembly.LoadFrom)
+        .Where(s => s != null));
     }
 
     public static async Task ApplyConfigureServices(IServiceCollection services, IConfiguration config, IEnumerable<Assembly> assemblies)
@@ -66,6 +59,7 @@ public static class PluginBootstrapper
                     // Console.WriteLine(setting == null);
                     startup.UsePlugin(app);
                     startup.UsePlugin(app, configuration);
+                    await startup.UsePluginAsync(app);
                     await startup.UsePluginAsync(app, configuration);
                     Log.Information("Configured middleware from {@Method}", startup.Name);
                 }

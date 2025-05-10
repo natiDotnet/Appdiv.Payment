@@ -1,14 +1,18 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
+<Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
     <ProjectReference Include="..\..\..\Appdiv.Payment.CBEBirr\Appdiv.Payment.CBEBirr.csproj" />
-    <ProjectReference Include="..\..\DirectPay.Application.Abstration\DirectPay.Application.Abstration.csproj" />
+    <ProjectReference Include="..\..\DirectPay.Application.Abstration\DirectPay.Application.Abstration.csproj" >
+      <Private>false</Private>
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </ProjectReference>
   </ItemGroup>
-
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <OutputPath>..\..\DirectPay.UI\bin\$(Configuration)\$(TargetFramework)\Plugins\DirectPay.Cbebirr</OutputPath>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    <EnableDynamicLoading>true</EnableDynamicLoading>
   </PropertyGroup>
-
 </Project>

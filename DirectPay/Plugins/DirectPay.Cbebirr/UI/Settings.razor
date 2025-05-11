@@ -1,0 +1,70 @@
+@using DirectPay.Cbebirr
+@using System.Text.Json
+@using DirectPay.Application.Abstration
+@using DirectPay.Cbebirr.Payments
+@using MudBlazor
+@using DirectPay.Domain.Settings
+@inject ISettingRepository SettingRepository
+@inject NavigationManager NavigationManager
+@inject ISnackbar Snackbar
+
+<MudCard Class="mt-4">
+    <MudCardHeader>
+        <MudText Typo="Typo.h6">CBE Callback Settings</MudText>
+    </MudCardHeader>
+    <MudCardContent>
+        <MudForm @ref="form" @bind-IsValid="@success">
+            <MudTextField @bind-Value="options.BasePath" Label="Base Path" Required="true"
+                RequiredError="Base path is required" />
+
+            <MudTextField Class="mt-2" @bind-Value="options.PaymentQueryPath" Label="Payment Query Path" Required="true"
+                RequiredError="Payment query path is required" />
+
+            <MudTextField Class="mt-2" @bind-Value="options.PaymentConfirmationPath" Label="Payment Confirmation Path"
+                Required="true" RequiredError="Payment confirmation path is required" />
+
+            <MudTextField Class="mt-2" @bind-Value="options.PaymentValidationPath" Label="Payment Validation Path" Required="true"
+                RequiredError="Payment validation path is required" />
+        </MudForm>
+    </MudCardContent>
+    <MudCardActions>
+        <MudButton Color="Color.Primary" Variant="Variant.Filled" OnClick="SaveSettings" Disabled="!success">Save
+            Settings</MudButton>
+    </MudCardActions>
+</MudCard>
+
+@code {
+    private MudForm form;
+    private bool success;
+    private CbeOptions options = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        var setting = await SettingRepository.ReadByKey("CbeCallback");
+        if (setting != null)
+        {
+            options = JsonSerializer.Deserialize<CbeOptions>(setting.Configuration)!;
+        }
+    }
+
+    private async Task SaveSettings()
+    {
+        await form.Validate();
+
+        if (success)
+        {
+            var setting = new Setting
+                {
+                    Key = "CbeCallback",
+                    Configuration = JsonSerializer.Serialize(options)
+                };
+
+            await SettingRepository.AddAsync(setting);
+
+            // Trigger API restart to apply new settings
+            await File.WriteAllTextAsync("Plugins/restart.dll", "restart");
+
+            Snackbar.Add("Settings saved successfully", Severity.Success);
+        }
+    }
+}

@@ -1,10 +1,13 @@
-<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk.Razor">
   <ItemGroup>
     <ProjectReference Include="..\..\..\Appdiv.Payment.CBEBirr\Appdiv.Payment.CBEBirr.csproj" />
-    <ProjectReference Include="..\..\DirectPay.Application.Abstration\DirectPay.Application.Abstration.csproj" >
+    <ProjectReference Include="..\..\DirectPay.Application.Abstration\DirectPay.Application.Abstration.csproj">
       <Private>false</Private>
       <ExcludeAssets>runtime</ExcludeAssets>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="MudBlazor" Version="8.5.1" />
   </ItemGroup>
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>

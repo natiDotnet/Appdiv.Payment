@@ -19,11 +19,13 @@
 
     private Type _componentType;
 
-    protected override void OnInitialized()
+    protected override Task OnParametersSetAsync()
     {
         if (!string.IsNullOrEmpty(Type))
         {
             _componentType = System.Type.GetType(Uri.UnescapeDataString(Type));
         }
+        return base.OnParametersSetAsync();
     }
+
 }

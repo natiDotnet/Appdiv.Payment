@@ -20,6 +20,8 @@ public class Startup : PluginStartup
 
     public override string Version => "1.0.0";
 
+    public override string Icon => "";
+
     public override IServiceCollection AddPlugin(IServiceCollection services, IConfiguration configuration)
     {
         services.AddCBEBirr<CBEbirrPayment>();

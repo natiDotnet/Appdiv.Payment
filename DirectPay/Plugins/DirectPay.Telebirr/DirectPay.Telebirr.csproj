@@ -14,8 +14,11 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.14" />
-    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.3.0" />
-    <PackageReference Include="MudBlazor" Version="8.5.1" />
+    <!-- <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.3.0" /> -->
+    <PackageReference Include="MudBlazor" Version="8.5.1" >
+      <Private>false</Private>
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include=".config/dotnet-tools.json" />

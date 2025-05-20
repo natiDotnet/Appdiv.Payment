@@ -31,7 +31,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DirectPay.API", "DirectPay\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DirectPay.UI", "DirectPay\DirectPay.UI\DirectPay.UI.csproj", "{2ABA9593-390A-4EDD-9679-9A8DE01A9406}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DirectPay.Application.Abstration", "DirectPay\DirectPay.Application.Abstration\DirectPay.Application.Abstration.csproj", "{7C511F30-D5C0-406C-9DE8-5C7038B26719}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DirectPay.Application.Abstractions", "DirectPay\DirectPay.Application.Abstractions\DirectPay.Application.Abstractions.csproj", "{7C511F30-D5C0-406C-9DE8-5C7038B26719}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

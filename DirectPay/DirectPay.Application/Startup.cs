@@ -1,6 +1,6 @@
 using System;
 using System.Diagnostics;
-using DirectPay.Application.Abstration;
+using DirectPay.Application.Abstractions;
 using DirectPay.Application.Database;
 using DirectPay.Application.Settings;
 using DirectPay.Application.Transations;

@@ -1,6 +1,6 @@
 using DirectPay.Domain.Settings;
 
-namespace DirectPay.Application.Abstration;
+namespace DirectPay.Application.Abstractions;
 
 public interface ISettingRepository
 {

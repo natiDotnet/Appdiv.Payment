@@ -26,6 +26,6 @@ public class Transaction
 
 public class Customization
 {
-    public string? Titile { get; set; }
+    public string? Title { get; set; }
     public string? Description { get; set; }
 }

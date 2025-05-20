@@ -2,7 +2,7 @@ using DirectPay.API.Plugins;
 using DirectPay.API.Services;
 using DirectPay.API.Transactions;
 using DirectPay.Application;
-using DirectPay.Application.Abstration;
+using DirectPay.Application.Abstractions;
 using Microsoft.AspNetCore.Mvc.ApplicationParts;
 using Microsoft.Extensions.Hosting;
 using Serilog;

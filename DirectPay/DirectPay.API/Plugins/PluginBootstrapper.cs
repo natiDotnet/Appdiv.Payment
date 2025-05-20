@@ -1,5 +1,5 @@
 using System.Reflection;
-using DirectPay.Application.Abstration;
+using DirectPay.Application.Abstractions;
 using Serilog;
 
 namespace DirectPay.API.Plugins;

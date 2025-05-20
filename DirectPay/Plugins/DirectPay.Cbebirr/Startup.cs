@@ -1,6 +1,6 @@
 using System.Text.Json;
 using Appdiv.Payment.CBEBirr;
-using DirectPay.Application.Abstration;
+using DirectPay.Application.Abstractions;
 using DirectPay.Cbebirr.Payments;
 using DirectPay.Cbebirr.UI;
 using DirectPay.Domain.Settings;

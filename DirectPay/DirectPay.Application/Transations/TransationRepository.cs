@@ -1,5 +1,5 @@
 using System;
-using DirectPay.Application.Abstration;
+using DirectPay.Application.Abstractions;
 using DirectPay.Application.Database;
 using DirectPay.Domain.Transactions;
 using Microsoft.EntityFrameworkCore;

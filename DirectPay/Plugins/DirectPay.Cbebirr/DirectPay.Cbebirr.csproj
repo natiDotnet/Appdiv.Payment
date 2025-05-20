@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Razor">
   <ItemGroup>
     <ProjectReference Include="..\..\..\Appdiv.Payment.CBEBirr\Appdiv.Payment.CBEBirr.csproj" />
-    <ProjectReference Include="..\..\DirectPay.Application.Abstration\DirectPay.Application.Abstration.csproj">
+    <ProjectReference Include="..\..\DirectPay.Application.Abstractions\DirectPay.Application.Abstractions.csproj">
       <Private>false</Private>
       <ExcludeAssets>runtime</ExcludeAssets>
     </ProjectReference>

@@ -6,7 +6,7 @@
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="../DirectPay.Domain/DirectPay.Domain.csproj" />
-    <ProjectReference Include="..\DirectPay.Application.Abstration\DirectPay.Application.Abstration.csproj" />
+    <ProjectReference Include="..\DirectPay.Application.Abstractions\DirectPay.Application.Abstractions.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="EFCore.NamingConventions" Version="8.0.3" />

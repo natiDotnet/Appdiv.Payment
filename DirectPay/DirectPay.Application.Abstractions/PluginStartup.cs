@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace DirectPay.Application.Abstration;
+namespace DirectPay.Application.Abstractions;
 
 public abstract class PluginStartup
 {

@@ -1,4 +1,4 @@
-namespace DirectPay.Application.Abstration;
+namespace DirectPay.Application.Abstractions;
 
 public class PluginView
 {

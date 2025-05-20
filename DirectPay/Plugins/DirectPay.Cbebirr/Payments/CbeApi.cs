@@ -1,7 +1,7 @@
 using System.Text.Json;
 using Appdiv.Payment.CBEBirr;
 using Appdiv.Payment.Shared.Models;
-using DirectPay.Application.Abstration;
+using DirectPay.Application.Abstractions;
 using DirectPay.Domain.Settings;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;

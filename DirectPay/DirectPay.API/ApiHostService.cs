@@ -87,13 +87,13 @@ public class ApiHostService : BackgroundService
 
         // Load plugin assemblies
 
-        var pluginAssemblies = PluginBootstrapper.LoadAssemblies(_pluginPath)
+        var pluginAssemblies = PluginBootstrap.LoadAssemblies(_pluginPath)
                                                  .ToList();
-        PluginBootstrapper.PluginStartups = pluginAssemblies.SelectMany(PluginBootstrapper.GetPluginStartup);
+        PluginBootstrap.PluginStartups = pluginAssemblies.SelectMany(PluginBootstrap.GetPluginStartup);
 
         // Hook services with the correct logger
 
-        await PluginBootstrapper.ApplyConfigureServices(
+        await PluginBootstrap.ApplyConfigureServices(
             builder.Services,
             builder.Configuration,
             pluginAssemblies);
@@ -104,7 +104,7 @@ public class ApiHostService : BackgroundService
 
         // Hook middleware with the app's logger factory
         app.UseRouting();
-        await PluginBootstrapper.ApplyConfigureMiddleware(
+        await PluginBootstrap.ApplyConfigureMiddleware(
             app,
             builder.Configuration,
             pluginAssemblies);

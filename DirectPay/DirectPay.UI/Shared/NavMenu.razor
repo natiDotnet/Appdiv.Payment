@@ -10,7 +10,7 @@
     <MudNavLink Href="https://localhost:7172/docs/index.html" Icon="@Icons.Material.Filled.Description" Target="_blank">
         Docs
     </MudNavLink>
-    @foreach (var plugin in PluginBootstrapper.PluginStartups)
+    @foreach (var plugin in PluginBootstrap.PluginStartups)
     {
         @if (!plugin.GetRazorComponents().Any())
         {

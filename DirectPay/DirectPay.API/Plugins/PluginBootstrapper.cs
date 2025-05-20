@@ -3,7 +3,7 @@ using DirectPay.Application.Abstractions;
 using Serilog;
 
 namespace DirectPay.API.Plugins;
-public static class PluginBootstrapper
+public static class PluginBootstrap
 {
     public static IEnumerable<PluginStartup> PluginStartups = [];
     public static IEnumerable<Assembly> RouteAssemblies = PluginStartups.SelectMany(p => p.GetRazorComponents().Select(v => v.Component.Assembly));

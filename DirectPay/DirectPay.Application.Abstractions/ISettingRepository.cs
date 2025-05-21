@@ -1,10 +1,10 @@
-using DirectPay.Domain.Settings;
+using DirectPay.Application.Abstractions.Models;
 
 namespace DirectPay.Application.Abstractions;
 
 public interface ISettingRepository
 {
-    Task<Setting> AddAsync(Setting setting);
-    Task<Setting?> GetByKey(string key);
-    Task<Setting?> ReadByKey(string key);
+    Task<Store<T>> AddAsync<T>(Store<T> setting);
+    Task<Store<T>?> GetByKey<T>(string key);
+    Task<Store<T>?> ReadByKey<T>(string key);
 }

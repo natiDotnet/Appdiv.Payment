@@ -1,20 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text.Json;
-using System.Threading.Tasks;
 using Appdiv.Payment.Telebirr;
 using DirectPay.Application.Abstractions;
-using DirectPay.Application.Abstractions;
-using DirectPay.Domain.Settings;
+using DirectPay.Application.Abstractions.Models;
 using DirectPay.Telebirr.Payment;
 using DirectPay.Telebirr.UI;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Mvc.ApplicationParts;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MudBlazor;
-using MudBlazor.Services;
 
 namespace DirectPay.Telebirr;
 public class Startup : PluginStartup
@@ -81,18 +74,18 @@ public class Startup : PluginStartup
     {
         using var scope = app.ApplicationServices.CreateScope();
         var settings = scope.ServiceProvider.GetRequiredService<ISettingRepository>();
-        var setting = await settings.ReadByKey("TelebirrCallback");
-        if (setting == null)
+        var store = await settings.ReadByKey<TelebirrOptions>("TelebirrCallback");
+        if (store == null)
         {
-            setting = new Setting
+            store = new Store<TelebirrOptions>
             {
                 Key = "TelebirrCallback",
-                Configuration = JsonSerializer.Serialize(new TelebirrOptions())
+                Value = new TelebirrOptions()
             };
-            await settings.AddAsync(setting);
+            await settings.AddAsync(store);
         }
 
-        TelebirrOptions telebirr = JsonSerializer.Deserialize<TelebirrOptions>(setting.Configuration)!;
+        TelebirrOptions telebirr = store.Value!;
         // TelebirrOptions telebirr = configuration.GetSection("Telebirr").Get<TelebirrOptions>()!;
         app.UseEndpoints(endpoints =>
         {

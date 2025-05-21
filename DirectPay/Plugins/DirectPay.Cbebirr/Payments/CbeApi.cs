@@ -1,8 +1,7 @@
-using System.Text.Json;
 using Appdiv.Payment.CBEBirr;
 using Appdiv.Payment.Shared.Models;
 using DirectPay.Application.Abstractions;
-using DirectPay.Domain.Settings;
+using DirectPay.Application.Abstractions.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -18,10 +17,10 @@ public static class CbeApi
             .WithTags("CBE Payments");
         group.MapPost("/CBE/CallbackPath", async ([FromBody] CbeOptions cbe, ISettingRepository settingRepository) =>
         {
-            var setting = new Setting
+            var setting = new Store<CbeOptions>
             {
                 Key = "CbeCallback",
-                Configuration = JsonSerializer.Serialize(cbe)
+                Value = cbe
             };
             await settingRepository.AddAsync(setting);
 

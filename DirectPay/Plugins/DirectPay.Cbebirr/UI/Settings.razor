@@ -1,9 +1,9 @@
+@using DirectPay.Application.Abstractions.Models
 @using DirectPay.Cbebirr
 @using System.Text.Json
 @using DirectPay.Application.Abstractions
 @using DirectPay.Cbebirr.Payments
 @using MudBlazor
-@using DirectPay.Domain.Settings
 @inject ISettingRepository SettingRepository
 @inject NavigationManager NavigationManager
 @inject ISnackbar Snackbar
@@ -40,10 +40,10 @@
 
     protected override async Task OnInitializedAsync()
     {
-        var setting = await SettingRepository.ReadByKey("CbeCallback");
+        var setting = await SettingRepository.ReadByKey<CbeOptions>("CbeCallback");
         if (setting != null)
         {
-            options = JsonSerializer.Deserialize<CbeOptions>(setting.Configuration)!;
+            options = setting.Value!;
         }
     }
 
@@ -53,13 +53,13 @@
 
         if (success)
         {
-            var setting = new Setting
+            var store = new Store<CbeOptions>
                 {
                     Key = "CbeCallback",
-                    Configuration = JsonSerializer.Serialize(options)
+                    Value = options
                 };
 
-            await SettingRepository.AddAsync(setting);
+            await SettingRepository.AddAsync(store);
 
             // Trigger API restart to apply new settings
             await File.WriteAllTextAsync("Plugins/restart.dll", "restart");

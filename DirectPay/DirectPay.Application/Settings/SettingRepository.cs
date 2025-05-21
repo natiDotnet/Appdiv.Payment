@@ -1,5 +1,7 @@
 using System;
+using System.Text.Json;
 using DirectPay.Application.Abstractions;
+using DirectPay.Application.Abstractions.Models;
 using DirectPay.Application.Database;
 using DirectPay.Domain.Settings;
 using Microsoft.EntityFrameworkCore;
@@ -10,35 +12,70 @@ public class SettingRepository(IApplicationDbContext context) : ISettingReposito
 {
     private readonly IApplicationDbContext _context = context;
 
-    public async Task<Setting> AddAsync(Setting setting)
+    public async Task<Store<T>> AddAsync<T>(Store<T> store, CancellationToken cancellationToken = default)
     {
-        var old = await _context.Settings.Where(s => s.Key == setting.Key)
-                                         .FirstOrDefaultAsync();
+        var old = await _context.Settings
+                .Where(s => s.Key == store.Key)
+                .FirstOrDefaultAsync(cancellationToken);
         if (old is not null)
         {
-            old.Configuration = setting.Configuration;
+            old.Configuration = JsonSerializer.Serialize(store.Value);
         }
         else
         {
-            await _context.Settings.AddAsync(setting);
+            var setting = new Setting
+            {
+                Key = store.Key,
+                Configuration = JsonSerializer.Serialize(store.Value),
+                CreatedAt = DateTime.Now,
+                UpdatedAt = DateTime.Now
+            };
+            await _context.Settings.AddAsync(setting, cancellationToken);
         }
-        await _context.SaveChangesAsync();
+        await _context.SaveChangesAsync(cancellationToken);
 
-        return setting;
+        return new Store<T>
+        {
+            Key = store.Key,
+            Value = store.Value,
+            CreatedAt = DateTime.Now,
+            UpdatedAt = DateTime.Now
+        };
     }
 
-    public Task<Setting?> GetByKey(string key)
+    public async Task<Store<T>?> GetByKey<T>(string key, CancellationToken cancellationToken = default)
     {
-        return _context.Settings.FirstOrDefaultAsync(x => x.Key == key);
+        var setting = await _context.Settings
+            .Where(x => x.Key == key)
+            .FirstOrDefaultAsync(cancellationToken);
+
+        if (setting == null)
+            return null;
+
+        return new Store<T>
+        {
+            Key = setting.Key,
+            Value = JsonSerializer.Deserialize<T>(setting.Configuration),
+            CreatedAt = setting.CreatedAt,
+            UpdatedAt = setting.UpdatedAt
+        };
     }
 
-    public async Task<Setting?> ReadByKey(string key)
+    public async Task<Store<T>?> ReadByKey<T>(string key, CancellationToken cancellationToken = default)
     {
-        return await _context.Settings
-                            .AsNoTracking()
-                            .FirstOrDefaultAsync(x => x.Key == key);
+        var setting = await _context.Settings
+            .Where(x => x.Key == key)
+            .FirstOrDefaultAsync(cancellationToken);
+
+        if (setting == null)
+            return null;
+
+        return new Store<T>
+        {
+            Key = setting.Key,
+            Value = JsonSerializer.Deserialize<T>(setting.Configuration),
+            CreatedAt = setting.CreatedAt,
+            UpdatedAt = setting.UpdatedAt
+        };
     }
-
-
-
 }

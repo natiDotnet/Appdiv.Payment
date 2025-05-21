@@ -1,6 +1,6 @@
 using DirectPay.Domain.Transactions;
 
-namespace DirectPay.Application.Transations;
+namespace DirectPay.Application.Transactions;
 
 public class TransactionResponse
 {

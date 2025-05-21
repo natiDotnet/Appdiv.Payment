@@ -1,10 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using DirectPay.Application.Abstractions;
 using DirectPay.Application.Shared;
-using DirectPay.Application.Transations;
+using DirectPay.Application.Transactions;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DirectPay.API.Transactions;

@@ -29,7 +29,7 @@
                     Variant="Variant.Outlined" />
 
                 <MudTextField @bind-Value="dbConfig.Port" Label="Port" Required="true" For="@(() => dbConfig.Port)"
-                    Variant="Variant.Outlined" Type="InputType.Number" />
+                    Variant="Variant.Outlined" InputType="@InputType.Number" />
 
                 <MudTextField @bind-Value="dbConfig.Username" Label="Username" Required="true"
                     For="@(() => dbConfig.Username)" Variant="Variant.Outlined" />

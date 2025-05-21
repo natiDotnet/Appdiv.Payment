@@ -3,7 +3,7 @@ using System.Diagnostics;
 using DirectPay.Application.Abstractions;
 using DirectPay.Application.Database;
 using DirectPay.Application.Settings;
-using DirectPay.Application.Transations;
+using DirectPay.Application.Transactions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

@@ -2,7 +2,7 @@ using System.Text.Json;
 using Appdiv.Payment.Shared.Models;
 using Appdiv.Payment.Telebirr;
 using DirectPay.Application.Abstractions;
-using DirectPay.Domain.Settings;
+using DirectPay.Application.Abstractions.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -18,12 +18,12 @@ public static class TelebirrApi
             .WithTags("Telebirr Payments");
         group.MapPost("/Telebirr/CallbackPath", async ([FromBody] TelebirrOptions telebirr, ISettingRepository settingRepository) =>
         {
-            var setting = new Setting
+            var store = new Store<TelebirrOptions>
             {
                 Key = "TelebirrCallback",
-                Configuration = JsonSerializer.Serialize(telebirr)
+                Value = telebirr
             };
-            await settingRepository.AddAsync(setting);
+            await settingRepository.AddAsync(store);
 
             // Restart the API host service to apply the new settings
             await File.WriteAllTextAsync("Plugins/restart.dll", "restart");

@@ -1,9 +1,9 @@
 using System.Text.Json;
 using Appdiv.Payment.CBEBirr;
 using DirectPay.Application.Abstractions;
+using DirectPay.Application.Abstractions.Models;
 using DirectPay.Cbebirr.Payments;
 using DirectPay.Cbebirr.UI;
-using DirectPay.Domain.Settings;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -181,18 +181,18 @@ public class Startup : PluginStartup
     {
         using var scope = app.ApplicationServices.CreateScope();
         var settings = scope.ServiceProvider.GetRequiredService<ISettingRepository>();
-        var setting = await settings.ReadByKey("CbeCallback");
+        var setting = await settings.ReadByKey<CbeOptions>("CbeCallback");
         if (setting == null)
         {
-            setting = new Setting
+            setting = new Store<CbeOptions>
             {
                 Key = "CbeCallback",
-                Configuration = JsonSerializer.Serialize(new CbeOptions())
+                Value = new CbeOptions()
             };
             await settings.AddAsync(setting);
         }
 
-        CbeOptions cbe = JsonSerializer.Deserialize<CbeOptions>(setting.Configuration)!;
+        CbeOptions cbe = setting.Value!;
         // app.UseCBEBirr();
         app.UseEndpoints(e =>
         {

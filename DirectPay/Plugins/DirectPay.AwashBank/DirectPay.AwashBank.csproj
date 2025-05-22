@@ -1,11 +1,18 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
     <ProjectReference Include="..\..\..\Appdiv.Payment.AwashBank\Appdiv.Payment.AwashBank.csproj" />
-    <ProjectReference Include="..\..\DirectPay.Application.Abstractions\DirectPay.Application.Abstractions.csproj" />
+    <ProjectReference Include="..\..\DirectPay.Application.Abstractions\DirectPay.Application.Abstractions.csproj" >
+      <Private>false</Private>
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <OutputPath>..\..\DirectPay.UI\bin\$(Configuration)\$(TargetFramework)\Plugins\DirectPay.AwashBank</OutputPath>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    <EnableDynamicLoading>true</EnableDynamicLoading>
   </PropertyGroup>
 </Project>

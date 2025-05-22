@@ -32,17 +32,19 @@ public static class Startup
     }
     public static void UseAwashEndpoint(this IEndpointRouteBuilder endpoints, string endpoint = "/Awash", string authPath = "/Authentication", string paymentQueryPath = "/PaymentQuery", string paymentConfirmationPath = "/PaymentConfirmation")
     {
-        endpoints.MapPost($"{endpoint}{authPath}", async ([FromBody] Credential request, [FromServices] IAwashReference awash) =>
+        var group = endpoints.MapGroup("/api")
+            .WithTags("Awash Bank Payments");
+        group.MapPost($"{endpoint}{authPath}", async ([FromBody] Credential request, [FromServices] IAwashReference awash) =>
         {
             var response = await awash.AuthenticateUserAsync(request);
             return response.Status ? Results.Ok(response) : Results.BadRequest(response);
         });
-        endpoints.MapPost($"{endpoint}{paymentQueryPath}", async ([FromBody] PaymentQueryRequest request, [FromServices] IAwashReference awash) =>
+        group.MapPost($"{endpoint}{paymentQueryPath}", async ([FromBody] PaymentQueryRequest request, [FromServices] IAwashReference awash) =>
         {
             var response = await awash.PaymentQueryAsync(request);
             return response.Status ? Results.Ok(response) : Results.BadRequest(response);
         });
-        endpoints.MapPost($"{endpoint}{paymentConfirmationPath}", async ([FromBody] PaymentConfirmationRequest request, [FromServices] IAwashReference awash) =>
+        group.MapPost($"{endpoint}{paymentConfirmationPath}", async ([FromBody] PaymentConfirmationRequest request, [FromServices] IAwashReference awash) =>
         {
             var response = await awash.PaymentConfirmAsync(request);
             return response.Status ? Results.Ok(response) : Results.BadRequest(response);

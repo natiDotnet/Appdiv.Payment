@@ -7,7 +7,7 @@ namespace DirectPay.Application.Database;
 public sealed class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
     : DbContext(options), IApplicationDbContext
 {
-    public DbSet<Transaction> Transations { get; set; }
+    public DbSet<Transaction> Transactions { get; set; }
     public DbSet<Setting> Settings { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

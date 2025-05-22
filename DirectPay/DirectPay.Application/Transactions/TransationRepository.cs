@@ -3,22 +3,18 @@ using DirectPay.Application.Abstractions.Models;
 using DirectPay.Application.Database;
 using DirectPay.Domain.Transactions;
 using Microsoft.EntityFrameworkCore;
+using Customization = DirectPay.Application.Abstractions.Models.Customization;
 
 namespace DirectPay.Application.Transactions;
 
 
-public class TransactionRepository : ITransactionRepository
+public class TransactionRepository(IApplicationDbContext context) : ITransactionRepository
 {
-    private readonly IApplicationDbContext _context;
-
-    public TransactionRepository(IApplicationDbContext context)
-    {
-        _context = context ?? throw new ArgumentNullException(nameof(context));
-    }
+    private readonly IApplicationDbContext _context = context ?? throw new ArgumentNullException(nameof(context));
 
     public async Task<int> AddAsync(Payment payment, CancellationToken cancellationToken = default)
     {
-        var transation = new Transaction
+        var transaction = new Transaction
         {
             Amount = payment.Amount,
             Currency = payment.Currency,
@@ -35,43 +31,79 @@ public class TransactionRepository : ITransactionRepository
             CallbackUrl = payment.CallbackUrl,
             ReturnUrl = payment.ReturnUrl,
             Reference = payment.Reference,
+            Customization = new Domain.Transactions.Customization
+            {
+                Title = payment.Customization?.Title,
+                Description = payment.Customization?.Description
+            }
         };
-        await _context.Transations.AddAsync(transation);
+        await _context.Transactions.AddAsync(transaction, cancellationToken);
         return await _context.SaveChangesAsync(cancellationToken);
     }
 
     public async Task<Payment?> ReadByReferenceAsync(string reference, CancellationToken cancellationToken = default)
     {
-        return await _context.Transations
+        return await _context.Transactions
                             .AsNoTracking()
                             .Where(t => t.TxRef == reference)
                             .Select(t => new Payment
                             {
+                                Id = t.Id,
                                 Amount = t.Amount,
                                 Currency = t.Currency,
                                 Email = t.Email,
                                 FirstName = t.FirstName,
-                                MiddleName = t.MiddleName, // not require
+                                MiddleName = t.MiddleName,
                                 LastName = t.LastName,
                                 PhoneNumber = t.PhoneNumber,
                                 TxRef = t.TxRef,
+                                CallbackUrl = t.CallbackUrl,
+                                ReturnUrl = t.ReturnUrl,
+                                PaymentStatus = t.PaymentStatus,
+                                Reference = t.Reference,
+                                PaymentType = t.PaymentType,
+                                PaymentMethod = t.PaymentMethod,
+                                PaymentDate = t.PaymentDate,
+                                CreatedAt = t.CreatedAt,
+                                UpdatedAt = t.UpdatedAt,
+                                Customization = t.Customization != null ? new Customization
+                                {
+                                    Title = t.Customization.Title,
+                                    Description = t.Customization.Description
+                                } : null
                             })
                             .FirstOrDefaultAsync(cancellationToken);
     }
 
     public async Task<Payment?> GetByReferenceAsync(string reference, CancellationToken cancellationToken = default)
     {
-        return await _context.Transations.Where(t => t.TxRef == reference)
+        return await _context.Transactions
+                           .Where(t => t.TxRef == reference)
                            .Select(t => new Payment
                            {
+                               Id = t.Id,
                                Amount = t.Amount,
                                Currency = t.Currency,
                                Email = t.Email,
                                FirstName = t.FirstName,
-                               MiddleName = t.MiddleName, // not require
+                               MiddleName = t.MiddleName,
                                LastName = t.LastName,
                                PhoneNumber = t.PhoneNumber,
                                TxRef = t.TxRef,
+                               CallbackUrl = t.CallbackUrl,
+                               ReturnUrl = t.ReturnUrl,
+                               PaymentStatus = t.PaymentStatus,
+                               Reference = t.Reference,
+                               PaymentType = t.PaymentType,
+                               PaymentMethod = t.PaymentMethod,
+                               PaymentDate = t.PaymentDate,
+                               CreatedAt = t.CreatedAt,
+                               UpdatedAt = t.UpdatedAt,
+                               Customization = t.Customization != null ? new Customization
+                               {
+                                   Title = t.Customization.Title,
+                                   Description = t.Customization.Description
+                               } : null
                            })
                             .FirstOrDefaultAsync(cancellationToken);
     }

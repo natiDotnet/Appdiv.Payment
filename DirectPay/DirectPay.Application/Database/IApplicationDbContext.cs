@@ -6,7 +6,7 @@ namespace DirectPay.Application.Database;
 
 public interface IApplicationDbContext
 {
-    DbSet<Transaction> Transations { get; set; }
+    DbSet<Transaction> Transactions { get; set; }
     DbSet<Setting> Settings { get; set; }
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 }
